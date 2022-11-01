@@ -1,24 +1,31 @@
-# README
+# <Roundie>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+　ラウンドのイベントを作成したり、イベントに参加して
+　見知らぬゴルフ好き（バディ）とラウンドができる、20～30代専用のゴルフコミュニティサイト
 
-Things you may want to cover:
+### テーマを選んだ理由
+　私自身がゴルフ好きで、50代以上の方とランドに行くことはよくありましたが、同じレベルでラウンドできる同年代や同性のゴルフ仲間が少なく、
+　ゴルフコミュニティを広げられるサービスがあったらいいなと思いこちらのテーマにしました。
+　また、昨今ゴルフを始める若者が多いことに着目し、会社の上司と回るために練習したい！コンペで恥をかきたくない！など、若者特融の悩みに
+　アプローチするために年齢を絞りました。
 
-* Ruby version
+### ターゲットユーザ
+　20~30代のゴルフ好きの若者
 
-* System dependencies
+### 主な利用シーン
+　ゴルフ好きな友達が欲しい！ / ゴルフに行きたいが、周りに予定の合う友達がいない / ゴルフを始めたばかりで、上司と回る前に練習ラウンドがしたい ・・・
+　などと思った時
 
-* Configuration
+## 設計書
 
-* Database creation
 
-* Database initialization
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
