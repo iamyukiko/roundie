@@ -1,0 +1,37 @@
+ja:
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      short: "%m/%d"
+      long: "%Y年%m月%d日(%a)"
+
+    day_names: [日曜日, 月曜日, 火曜日, 水曜日, 木曜日, 金曜日, 土曜日]
+    abbr_day_names: [日, 月, 火, 水, 木, 金, 土]
+
+    month_names: [~, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    abbr_month_names: [~, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    order:
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%y/%m/%d %H:%M"
+      long: "%Y年%m月%d日(%a) %H時%M分%S秒 %Z"
+    am: "午前"
+    pm: "午後"
+
+  enums:
+    user:
+      gender:
+        male: "男性"
+        female: "女性"
+        others: "その他"
+      user_score:
+        beginner: "エンジョイ(150～120)"
+        middle: "アベレージ(115～95)"
+        athlete: "アスリート(99～80)"
+        low_handicap: "シングル(～70)"

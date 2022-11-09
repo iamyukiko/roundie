@@ -1,3 +1,28 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  #会員用Devise
+  devise_for :users, controllers: {
+  registrations: "public/registrations",
+  sessions: 'public/sessions',
+  passwords: 'public/passwords'
+  }
+
+  #管理者用Devise
+  devise_for :admin, skip: [:registrations,:passwords] ,controllers: {
+  sessions: "admin/sessions"
+  }
+
+  #会員用ルーティング
+  scope module: :public do
+  root to: 'homes#top'
+  get '/about' => "homes#about", as: "about"
+  resources :users, only:[:show, :edit, :update, :unsubscribe]
+  resources :events, except:[:destroy]
+  end
+
+  #管理者用ルーティング
+  scope module: :admin do
+  get '/admin' => "homes#top"
+  end
+
 end
