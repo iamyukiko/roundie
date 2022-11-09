@@ -67,14 +67,14 @@ ActiveRecord::Schema.define(version: 2022_11_09_072636) do
 
   create_table "events", force: :cascade do |t|
     t.integer "owner_id", null: false
-    t.integer "area_id", null: false
+    t.integer "event_area", null: false
     t.date "event_date", null: false
     t.date "deadline_date", null: false
     t.string "entry_limit", null: false
     t.integer "age"
     t.string "event_title", null: false
     t.text "event_introduction", null: false
-    t.boolean "event_status", null: false
+    t.boolean "event_status"
     t.integer "search_score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

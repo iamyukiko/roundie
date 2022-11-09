@@ -21,8 +21,6 @@ class User < ApplicationRecord
     (Date.today.strftime(date_format).to_i - birthdate.strftime(date_format).to_i) / 10000
   end
 
-
-
 #性別の選択用
   enum gender:{male:0, female:1, others:2}
 

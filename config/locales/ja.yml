@@ -35,3 +35,9 @@ ja:
         middle: "アベレージ(115～95)"
         athlete: "アスリート(99～80)"
         low_handicap: "シングル(～70)"
+    event:
+      search_score:
+        beginner: "エンジョイ(150～120)"
+        middle: "アベレージ(115～95)"
+        athlete: "アスリート(99～80)"
+        low_handicap: "シングル(～70)"

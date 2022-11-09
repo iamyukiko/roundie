@@ -32,6 +32,17 @@ ja:
         gender: 性別
         user_score: 平均スコア
         self_introduction: 自己紹介
+      event:
+        event_area: 開催エリア
+        event_date: 開催日
+        deadline_date: 募集締切日
+        entry_limit: 募集人数
+        age: 年齢
+        event_title: イベント名
+        event_introduction: イベント詳細
+        event_status: イベントステータス
+        search_score: 平均スコア
+
     models:
       user: ユーザー
   devise:

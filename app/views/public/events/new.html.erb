@@ -1,0 +1,38 @@
+<div class="container">
+  <h3>イベント新規作成</h3>
+  <%= form_with model: @event do |f| %>
+  <table class="table">
+    <tr>
+      <td><%= f.label :event_date %></td>
+      <td><%= f.date_select :event_date, start_year:Time.now.year, end_year:Time.now.year+1, date_separator:' / ' %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :event_title %></td>
+      <td><%= f.text_field :event_title %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :event_introduction %></td>
+      <td><%= f.text_area :event_introduction %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :event_area %></td>
+      <td><%= f.select :event_area, Event.event_areas.keys, {} %></td>
+    <tr>
+      <td><%= f.label :entry_limit %></td>
+      <td><%=f.select :entry_limit, options_for_select((1..16).to_a) %> 人</td>
+    </tr>
+    <tr>
+      <td><%= f.label :deadline_date %></td>
+      <td><%= f.date_select :deadline_date, start_year:Time.now.year, end_year:Time.now.year, date_separator:' / ' %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :search_score %></td>
+      <td><%= f.collection_select :search_score, Event.search_scores_i18n, :first, :last %></td>
+    </tr>
+    <tr>
+      <td class="colspan-2"><%= f.submit %></td>
+      <td></td>
+    </tr>
+  </table>
+  <% end %>
+</div>
