@@ -1,6 +1,6 @@
 <div class="container">
   <h3>イベント詳細</div>
-
+  <div class="row">
   <table class="table col-5">
     <tr>
       <td>イベント名</td>
@@ -19,9 +19,9 @@
       <td><%= @event.event_area %></td>
     </tr>
     <tr>
-      <td></td>
+      <td>イベント参加者</td>
       <td><% @event_users.each do |event_user| %>
-          <%= event_user.user_name %>
+          <%= link_to user_path(event_user.id) do %><%= event_user.user_name %><% end %>
           <% end %>
       </td>
     </tr>
@@ -53,5 +53,21 @@
       <td></td>
     </tr>
   </table>
-
+  <div class="col-5">
+    <div>
+      <% @event.event_comments.each do |event_comment| %>
+      <!--<p><= image_tag event_comment.user %></p>-->
+        <%= event_comment.user.user_name %>
+        <%= event_comment.comment %>
+        <%= event_comment.created_at.strftime('%Y/%m/%d') %>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with model: [@event, @event_comment] do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+        <%= f.submit "送信する" %>
+      <% end %>
+    </div>
+  </div>
+  </div>
 </div>

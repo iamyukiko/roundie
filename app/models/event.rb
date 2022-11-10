@@ -2,6 +2,7 @@ class Event < ApplicationRecord
 
   has_many :applies
   has_many :users, through: :applies
+  has_many :event_comments, dependent: :destroy
 
   # validates :event_date, presence: true
   # validates :deadline_date, presence: true

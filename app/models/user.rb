@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_one_attached :image
   has_many :applies
   has_many :events, through: :applies
+  has_many :event_comments, dependent: :destroy
 
 #プロフィール画像の設定
   def get_image

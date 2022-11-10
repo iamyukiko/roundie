@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   resources :events do
     get "join" => "events#join"
   end
+  resources :events, only:[:new, :create, :index, :show, :destroy] do
+    resources :event_comments, only:[:create]
+  end
   end
 
   #管理者用ルーティング

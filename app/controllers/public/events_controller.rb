@@ -1,7 +1,5 @@
 class Public::EventsController < ApplicationController
 
-
-
   def join
     @event = Event.find(params[:event_id])
     @event.users << current_user
@@ -36,6 +34,7 @@ class Public::EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @event_users = @event.users
+    @event_comment = EventComment.new
   end
 
   def edit

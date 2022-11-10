@@ -6,6 +6,7 @@
     </div>
       <div class="col-8">
         <%= link_to "参加イベント一覧", user_path(@user.id,{type: 'join'}) %> | <%= link_to "主催イベント一覧", user_path(@user.id,{type: 'owner'}) %>
+        <%= link_to "イベント新規作成", new_event_path %>
         <table class="table">
           <thead>
             <tr>
