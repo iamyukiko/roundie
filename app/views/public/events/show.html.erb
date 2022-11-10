@@ -1,1 +1,57 @@
-event showページ
+<div class="container">
+  <h3>イベント詳細</div>
+
+  <table class="table col-5">
+    <tr>
+      <td>イベント名</td>
+      <td><%= @event.event_title %>
+    </tr>
+    <tr>
+      <td>開催日</td>
+      <td><%= @event.event_date %>
+    </tr>
+    <tr>
+      <td>イベント詳細</td>
+      <td><%= @event.event_introduction %></td>
+    </tr>
+    <tr>
+      <td>開催エリア</td>
+      <td><%= @event.event_area %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><% @event_users.each do |event_user| %>
+          <%= event_user.user_name %>
+          <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>参加状況</td>
+      <td><%= @event.users.count %> / <%= @event.entry_limit %>人</td>
+    </tr>
+    <tr>
+      <td>平均スコア</td>
+      <td><%= @event.search_score_i18n %></td>
+    </tr>
+    <tr>
+      <td>募集締め切り日</td>
+      <td>あと<%= @event.date %>日</td>
+    </tr>
+    <tr>
+      <td>イベント作成者</td>
+      <td><%= @event.owner_id %></td>
+    </tr>
+    <tr>
+      <td><% if @event.owner_id == current_user.id %>
+            <%= link_to '編集', edit_event_path(@event) %><%= link_to '削除', event_path(@event), method: :delete %>
+          <% elsif @event.users.include?(current_user) %>
+            <%= link_to 'イベントを辞退', event_path(@event), method: :delete, class: "btn btn-sm btn-danger" %>
+          <% else %>
+            <%= link_to '申請依頼', event_join_path(@event), class: "btn btn-sm btn-success" %>
+          <% end %>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+
+</div>

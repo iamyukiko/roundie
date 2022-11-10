@@ -2,8 +2,25 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @events = @user.events
+    if params[:type] == 'owner'
+      @events = Event.where(owner_id: @user.id)
+    else
+     @events = @user.events
+    end
   end
+
+  def join_events
+    @user = User.find(params[:id])
+    @events = @user.events
+    render :show
+  end
+
+  def owner_events
+    @user = User.find(params[:id])
+    @events = Event.where(owner_id: @user.id)
+    render :show
+  end
+
 
   def edit
     @user = User.find(params[:id])

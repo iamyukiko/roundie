@@ -55,10 +55,6 @@ ActiveRecord::Schema.define(version: 2022_11_09_072636) do
   create_table "applies", force: :cascade do |t|
     t.integer "user_id"
     t.integer "event_id"
-    t.integer "apply_status", null: false
-    t.date "application_date", null: false
-    t.date "approval_date", null: false
-    t.date "rejection_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_applies_on_event_id"

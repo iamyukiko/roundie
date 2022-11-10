@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get '/about' => "homes#about", as: "about"
   resources :users, only:[:show, :edit, :update, :unsubscribe]
-  resources :events, except:[:destroy]
+  resources :events do
+    get "join" => "events#join"
+  end
   end
 
   #管理者用ルーティング

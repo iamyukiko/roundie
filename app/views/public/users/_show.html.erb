@@ -1,0 +1,9 @@
+
+<div>
+    <%= image_tag user.get_image, size:'200x200' %></br>
+    <p>居住地: <%= user.user_area %></p>
+    <p><%= user.gender_i18n %><%= user.age%>歳</p>
+    <p><%= user.user_score_i18n %></p>
+    <p>自己紹介</br><%= user.self_introduction %></p>
+    <%= link_to "プロフィールを編集", edit_user_path(user.id) %>
+</div>
