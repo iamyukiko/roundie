@@ -1,0 +1,23 @@
+<div>
+  <div>
+    <% if @messages.present? %>
+      <% @messages.each do |message| %>
+        <div>
+          <div class>
+            <%= image_tag message.user.get_image, size:'100x100' %>
+          </div>
+          <div><strong><%= message.body %></strong><br>
+            <%= message.created_at.strftime("%Y-%m-%d %H:%M")%>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <%= form_for @message do |f| %>
+      <%= f.text_field :body, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+          <%= f.submit "投稿",class: 'form-submit'%>
+    <% end %>
+  </div>
+</div>

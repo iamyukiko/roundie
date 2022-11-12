@@ -7,8 +7,34 @@ class User < ApplicationRecord
   has_many :applies
   has_many :events, through: :applies
   has_many :event_comments, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  has_many :rooms, dependent: :destroy
 
-#プロフィール画像の設定
+  #フォローされる設定
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+
+  #フォローする設定
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followings, through: :relationships, source: :followed
+
+  #フォローしたときの設定
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+
+  #フォローを外すときの設定
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+
+  #フォローをしているか確認
+  def following?(user)
+    followings.include?(user)
+  end
+
+  #プロフィール画像の設定
   def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -16,19 +42,19 @@ class User < ApplicationRecord
     end
       image
   end
-#年齢の算出
+  #年齢の算出
   def age
     date_format = "%Y%m%d"
     (Date.today.strftime(date_format).to_i - birthdate.strftime(date_format).to_i) / 10000
   end
 
-#性別の選択用
+  #性別の選択用
   enum gender:{male:0, female:1, others:2}
 
-#ユーザー平均スコアの選択用
+  #ユーザー平均スコアの選択用
   enum user_score:{beginner:0, middle:1, athlete:2, low_handicap:3}
 
-#居住地の選択用
+  #居住地の選択用
   enum user_area:{
      "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
@@ -41,6 +67,5 @@ class User < ApplicationRecord
      福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,
      沖縄県:47
    }
-
 
 end

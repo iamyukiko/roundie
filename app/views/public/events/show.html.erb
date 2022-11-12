@@ -56,7 +56,6 @@
   <div class="col-5">
     <div>
       <% @event.event_comments.each do |event_comment| %>
-      <!--<p><= image_tag event_comment.user %></p>-->
         <%= event_comment.user.user_name %>
         <%= event_comment.comment %>
         <%= event_comment.created_at.strftime('%Y/%m/%d') %>

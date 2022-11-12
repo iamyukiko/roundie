@@ -1,0 +1,11 @@
+<div class="container">
+<% @another_entries.each do |entry| %>
+<table class="container">
+<tr>
+  <td><%= link_to room_path(entry.room.id) do %><%= entry.user.user_name %>とのDM<% end %>
+  <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
+  </td>
+</tr>
+</div>
+<% end %>
+

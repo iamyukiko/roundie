@@ -1,0 +1,18 @@
+<!--フォローしている人の一覧-->
+<div class="container">
+  <% if @users.exists? %>
+    <% @users.each do |user| %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><%= image_tag user.get_image, size:'100x100' %></br></td>
+            <td><%= link_to user_path(user) do %><%= user.user_name %><% end %></td>
+            <td><%= render 'public/relationships/relationship_btn', user: user %>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  <% else %>
+    <p>ユーザーはいません</p>
+  <% end %>
+</div>
