@@ -1,0 +1,56 @@
+<div class="container">
+	<h4 class="mt-2 p-2 text-center bg-secondary text-white col-sm-5"><%= @user.user_name %>さんの会員詳細</h4>
+	<table class="table table-borderless col-6">
+		<tr>
+			<th>会員ID</th>
+			<td><%= @user.id %></td>
+		</tr>
+		<tr>
+			<th>氏名</th>
+			<td><%= @user.user_name %></td>
+		</tr>
+		<tr>
+			<th>ニックネーム</th>
+			<td><%= @user.nickname %></td>
+		</tr>
+		<tr>
+			<th>生年月日</th>
+			<td><%= @user.birthdate %></td>
+		</tr>
+		<tr>
+			<th>住所</th>
+			<td><%= @user.user_area %>
+		</tr>
+		<tr>
+			<th>メールアドレス</th>
+			<td><%= @user.email %></td>
+		</tr>
+		<tr>
+			<th>パスワード</th>
+			<td><%= @user.password %></td>
+		</tr>
+		<tr>
+			<th>スコアレベル</th>
+			<td><%= @user.user_score %></td>
+		</tr>
+		<tr>
+			<th>自己紹介</th>
+			<td><%= @user.self_introduction %></td>
+		</tr>
+		<tr>
+			<th>会員ステータス</th>
+			<td>
+				<% if @user.is_valid == true %>
+					<p class="text-success font-weight-bold">有効</p>
+				<% else %>
+					<p class="text-secondary font-weight-bold">退会</p>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><%= link_to  "編集する", edit_admin_user_path(@user.id), class:"btn btn-sm btn-success" %></td>
+			<td><td>
+		</tr>
+	</table>
+</div>

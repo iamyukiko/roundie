@@ -10,7 +10,12 @@
 
   <div class="field">
     <%= f.label :birthdate %><br />
-    <%= f.date_select :birthdate, start_year: 1990, end_year:Time.now.year-10, date_separator:' / ' %>
+    <%= f.date_select :birthdate, start_year:Time.now.year-37, end_year:Time.now.year, date_separator:' / ' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.collection_radio_buttons :gender, User.genders_i18n, :first, :last %>
   </div>
 
   <div class="field">
@@ -21,7 +26,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    (<em><%= @minimum_password_length %></em>文字以上)
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>

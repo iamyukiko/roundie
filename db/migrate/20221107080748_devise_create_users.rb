@@ -35,7 +35,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :nickname, null: true
       t.date :birthdate, null: false
       t.integer :user_area, null: true
-      t.integer :gender, null: true
+      t.integer :gender, null: false, default: 2
       t.integer :user_score, null: true
       t.text :self_introduction, null: true
       t.boolean :is_valid, null: false , default: true

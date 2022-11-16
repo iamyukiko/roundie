@@ -7,20 +7,30 @@ Rails.application.routes.draw do
   passwords: 'public/passwords'
   }
 
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
   #管理者用Devise
   devise_for :admin, skip: [:registrations,:passwords] ,controllers: {
-  sessions: "admin/sessions"
+    sessions: "admin/sessions"
   }
 
   #会員用ルーティング
   scope module: :public do
   root to: 'homes#top'
   get '/about' => "homes#about", as: "about"
+
   resources :users, only:[:show, :edit, :update, :unsubscribe] do
     resource :relationships, only:[:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
   	get 'followers' => 'relationships#followers', as: 'followers'
   end
+  get '/users/:user_id/events/applies' => "applies#index", as: 'index_apply'
+  # post '/users/:user_id/events/:id/applies' => "applies#create", as: 'create_apply'
+  patch '/users/:user_id/events/:event_id/applies/:id' => "applies#update", as: 'update_apply'
+  get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+  patch '/users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
   resources :messages, only:[:create,]
   resources :rooms, only:[:create, :show, :index]
   resources :events do
@@ -36,6 +46,11 @@ Rails.application.routes.draw do
   #管理者用ルーティング
   scope module: :admin do
   get '/admin' => "homes#top"
+  end
+
+  namespace :admin do
+    resources :users, only: [:index, :show, :edit, :update]
+    resources :events, only: [:index, :show, :edit, :update]
   end
 
 end

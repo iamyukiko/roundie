@@ -2,7 +2,7 @@
   <h3>プロフィール編集</h3>
   <%= render 'public/shared/error_messages', resource: @user %>
 
-  <%= form_with model: @user do |f| %>
+  <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
   <table class="table">
     <tr>
       <td><%= f.label :user_name, "氏名（スペースなし）" %></td>
@@ -43,10 +43,18 @@
       <td><%= f.label :self_introduction %></td>
       <td><%= f.text_area :self_introduction %></td>
     </tr>
-    <tr>
-      <td class="colspan-2"><%= f.submit %><%= link_to "退会する", unsubscribe_path(@user.id) %></td>
-      <td></td>
-    </tr>
-  </table>
+   <tr>
+    <th><%= f.label :is_valid %></th>
+    <td><%= f.radio_button :is_valid, :true %>
+        <%= f.label :is_valid, "有効", {value: :true} %>
+        <%= f.radio_button :is_valid, :false %>
+        <%= f.label :is_valid, "退会", {value: :false} %>
+    </td>
+  </tr>
+  <tr>
+    <th></th>
+    <td><%= f.submit '変更を保存', class:"btn btn-success" %></td>
+  </tr>
+</table>
   <% end %>
 </div>

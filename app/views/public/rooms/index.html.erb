@@ -1,4 +1,5 @@
 <div class="container">
+<% if @users.present? %>
 <% @another_entries.each do |entry| %>
 <table class="container">
 <tr>
@@ -7,5 +8,8 @@
   </td>
 </tr>
 </div>
+<% end %>
+<% else %>
+<p>メッセージのやり取りはありません</p>
 <% end %>
 

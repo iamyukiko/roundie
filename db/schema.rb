@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_12_051027) do
+ActiveRecord::Schema.define(version: 2022_11_14_111011) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +55,9 @@ ActiveRecord::Schema.define(version: 2022_11_12_051027) do
   create_table "applies", force: :cascade do |t|
     t.integer "user_id"
     t.integer "event_id"
+    t.integer "apply_status", null: false
+    t.date "approval_date"
+    t.date "rejection_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_applies_on_event_id"
@@ -83,7 +86,7 @@ ActiveRecord::Schema.define(version: 2022_11_12_051027) do
     t.integer "event_area", null: false
     t.date "event_date", null: false
     t.date "deadline_date", null: false
-    t.string "entry_limit", null: false
+    t.integer "entry_limit", null: false
     t.integer "age"
     t.string "event_title", null: false
     t.text "event_introduction", null: false
@@ -127,7 +130,7 @@ ActiveRecord::Schema.define(version: 2022_11_12_051027) do
     t.string "nickname"
     t.date "birthdate", null: false
     t.integer "user_area"
-    t.integer "gender"
+    t.integer "gender", default: 2, null: false
     t.integer "user_score"
     t.text "self_introduction"
     t.boolean "is_valid", default: true, null: false

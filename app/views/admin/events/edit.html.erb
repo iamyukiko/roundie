@@ -1,5 +1,5 @@
-<%= render 'public/shared/error_messages', resource: event %>
-<%= form_with model: event do |f| %>
+<%= render 'public/shared/error_messages', resource: @event %>
+<%= form_with model: @event, url: admin_event_path(@event.id), method: :patch do |f| %>
 <table class="table">
   <tr>
     <td><%= f.label :event_date %></td>

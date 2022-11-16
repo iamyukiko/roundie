@@ -44,7 +44,8 @@ ja:
         search_score: 平均スコア
 
     models:
-      user: ユーザー
+      user: 会員情報
+      event: イベント
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

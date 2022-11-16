@@ -1,0 +1,43 @@
+<h1>Users</h1>
+
+<div class="search-form">
+  <%= form_with(scope: :search, url: events_path, method: :get, local: true) do |f| %>
+    <div class="field">
+      <%= f.label :event_title %>
+      <%= f.text_field :event_title, value: @search_params[:event_title] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :gender %>
+      <%= f.collection_radio_buttons (:gender, User.genders, :first, :first) do |r| %>
+        <%= tag.div(class: 'form-check form-check-inline') do %>
+          <%= r.radio_button(checked: r.value == @search_params[:gender], class: 'form-check-input') %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :event_date %>
+      <%= f.date_field :event_date_from, value: @search_params[:event_date_from] %> ~ <%= f.date_field :event_date_to, value: @search_params[:event_date_to] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :event_area %>
+      <%= f.collection_select(:event_area, selected: @search_params[:event_area] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :search_score %>
+      <%= f.collection_select(:search_score, selected: @search_params[:search_score] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :entry_limit %>
+      <%= f.collection_select(:entry_limit, selected: @search_params[:entry_limit] %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit(t('helpers.submit.search')) %>
+    </div>
+  <% end %>
+</div>

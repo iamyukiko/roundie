@@ -1,0 +1,46 @@
+<div class="container">
+	<table class="table table-borderless col-6">
+		<tr>
+			<th>開催日</th>
+			<td><%= @event.id %></td>
+		</tr>
+		<tr>
+			<th>イベントタイトル</th>
+			<td><%= @event.event_title %></td>
+		</tr>
+		<tr>
+			<th>イベント詳細</th>
+			<td><%= @event.event_introduction %></td>
+		</tr>
+		<tr>
+			<th>開催エリア</th>
+			<td><%= @event.event_area %></td>
+		</tr>
+		<tr>
+			<th>募集人数</th>
+			<td><%= @event.entry_limit %>
+		</tr>
+		<tr>
+			<th>募集締め切り日</th>
+			<td><%= @event.deadline_date %></td>
+		</tr>
+		<tr>
+			<th>平均スコア</th>
+			<td><%= @event.search_score %></td>
+		</tr>
+		<tr>
+			<th>開催状況</th>
+			<td>
+				<!--< if @event.customer_status == true %>-->
+				<!--	<p class="text-success font-weight-bold">有効</p>-->
+				<!--< else %>-->
+				<!--	<p class="text-secondary font-weight-bold">退会</p>-->
+				<!--< end %>-->
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><%= link_to  "編集する", edit_admin_event_path(@event.id), class:"btn btn-sm btn-success" %></td>
+		</tr>
+	</table>
+</div>

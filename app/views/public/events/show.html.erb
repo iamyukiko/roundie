@@ -21,13 +21,13 @@
     <tr>
       <td>イベント参加者</td>
       <td><% @event_users.each do |event_user| %>
-          <%= link_to user_path(event_user.id) do %><%= event_user.user_name %><% end %>
+          <%= link_to user_path(event_user.id) do %><%= event_user.nickname %><% end %>
           <% end %>
       </td>
     </tr>
     <tr>
       <td>参加状況</td>
-      <td><%= @event.users.count %> / <%= @event.entry_limit %>人</td>
+      <td><%= @event.applies.where(apply_status: :approved).count %> / <%= @event.entry_limit %>人</td>
     </tr>
     <tr>
       <td>平均スコア</td>
@@ -39,7 +39,7 @@
     </tr>
     <tr>
       <td>イベント作成者</td>
-      <td><%= @event.owner_id %></td>
+      <td><%= link_to @owner.user_name, user_path(@owner.id) %></td>
     </tr>
     <tr>
       <td><% if @event.owner_id == current_user.id %>

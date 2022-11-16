@@ -1,29 +1,65 @@
 <div class="container">
-  <div class="row">
-    <div class="col-3">
-      aaaa
+
+
+<div class="search-form">
+  <%= form_with(url: events_path, method: :get, local: true) do |f| %>
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title, value: params[:title] %>
     </div>
-    <table class="table col-7">
-      <thead>
-        <tr>
-          <th>開催日</th>
-          <th>イベントタイトル</th>
-          <th>開催エリア</th>
-          <th>参加状況</th>
-          <th>締め切り</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @events.each do |event| %>
-        <tr>
-          <td><%= link_to event.event_date, event_path(event.id) %></td>
-          <td><%= event.event_title %></td>
-          <td><%= event.event_area %></td>
-          <td><%= event.entry_limit %>人</td>
-          <td>あと<%= event.date %>日</td>
-        </tr>
-        <% end %>
-     </tbody>
-    </table>
+
+    <div class="field">
+      <%= f.label :date %>
+      <%= f.date_select :date_from, start_year: Time.now.year, end_year: Time.now.year - 2, selected: date_select_params_to_date(:date_from) %> ~
+      <%= f.date_select :date_to, start_year: Time.now.year, end_year: Time.now.year - 2, selected: date_select_params_to_date(:date_to) %>
+
+    </div>
+
+    <div class="field">
+      <!--enum使用--->
+      <%= f.label :area %>
+      <%= f.select :area, Event.event_areas.map{|k, v| [k, v]}, { selected: params[:area], include_blank: "---" } %>
+    </div>
+
+    <div class="field">
+       <!--enum--->
+      <%= f.label :search_score %>
+      <%= f.select :search_score, Event.search_scores.map{|k, v| [k, v]}, { selected: params[:search_score], include_blank: "---" } %>
+    </div>
+
+    <div class="field">
+      <%= f.label :entry_limit %>
+      <%= f.select :entry_limit, options_for_select((1..16).to_a, params[:entry_limit]) ,{ include_blank: "---" } %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "検索する" %>
+    </div>
+  <% end %>
+</div>
+
+
+  <table class="table col-7">
+    <thead>
+      <tr>
+        <th>開催日</th>
+        <th>イベントタイトル</th>
+        <th>開催エリア</th>
+        <th>参加状況</th>
+        <th>締め切り</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+      <tr>
+        <td><%= link_to event.event_date, event_path(event.id) %></td>
+        <td><%= event.event_title %></td>
+        <td><%= event.event_area %></td>
+        <td><%= event.entry_limit %>人</td>
+        <td>あと<%= event.date %>日</td>
+      </tr>
+      <% end %>
+   </tbody>
+  </table>
   </div>
 </div>

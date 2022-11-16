@@ -1,0 +1,28 @@
+<div class="container">
+  <h4 class="mt-2 p-2 text-center bg-secondary text-white col-md-3">会員一覧</h4>
+  <table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th>会員ID</th>
+        <th>氏名</th>
+        <th>メールアドレス</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= link_to user.user_name, admin_user_path(user.id) %></td>
+        <td><%= user.email %></td>
+        <td><% if user.is_valid == true %>
+        <p class="text-success font-weight-bold">有効</p>
+        <% else %>
+        <p class="text-secondary font-weight-bold">退会</p>
+      <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <!--<= paginate @customers %>-->
+</div>

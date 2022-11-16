@@ -2,7 +2,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    
+
     @currentUserEntry=Entry.where(user_id: current_user.id) #ログインユーザーをEntryに記録するために探す
     @userEntry=Entry.where(user_id: @user.id) #チャットボタンをクリックされたユーザーをEntryに記録するために探す
       unless @user.id == current_user.id
@@ -45,7 +45,12 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-     @user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if @user.email == 'guest@example.com'
+      redirect_to user_path(@user.id), alert: 'ゲストユーザーの更新・削除はできません'
+      return
+    end
+
     if @user.update(user_params)
       redirect_to user_path(@user.id)
     else
@@ -54,6 +59,18 @@ class Public::UsersController < ApplicationController
   end
 
   def unsubscribe
+    @user = current_user
+  end
+
+  def withdraw
+    @user = User.find(params[:id])
+    if @user.email == 'guest@example.com'
+      redirect_to user_path(@user.id), alert: 'ゲストユーザーの更新・削除はできません'
+      return
+    end
+    @user.update(is_valid: false)
+    reset_session
+    redirect_to root_path
   end
 
   private

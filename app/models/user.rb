@@ -2,7 +2,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+         
   has_one_attached :image
   has_many :applies
   has_many :events, through: :applies
@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :rooms, dependent: :destroy
-
+  
   #フォローされる設定
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
@@ -18,6 +18,20 @@ class User < ApplicationRecord
   #フォローする設定
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
+
+  #バリデーション
+    validates :user_name, presence: true, length: { minimum: 1, maximum: 10 }
+    validates :birthdate, presence: true
+    validates :gender, presence: true
+    validates :nickname, length: { minimum: 1, maximum: 10 },uniqueness: true, allow_blank: true
+
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+    user.password = SecureRandom.urlsafe_base64
+    user.user_name = "ゲスト"
+    user.birthdate = '19990101'
+    end
+  end
 
   #フォローしたときの設定
   def follow(user_id)

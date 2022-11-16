@@ -1,2 +1,11 @@
-<h1>Public::Users#unsubscribe</h1>
-<p>Find me in app/views/public/users/unsubscribe.html.erb</p>
+
+<div>
+  <h2>本当に退会しますか？</h2>
+  <div>
+    <p>退会する場合は、『退会する』をクリックしてください。</p>
+  </div>
+  <div>
+    <%= link_to '退会しない', user_path(@user.id) %>
+    <%= link_to "退会する", withdraw_path(@user.id), method: :patch %>
+  </div>
+</div>

@@ -4,17 +4,39 @@ class Event < ApplicationRecord
   has_many :users, through: :applies
   has_many :event_comments, dependent: :destroy
 
-  # validates :event_date, presence: true
-  # validates :deadline_date, presence: true
-  # validates :entry_limit, presence: true
-  # validates :event_title, presence: true
-  # validates :event_introduction, presence: true
-  # validates :event_status, presence: true
+  validates :event_date, presence: true
+  validates :deadline_date, presence: true
+  validates :entry_limit, presence: true
+  validates :event_title, presence: true
+  validates :event_introduction, presence: true
+  validate :users_must_complete_info #if: :admin_check?
+  validate :event_date_start
+  validate :deadline_date_finish
+  validate :users_count_can_not_over_entry_limit
+
+  scope :event_title_like, -> (event_title) { where('event_title LIKE ?', "%#{event_title}%") if event_title.present? }
+  scope :gender_is, -> (gender) { where(gender: gender) if gender.present? }
+  scope :event_date_from, -> (from) { where('? <= event_date', from) if from.present? }
+  scope :event_date_to, -> (to) { where('event_date <= ?', to) if to.present? }
+  scope :event_area_is, -> (event_area) { where(event_area: event_area) if event_area.present? }
+  scope :search_score_is, -> (search_score) { where(search_score: search_score) if search_score.present? }
+  scope :entry_limit_is, -> (entry_limit) { where(entry_limit: entry_limit) if entry_limit.present? }
+
+  def self.search(title: nil, gender: nil, date_from: nil, date_to: nil, area: nil, search_score: nil, entry_limit: nil)
+    event_title_like(title)
+      .gender_is(gender)
+      .event_date_from(date_from)
+      .event_date_to(date_to)
+      .event_area_is(area)
+      .search_score_is(search_score)
+      .entry_limit_is(entry_limit)
+  end
+
 
 #イベントの残日数表示
   def date
     date_format = "%Y%m%d"
-    (deadline_date.strftime(date_format).to_i - Date.today.strftime(date_format).to_i)
+    (Date.today.strftime(date_format).to_i - deadline_date.strftime(date_format).to_i)
   end
 
   def is_owned_by?(user)
@@ -24,7 +46,6 @@ class Event < ApplicationRecord
 
 #開催エリアの選択用
   enum event_area:{
-     "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
      茨城県:8,栃木県:9,群馬県:10,埼玉県:11,千葉県:12,東京都:13,神奈川県:14,
      新潟県:15,富山県:16,石川県:17,福井県:18,山梨県:19,長野県:20,
@@ -34,9 +55,55 @@ class Event < ApplicationRecord
      徳島県:36,香川県:37,愛媛県:38,高知県:39,
      福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,
      沖縄県:47
-   }
+   }, _prefix: true
 
-  enum search_score:{beginner:0, middle:1, athlete:2, low_handicap:3}
+ #スコアレベルのeunm
+  enum search_score: {
+    beginner: 0,
+    middle: 1,
+    athlete: 2,
+    low_handicap: 3,
+    enjoy: 4
 
+  }, _prefix: true
+
+ #側で選択するenum
+  enum event_status: {
+    application: 0, #申請
+    applying: 1, #申請中
+    approved: 3, #承認済み
+  }
+
+  private
+
+  #イベント作成時にはプロフィール詳細設定が必要というバリデーション
+  def users_must_complete_info
+    errors.add(:base, "プロフィールの詳細設定が必要です。マイページのプロフィール編集から設定してください。") if users.any? do |user|
+      user.nickname.blank? || user.user_area.blank? || user.user_score.blank? || user.self_introduction.blank?
+    end
+  end
+
+  #イベント作成日は今日以降の日付で設定というバリデーション
+  def event_date_start
+    return if event_date.blank?
+    errors.add(:event_date, "は今日以降のものを選択してください") if event_date < Date.today
+  end
+
+  #募集締め切り日は開催日より8日前以上で設定というバリデーション
+  def deadline_date_finish
+    return if deadline_date.blank? || event_date.blank?
+    errors.add(:deadline_date, "は開催日より8日以上前を選択してください")unless
+    self.deadline_date+8.days < self.event_date
+  end
+
+  def users_count_can_not_over_entry_limit
+    if entry_limit < users.count
+      errors.add(:base, "規定人数に達しているため参加できません")
+    end
+  end
+
+  # def admin_check?
+  #   user.email != 'admin@admin'
+  # end
 
 end
