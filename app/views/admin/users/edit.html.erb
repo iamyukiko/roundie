@@ -28,10 +28,6 @@
       <td><%= f.text_field :email %></td>
     </tr>
     <tr>
-      <td><%= f.label :password %></td>
-      <td><%= f.text_field :password %></td>
-    </tr>
-    <tr>
       <td><%= f.label :user_score %></td>
       <td><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last %></td>
     </tr>

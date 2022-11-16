@@ -6,10 +6,9 @@ class CreateEvents < ActiveRecord::Migration[6.1]
       t.date :event_date, null: false
       t.date :deadline_date, null: false
       t.string :entry_limit, null: false #募集人数
-      t.integer :age, null: true
       t.string :event_title, null: false
       t.text :event_introduction, null: false
-      t.boolean :event_status, null: true
+      t.boolean :event_status, null: false, default: true
       t.integer :search_score, null: true
       t.timestamps
     end

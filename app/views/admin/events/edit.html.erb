@@ -28,6 +28,14 @@
     <td><%= f.label :search_score %></td>
     <td><%= f.collection_select :search_score, Event.search_scores_i18n, :first, :last %></td>
   </tr>
+   <tr>
+    <th><%= f.label :event_status %></th>
+    <td><%= f.radio_button :event_status, :true %>
+        <%= f.label :event_status, "募集中", {value: :true} %>
+        <%= f.radio_button :event_status, :false %>
+        <%= f.label :event_status, "募集終了", {value: :false} %>
+    </td>
+  </tr>
   <tr>
     <td class="colspan-2"><%= f.submit %></td>
     <td></td>

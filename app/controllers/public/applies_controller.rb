@@ -2,13 +2,23 @@ class Public::AppliesController < ApplicationController
 
   def index
     # @owned_events = Event.find(owner_id: current_user.id)
-    @applies = Apply.joins(:event).where(event:{ owner_id: params[:current_user_id]}, apply_status: :applying) #ログインしている人にする
+    @applies = Apply.joins(:event).where(event:{ owner_id: current_user.id}, apply_status: :applying) #ログインしている人にする
   end
 
   def update
-  end
-
-  def destroy
+    @apply = Apply.find(params[:id]) #フォームでもURLでも取れる
+    if params[:apply][:apply_status] == 'approved'
+      if @apply.event.entry_limit.to_i < Apply.where(event_id: params[:event_id], apply_status: :approved).count+1
+        redirect_to index_apply_path(current_user.id), alert: "規定人数を超えています"
+      else
+        @apply.update(apply_status: :approved)
+        redirect_to index_apply_path(current_user.id), notice: "承認しました"
+      end
+    elsif params[:apply][:apply_status] == 'rejected'
+        @apply.update(apply_status: :rejected)
+    elsif params[:apply][:apply_status] == 'applying'
+        @apply.update(apply_status: :applying)
+    end
   end
 
 end

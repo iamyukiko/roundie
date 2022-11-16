@@ -17,6 +17,7 @@
         <td><%= apply.user.user_name %></td>
         <td><%= form_with model: apply, url: update_apply_path(current_user.id, apply.event_id, apply.id), method: :patch, local: true do |f| %>
             <%=f.select :apply_status, options_for_select(Apply.apply_statuses_i18n.invert) %>
+            <%= f.submit %>
             <% end %>
         </td>
       </tr>

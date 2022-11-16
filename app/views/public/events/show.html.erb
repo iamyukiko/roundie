@@ -43,7 +43,7 @@
     </tr>
     <tr>
       <td><% if @event.owner_id == current_user.id %>
-            <%= link_to '編集', edit_event_path(@event) %><%= link_to '削除', event_path(@event), method: :delete %>
+            <%= link_to '編集', edit_event_path(@event) %>
           <% elsif @event.users.include?(current_user) %>
             <%= link_to 'イベントを辞退', event_path(@event), method: :delete, class: "btn btn-sm btn-danger" %>
           <% else %>
@@ -53,7 +53,9 @@
       <td></td>
     </tr>
   </table>
+
   <div class="col-5">
+    <!--< if @event.current_user.apply.apply_status == approved %>-->
     <div>
       <% @event.event_comments.each do |event_comment| %>
         <%= event_comment.user.user_name %>
@@ -67,6 +69,12 @@
         <%= f.submit "送信する" %>
       <% end %>
     </div>
+    <!--< else %>-->
+    <% if current_user != @owner %>
+    <%= link_to "イベント主催者に問い合わせる", room_path(@owner.id) %>
+    <% else %>
+    <p></p>
+    <% end %>
   </div>
   </div>
 </div>

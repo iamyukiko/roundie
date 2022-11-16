@@ -5,10 +5,12 @@
   <p><%= user.user_score_i18n %></p>
   <p>自己紹介</br><%= user.self_introduction %></p>
   <p><%= link_to user.followings.count, user_followings_path(user) %>フォロー | <%= link_to user.followers.count, user_followers_path(user) %>フォロワー</p>
-  <p><%= link_to "DM一覧", rooms_path %>
+
      <% if current_user != user%>
      <p></p>
      <% else %>
+     <p><%= link_to "DM一覧", rooms_path %></p>
         <p><%= link_to "プロフィールを編集", edit_user_path(user.id) %></p>
+
      <% end %>
 </div>

@@ -17,8 +17,8 @@
 			<td><%= @event.event_area %></td>
 		</tr>
 		<tr>
-			<th>募集人数</th>
-			<td><%= @event.entry_limit %>
+			<th>参加状況</th>
+			<td><%= @event.applies.where(apply_status: :approved).count %>/<%= @event.entry_limit %>人</td>
 		</tr>
 		<tr>
 			<th>募集締め切り日</th>
@@ -31,16 +31,16 @@
 		<tr>
 			<th>開催状況</th>
 			<td>
-				<!--< if @event.customer_status == true %>-->
-				<!--	<p class="text-success font-weight-bold">有効</p>-->
-				<!--< else %>-->
-				<!--	<p class="text-secondary font-weight-bold">退会</p>-->
-				<!--< end %>-->
+				<% if @event.event_status == true %>
+					<p class="text-success font-weight-bold">募集中</p>
+				<% else %>
+					<p class="text-secondary font-weight-bold">募集終了</p>
+				<% end %>
 			</td>
 		</tr>
 		<tr>
 			<th></th>
-			<td><%= link_to  "編集する", edit_admin_event_path(@event.id), class:"btn btn-sm btn-success" %></td>
+			<td><%= link_to "編集する", edit_admin_event_path(@event.id), class:"btn btn-sm btn-success" %></td>
 		</tr>
 	</table>
 </div>

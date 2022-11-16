@@ -3,24 +3,24 @@ class Public::EventsController < ApplicationController
 
   def join
     @event = Event.find(params[:event_id])
-    # user_ids = @event.user_ids
-    # user_ids.push(current_user.id)
     apply = @event.applies.find_by(user_id: current_user.id) #申請の確認
+    
     if apply.nil? #nilだった場合、申請を作成
       @apply_create = @event.applies.new(user_id: current_user.id, apply_status: :applying).save
       redirect_to event_path(@event.id), notice: "申請しました"
-    elsif apply.applying?
+    elsif apply.applying? #申請中になっていいた場合
       redirect_to event_path(@event.id), notice: "申請中です"
-    elsif apply.approved?
+    elsif apply.approved?　#承認されている場合は、参加済み＆参加する
       user_ids = @event.user_ids
   　　user_ids.push(current_user.id)
-      # @event.update(user_ids: user_ids)
+  　　@apply_create = @event.applies.new(user_id: current_user.id, apply_status: :approved).save
        redirect_to event_path(@event.id), notice: "承認されています"
-    elsif apply.rejected?
+    elsif apply.rejected?　#却下された場合は、nillに戻す
+    　@event.apply.users.delete(current_user.id)
+      @apply_create = @event.applies.new(user_id: current_user.id, apply_status: :nil).save
       redirect_to event_path(@event.id), notice: "却下されています"
     else
       redirect_to event_path(@event.id), alert: "失敗"
-      # redirect_to event_path(@event.id), alert: @event.errors.full_messages.join(" ")
     end
   end
 
@@ -32,6 +32,7 @@ class Public::EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.owner_id = current_user.id
     @event.users << current_user
+      @event.applies.update(apply_status: "approved")
       if @event.save
          redirect_to event_path(@event.id)
       else
@@ -57,6 +58,7 @@ class Public::EventsController < ApplicationController
   end
 
   def show
+    @room = Room.create
     @event = Event.find(params[:id])
     @owner = User.find(@event.owner_id)
     @event_users = @event.users
