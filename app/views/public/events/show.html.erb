@@ -1,80 +1,81 @@
-<div class="container">
-  <h3>イベント詳細</div>
-  <div class="row">
-  <table class="table col-5">
-    <tr>
-      <td>イベント名</td>
-      <td><%= @event.event_title %>
-    </tr>
-    <tr>
-      <td>開催日</td>
-      <td><%= @event.event_date %>
-    </tr>
-    <tr>
-      <td>イベント詳細</td>
-      <td><%= @event.event_introduction %></td>
-    </tr>
-    <tr>
-      <td>開催エリア</td>
-      <td><%= @event.event_area %></td>
-    </tr>
-    <tr>
-      <td>イベント参加者</td>
-      <td><% @event_users.each do |event_user| %>
-          <%= link_to user_path(event_user.id) do %><%= event_user.nickname %><% end %>
-          <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td>参加状況</td>
-      <td><%= @event.applies.where(apply_status: :approved).count %> / <%= @event.entry_limit %>人</td>
-    </tr>
-    <tr>
-      <td>平均スコア</td>
-      <td><%= @event.search_score_i18n %></td>
-    </tr>
-    <tr>
-      <td>募集締め切り日</td>
-      <td>あと<%= @event.date %>日</td>
-    </tr>
-    <tr>
-      <td>イベント作成者</td>
-      <td><%= link_to @owner.user_name, user_path(@owner.id) %></td>
-    </tr>
-    <tr>
-      <td><% if @event.owner_id == current_user.id %>
-            <%= link_to '編集', edit_event_path(@event) %>
-          <% elsif @event.users.include?(current_user) %>
-            <%= link_to 'イベントを辞退', event_path(@event), method: :delete, class: "btn btn-sm btn-danger" %>
-          <% else %>
-            <%= link_to '申請依頼', event_join_path(@event), class: "btn btn-sm btn-success" %>
-          <% end %>
-      </td>
-      <td></td>
-    </tr>
-  </table>
-
-  <div class="col-5">
-    <!--< if @event.current_user.apply.apply_status == approved %>-->
-    <div>
-      <% @event.event_comments.each do |event_comment| %>
-        <%= event_comment.user.user_name %>
-        <%= event_comment.comment %>
-        <%= event_comment.created_at.strftime('%Y/%m/%d') %>
-      <% end %>
+<div class="container mt-3">
+  <div class="row mt-4">
+    <div class="col-5">
+      <h4 class="mb-4 text-center">イベント詳細</h4>
+        <table class="table">
+          <tr>
+            <td>イベント名</td>
+            <td><%= @event.event_title %>
+          </tr>
+          <tr>
+            <td>開催日</td>
+            <td><%= @event.event_date %>
+          </tr>
+          <tr>
+            <td>イベント詳細</td>
+            <td><%= @event.event_introduction %></td>
+          </tr>
+          <tr>
+            <td>開催エリア</td>
+            <td><%= @event.event_area %></td>
+          </tr>
+          <tr>
+            <td>イベント参加者</td>
+            <td><% @event_users.each do |event_user| %>
+                <%= link_to user_path(event_user.id), class:"text-success" do %><%= event_user.nickname %><% end %>
+                <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>参加状況</td>
+            <td><%= @event.applies.where(apply_status: :approved).count %> / <%= @event.entry_limit %>人</td>
+          </tr>
+          <tr>
+            <td>平均スコア</td>
+            <td><%= @event.search_score_i18n %></td>
+          </tr>
+          <tr>
+            <td>募集締め切り日</td>
+            <td>あと<%= @event.date %>日 (<%= @event.deadline_date %>)</td>
+          </tr>
+          <tr>
+            <td>イベント作成者</td>
+            <td><%= link_to @owner.user_name, user_path(@owner.id), class:"text-success" %></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center"><% if @event.owner_id == current_user.id %>
+                  <%= link_to '編集', edit_event_path(@event), class: "btn btn-sm btn-success" %>
+                <% elsif @event.users.include?(current_user) %>
+                  <% if @event.apply.apply_status == ">
+                  <%= link_to 'イベントを辞退', event_path(@event), method: :delete, class: "btn btn-sm btn-danger" %>
+                <% else %>
+                  <%= link_to '申請依頼', event_join_path(@event), class: "btn btn-sm btn-success" %>
+                <% end %>
+            </td>
+          </tr>
+        </table>
     </div>
-    <div>
-      <%= form_with model: [@event, @event_comment] do |f| %>
-        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-        <%= f.submit "送信する" %>
-      <% end %>
+    <div class="col-5 ml-4">
+      <h4 class="mb-4 text-center">~ コメント ~</h4>
+        <% @event.event_comments.each do |event_comment| %>
+          <div class="comment">
+            <p><font size="4"><%= event_comment.comment %>&emsp;</font>
+              <span><font size="1">(<i class="fas fa-user"></i>
+                <%= event_comment.user.user_name %> <%= event_comment.created_at.strftime('%Y/%m/%d') %>)</font></span>
+            </p>
+          </div>
+        <% end %>
+          <div>
+            <%= form_with model: [@event, @event_comment] do |f| %>
+              <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに入力", class:"form-control" %></br>
+              <%= f.submit "送信", class:"btn btn-primary" %>
+            <% end %>
+          </div>
+            <% if current_user != @owner %>
+              <%= link_to "イベント主催者に問い合わせる", room_path(@owner.id) %>
+            <% else %>
+              <p></p>
+            <% end %>
     </div>
-    <!--< else %>-->
-    <% if current_user != @owner %>
-    <%= link_to "イベント主催者に問い合わせる", room_path(@owner.id) %>
-    <% else %>
-    <p></p>
-    <% end %>
-  </div>
   </div>
 </div>

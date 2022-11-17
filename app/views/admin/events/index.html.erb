@@ -20,8 +20,7 @@
         <td><%= event.event_date %></td>
         <td><%= event.deadline_date %></td>
 
-        <% owner = User.find(event.owner_id) %>
-        <td><%= owner.user_name %></td>
+        <td><% owner = User.find(event.owner_id) %><%= owner.user_name %></td>
         <td><%= event.event_area %></td>
         <td><%= event.event_status ? '募集中' : '募集終了' %></td>
     <% end %>

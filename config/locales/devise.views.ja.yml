@@ -9,7 +9,7 @@ ja:
         current_password: 現在のパスワード
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
-        email: Eメール
+        email: メールアドレス
         encrypted_password: 暗号化パスワード
         failed_attempts: 失敗したログイン試行回数
         last_sign_in_at: 最終ログイン時刻
@@ -41,7 +41,7 @@ ja:
         event_title: イベント名
         event_introduction: イベント詳細
         event_status: イベントステータス
-        search_score: 平均スコア
+        search_score: スコアレベル
 
     models:
       user: 会員情報

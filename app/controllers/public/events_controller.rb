@@ -4,10 +4,14 @@ class Public::EventsController < ApplicationController
   def join
     @event = Event.find(params[:event_id])
     apply = @event.applies.find_by(user_id: current_user.id) #申請の確認
-    
+
     if apply.nil? #nilだった場合、申請を作成
-      @apply_create = @event.applies.new(user_id: current_user.id, apply_status: :applying).save
-      redirect_to event_path(@event.id), notice: "申請しました"
+      if @event.entry_limit.to_i < Apply.where(event_id: params[:event_id], apply_status: :approved).count+1
+         redirect_to event_path(@event.id), notice: "規定人数を超えています"
+      else
+        @apply_create = @event.applies.new(user_id: current_user.id, apply_status: :applying).save
+        redirect_to event_path(@event.id), notice: "申請しました"
+      end
     elsif apply.applying? #申請中になっていいた場合
       redirect_to event_path(@event.id), notice: "申請中です"
     elsif apply.approved?　#承認されている場合は、参加済み＆参加する
@@ -48,7 +52,7 @@ class Public::EventsController < ApplicationController
 
   def index
     @events = Event.search(
-      title: params[:event_title],
+      event_title: params[:event_title],
       gender: params[:gender],
       date_from: date_select_params_to_date(:date_from),
       date_to: date_select_params_to_date(:date_to),

@@ -22,8 +22,8 @@ class Event < ApplicationRecord
   scope :search_score_is, -> (search_score) { where(search_score: search_score) if search_score.present? }
   scope :entry_limit_is, -> (entry_limit) { where(entry_limit: entry_limit) if entry_limit.present? }
 
-  def self.search(title: nil, gender: nil, date_from: nil, date_to: nil, area: nil, search_score: nil, entry_limit: nil)
-    event_title_like(title)
+  def self.search(event_title: nil, gender: nil, date_from: nil, date_to: nil, area: nil, search_score: nil, entry_limit: nil)
+    event_title_like(event_title)
       .gender_is(gender)
       .event_date_from(date_from)
       .event_date_to(date_to)
@@ -63,8 +63,7 @@ class Event < ApplicationRecord
     middle: 1,
     athlete: 2,
     low_handicap: 3,
-    enjoy: 4
-
+    every_one: 4
   }, _prefix: true
 
 #

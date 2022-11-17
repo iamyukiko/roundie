@@ -1,27 +1,41 @@
-<h1>トップページ</h1>
-<table>
-  <table>
-    <thead>
-      <tr>
-        <td>開催日</td>
-        <td>イベントタイトル</td>
-        <td>開催エリア</td>
-        <td>参加状況</td>
-        <td>締め切り</td>
-      </tr>
-    </thead>
-     <% @events.first(5).each do |event| %>
-    <tbody>
-      <tr>
-        <td><%= event.event_date %></td>
-        <td><%= link_to event_path(event) do %><%= event.event_title %><% end %></td>
-        <td><%= event.event_area %></td>
-        <td><%= event.users.count %> / <%= event.entry_limit %>人</td>
-        <td>あと<%= event.date %>日</td>
-      </tr>
-    </tbody>
-    <% end %>
-  </table>
-    <%= link_to "＞＞もっと見る", events_path %>
+<div class="jumbotron jumbotron-extend" style="background: url(<%= asset_path "top_image" %>)center; background-size:cover;">
+  <div class="row p-5">
+    <div class="col-md-12">
+      <div class="container col-6 p-4 text-center" style="background-color:rgba(255,255,255,0.7);">
+        <h1 style="color:#000000;"><strong>Let's find your "roundies" !!</strong></h1><br />
+        <p>
+          20~30代専用のゴルフマッチングサイトです。</br>
+          あなたの希望にピッタリの仲間とラウンドしてみませんか？</br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h5><i class="far fa-flag"></i> 新着イベント</h5>
+    <table class="table table-hover" bgcolor="#f5f5f5">
+      <thead>
+        <tr>
+          <th>開催日</th>
+          <th>イベントタイトル</th>
+          <th>開催エリア</th>
+          <th>参加状況</th>
+          <th>締め切り</th>
+        </tr>
+      </thead>
+      <% @events.first(5).each do |event| %>
+      <tbody>
+        <tr>
+          <td><%= event.event_date %></td>
+          <td><%= link_to event_path(event), class:"text-success" do %><%= event.event_title %><% end %></td>
+          <td><%= event.event_area %></td>
+          <td><%= event.users.count %> / <%= event.entry_limit %>人</td>
+          <td><font color=red>あと<%= event.date %>日</font></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+    <%= link_to "＞＞もっと見る", events_path, class:"text-success" %>
+</div>
 
 

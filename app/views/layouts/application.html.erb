@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Roundie</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,92 +8,76 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#6b8e23;" >
         <div class="container">
           <% if user_signed_in? %>
-          <%= link_to root_path, class:'navbar-brand' do %>Roundie<% end %>
+            <a class="navbar-brand p-3" href="/"><%= image_tag 'Logo_white.png', size: '280x50' %></a>
           <% elsif admin_signed_in? %>
-          <%= link_to admin_path, class:"navbar-brand" do %>Roundie<% end %>
+            <a class="navbar-brand p-3" href="/admin"><%= image_tag 'Logo_white.png', size: '280x50' %></a>
           <% else %>
-          <%= link_to root_path, class:'navbar-brand' do %>Roundie<% end %>
+            <a class="navbar-brand p-3" href="/"><%= image_tag 'Logo_white.png', size: '280x50' %></a>
           <% end %>
-          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="navbar-collapse collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-
-              <li class="nav-item">
-              <%= link_to user_path(current_user.id), class:'nav-link text-light' do %>
-              <i class="fas fa-home"></i> マイページ
-              <% end %>
-              </li>
-
-              <li class="nav-item">
-              <%= link_to events_path, class:'nav-link text-light' do %>
-              <i class="fas fa-users"></i> イベント検索
-              <% end %>
-              </li>
-
-               <li class="nav-item">
-              <%= link_to destroy_user_session_path, method: :delete, class:'nav-link text-light' do %>Log out<% end %>
-              </li>
-
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to user_path(current_user.id), class:'nav-link text-light' do %>
+                    <i class="fas fa-user-circle"></i> My page
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to events_path, class:'nav-link text-light' do %>
+                    <i class="fas fa-search"></i> Event
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to destroy_user_session_path, method: :delete, class:'nav-link text-light' do %>Log out
+                  <% end %>
+                </li>
               <% elsif admin_signed_in? %>
-
-              <li class="nav-item">
-              <%= link_to admin_path, class:'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Home
-              <% end %>
-              </li>
-
-               <li class="nav-item">
-              <%= link_to destroy_admin_session_path, method: :delete, class:'nav-link text-light' do %>Log out<% end %>
-              </li>
-
+                <li class="nav-item">
+                  <%= link_to admin_path, class:'nav-link text-light' do %>
+                    <i class="fas fa-home"></i>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to destroy_admin_session_path, method: :delete, class:'nav-link text-light' do %>Log out
+                  <% end %>
+                </li>
               <% else %>
-
-              <li class="nav-item">
-              <%= link_to root_path, class:'nav-link text-light' do %>Home<% end %>
-              </li>
-
-               <li class="nav-item">
-              <%= link_to about_path, class:'nav-link text-light' do %>About<% end %>
-              </li>
-
-               <li class="nav-item">
-              <%= link_to new_user_registration_path, class:'nav-link text-light' do %>Sign up<% end %>
-              </li>
-
-               <li class="nav-item">
-              <%= link_to user_session_path, class:'nav-link text-light' do %>Log in<% end %>
-              </li>
-
-              <li class="nav-item">
-              <%= link_to users_guest_sign_in_path, method: :post, class:'nav-link text-light' do %>Guest<% end %>
-              </li>
-
+                <li class="nav-item">
+                  <%= link_to user_session_path, class:'nav-link text-light' do %>Log in
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_registration_path, class:'nav-link text-light' do %>Sign up
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to about_path, class:'nav-link text-light' do %>About
+                  <% end %>
+                </li>
               <% end %>
-            </ul>
-          </div>
+              </ul>
+            </div>
         </div>
       </nav>
     </header>
-      <%= render 'layouts/flash' %>
-</body>
-    <%= yield %>
-    <footer>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="mx-auto">
-          <p>CopyRight Infratop.inc</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+    <%= render 'layouts/flash' %>
   </body>
+    <%= yield %>
+      <footer>
+        <div class='container mt-5'>
+        	<div class='row'>
+          	<div class='mx-auto'>
+          		<p>@2022 roundie</p>
+          	</div>
+          </div>
+        </div>
+      </footer>
 </html>

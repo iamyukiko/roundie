@@ -1,4 +1,7 @@
 <div class="container">
-  <h3>イベント新規作成</h3>
-  <%= render 'public/events/form', event: @event %>
+  <div class="mx-auto" style="width: 500px;">
+    <h4 class="mt-2 mb-4 p-2 text-center">ラウンドイベント新規作成</h4>
+      <%= render 'public/shared/error_messages', resource: @event %>
+      <%= render 'public/events/form', event: @event %>
+  </div>
 </div>

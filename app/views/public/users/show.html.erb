@@ -1,39 +1,43 @@
-<div class="container">
-  <h3><%= @user.user_name %>さんのマイページ</h3>
-  <div class="row">
-    <div class="col-3">
-      <%= render 'public/users/show', user: @user%>
-      <%= render "public/relationships/relationship_btn", user: @user %>
-      <%= render "public/rooms/room", isRoom: @isRoom, roomId: @roomId, room: @room, entry: @entry, user: @user %>
-    </div>
+<div class="container mt-4">
+  <% if current_user != @user%>
+    <p><p>
+  <% else %>
+    <h3>My page</h3>
+  <% end %>
+    <div class="row mt-3">
+      <div class="col-4 mx-auto" style="text-align: center">
+        <%= render 'public/users/show', user: @user, isRoom: @isRoom, roomId: @roomId, room: @room, entry: @entry, user: @user%>
+      </div>
       <div class="col-8">
-        <%= link_to "参加イベント一覧", user_path(@user.id,{type: 'join'}) %> | <%= link_to "主催イベント一覧", user_path(@user.id,{type: 'owner'}) %>
-        <%= link_to "イベント新規作成", new_event_path %>
-        <%= link_to "イベント申請一覧", index_apply_path(@user.id) %>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>開催日</th>
-              <th>イベントタイトル</th>
-              <th>開催エリア</th>
-              <th>参加状況</th>
-              <th>締め切り</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if @events %>
-            <% @events.each do |event| %>
-            <tr>
-              <td><%= link_to event.event_date, event_path(event.id) %></td>
-              <td><%= event.event_title %></td>
-              <td><%= event.event_area %></td>
-              <td><%= event.applies.where(apply_status: :approved).count %>/<%= event.entry_limit %>人</td>
-              <td>あと<%= event.date %>日</td>
-            </tr>
-            <% end %>
-            <% end %>
-          </tbody>
-        </table>
+        <p><font size="4"><%= link_to "参加イベント一覧", user_path(@user.id,{ type: 'join' }), class:"text-success" %></font> |
+            <font size="4"><%= link_to "主催イベント一覧", user_path(@user.id,{ type: 'owner' }), class:"text-success" %></font>
+            <%= link_to new_event_path, class:"text-success" do %><i class="fas fa-plus-square"></i><% end %>
+            <span style="float: right"><%= link_to index_apply_path(@user.id), class:"text-success" do %><i class="fas fa-bell"></i>イベント申請一覧<% end %></span>
+        </p>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>開催日</th>
+                <th>イベント名</th>
+                <th>開催エリア</th>
+                <th>参加状況</th>
+                <th>募集締切日</th>
+              </tr>
+            </thead>
+              <tbody>
+                <% if @events %>
+                  <% @events.each do |event| %>
+                    <tr>
+                      <td><%= link_to event.event_date, event_path(event.id), class:"text-success" %></td>
+                      <td><%= event.event_title %></td>
+                      <td><%= event.event_area %></td>
+                      <td><%= event.applies.where(apply_status: :approved).count %>/<%= event.entry_limit %>人</td>
+                      <td>あと<%= event.date %>日</td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+          </table>
       </div>
   </div>
 </div>

@@ -1,11 +1,11 @@
-
-<div>
-  <h2>本当に退会しますか？</h2>
-  <div>
-    <p>退会する場合は、『退会する』をクリックしてください。</p>
-  </div>
-  <div>
-    <%= link_to '退会しない', user_path(@user.id) %>
-    <%= link_to "退会する", withdraw_path(@user.id), method: :patch %>
+<div class="container mt-4">
+  <div class="center-block">
+    <h4 class="mt-2 mb-4 p-2 text-center">本当に退会しますか？</h4>
+      <p class="text-center">退会する場合は、『退会する』をクリックしてください。</br>
+        ※参加中のイベントがある場合は、</br>
+        必ず主催者に連絡をした上で退会を行ってください </br></br>
+        <%= link_to '退会しない', user_path(@user.id), class:"btn btn-primary" %>&emsp;&emsp;
+        <%= link_to "退会する", withdraw_path(@user.id), method: :patch, class:"btn btn-danger" %>
+      </p>
   </div>
 </div>

@@ -41,9 +41,9 @@ ja:
         middle: "アベレージ(115～95)"
         athlete: "アスリート(99～80)"
         low_handicap: "シングル(～70)"
+        every_one: "とにかく楽しく!"
     apply:
       apply_status:
         applying: "申請中"
         approved: "承認"
         rejected: "却下"
-
