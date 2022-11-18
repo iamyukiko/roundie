@@ -1,34 +1,49 @@
 <%= form_with model: event do |f| %>
   <table class="table table-borderless table-sm">
     <tr>
-      <td><%= f.label :event_date %></td>
+      <td><%= f.label :event_title %>
+        <span class="text-danger"><font size ="1">（必須）</font></span>
+      </td>
+      <td class="form-group"><%= f.text_field :event_title, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :event_introduction %>
+        <span class="text-danger"><font size ="1">（必須）</font></span>
+      </td>
+      <td class="form-group"><%= f.text_area :event_introduction, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :event_area %>
+        <span class="text-danger"><font size ="1">（必須）</font></span>
+      </td>
+      <td class="form-group"><%= f.select :event_area, Event.event_areas.keys, { include_blank: "---" }, class: "form-control" %></td>
+    <tr>
+      <td><%= f.label :entry_limit %>
+        <span class="text-danger"><font size ="1">（必須）</font></span>
+      </td>
+      <td class="form-inline"><%=f.select :entry_limit, options_for_select((1..16).to_a), { include_blank: "---" }, class: "form-control" %> 人</td>
+    </tr>
+    <tr>
+      <td><%= f.label :event_date %>
+        <span class="text-danger"><font size ="1">（必須）</font></span>
+      </td>
       <td class="form-group"><%= f.date_select :event_date, start_year: Time.now.year, end_year: Time.now.year + 1, date_separator:' / ' %></td>
     </tr>
     <tr>
-      <td><%= f.label :event_title %></td>
-      <td class="form-group"><%= f.text_field :event_title, class:"form-control" %></td>
+      <td><%= f.label :deadline_date %>
+        <span class="text-danger"><font size ="1">（必須）</font></span></br>
+        <font size ="1">※開催日より8日以上前の日付を選択してください</font>
+      </td>
+      <td class="form-group"><%= f.date_select :deadline_date, start_year:Time.now.year, end_year:Time.now.year, date_separator: ' / ' %></td>
     </tr>
     <tr>
-      <td><%= f.label :event_introduction %></td>
-      <td class="form-group"><%= f.text_area :event_introduction, class:"form-control" %></td>
+      <td><%= f.label :search_score %>
+        <span><font size ="1">（任意）</font></span>
+      </td>
+      <td class="form-group"><%= f.collection_select :search_score, Event.search_scores_i18n, :first, :last, { include_blank: "---" }, class: "form-control" %></td>
     </tr>
     <tr>
-      <td><%= f.label :event_area %></td>
-      <td class="form-group"><%= f.select :event_area, Event.event_areas.keys, { include_blank: "---" } %></td>
-    <tr>
-      <td><%= f.label :entry_limit %></td>
-      <td class="form-group"><%=f.select :entry_limit, options_for_select((1..16).to_a), { include_blank: "---" } %> 人</td>
-    </tr>
-    <tr>
-      <td><%= f.label :deadline_date %></td>
-      <td class="form-group"><%= f.date_select :deadline_date, start_year:Time.now.year, end_year:Time.now.year, date_separator:' / ' %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :search_score %></td>
-      <td class="form-group"><%= f.collection_select :search_score, Event.search_scores_i18n, :first, :last, { include_blank: "---" } %></td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center"><%= f.submit class:"btn btn-primary" %></td>
+      <td colspan="2" align="center"><%= f.submit class: "btn btn-primary btn-block col-3" %></td>
     </tr>
   </table>
 <% end %>

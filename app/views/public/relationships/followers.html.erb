@@ -1,18 +1,22 @@
 <!--フォローされている人の一覧-->
-<div class="container">
-  <% if @users.exists? %>
-    <% @users.each do |user| %>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><%= image_tag user.get_image, size:'100x100' %></br></td>
-            <td><%= link_to user_path(user) do %><%= user.user_name %><% end %></td>
-            <td><%= render 'public/relationships/relationship_btn', user: user %>
-          </tr>
-        </tbody>
-      </table>
+<div class="container mt-4 col-6">
+  <h4>フォロワー</h4>
+    <% if @users.exists? %>
+      <% @users.each do |user| %>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><%= image_tag user.get_image, class: "rounded-circle", size:'100x100' %></td>
+              <td><%= link_to user_path(user) do %><%= user.user_name %><% end %></td>
+              <td><%= render 'public/relationships/relationship_btn', user: user %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% else %>
+      <div class="text-center">
+        <p>フォローされると、フォロワーがここに表示されます</p>
+        <h1><i class="fas fa-users"></i></h1>
+      </div>
     <% end %>
-  <% else %>
-    <p>ユーザーはいません</p>
-  <% end %>
 </div>

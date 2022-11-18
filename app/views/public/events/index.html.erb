@@ -1,38 +1,35 @@
 <div class="container mt-3">
-  <div class="row mt-4">
-    <div class="col-5">
-      <table class ="table-sm table-borderless">
-        <tbody>
-          <%= form_with(url: events_path, method: :get, local: true) do |f| %>
-            <tr>
-              <td><%= f.label :event_title, "イベント名" %></td>
-              <td><%= f.text_field :event_title, value: params[:event_title], class:"form-control col-md-7" %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :date, "開催日" %></td>
-              <td><%= f.date_select :date_from, start_year: Time.now.year, end_year: Time.now.year - 2, selected: date_select_params_to_date(:date_from) %> ~
-                  <%= f.date_select :date_to, start_year: Time.now.year, end_year: Time.now.year - 2, selected: date_select_params_to_date(:date_to) %>
-              </td>
-            </tr>
-            <tr>
-              <td><%= f.label :area, "開催エリア" %></td>
-              <td><%= f.select :area, Event.event_areas.map{|k, v| [k, v]}, { selected: params[:area], include_blank: "---" } %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :search_score,"スコアレベル" %></td>
-              <td><%= f.select :search_score, Event.search_scores_i18n.invert.map{|k, v| [k, v]}, { selected: params[:search_score], include_blank: "---" } %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :entry_limit, "募集人数" %></td>
-              <td><%= f.select :entry_limit, options_for_select((1..16).to_a, params[:entry_limit]) ,{ include_blank: "---" } %>人</td>
-            </tr>
-            <tr>
-              <td colspan='2' align="center"><%= f.submit "検索する", class:"btn btn-primary" %></td>
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
+  <div class="row mt-5">
+    <form class="form-horizontal col-md-4" style="background-color:#f0fff0" >
+      <%= form_with url: events_path, method: :get, local: true do |f| %>
+        <div class="form-group mt-4">
+          <%= f.label :event_title, "イベント名 : " %></br>
+          <%= f.text_field :event_title, value: params[:event_title], class: "form-control" %>
+          </div>
+        <div class="form-group">
+          <%= f.label :date, "開催日 : " %></br>
+          <%= f.date_select :date_from, { default: Date.today, start_year: Time.now.year, end_year: Time.now.year - 2 }, selected: date_select_params_to_date(:date_from) %> ~
+          <%= f.date_select :date_to, { default: Date.today, start_year: Time.now.year, end_year: Time.now.year - 2 }, selected: date_select_params_to_date(:date_to) %>
+        </div>
+        <div class="form-group">
+          <%= f.label :area, "開催エリア : " %></br>
+          <%= f.select :area, Event.event_areas.map{|k, v| [k, v]}, { selected: params[:area], include_blank: "---" }, class: "form-control col-md-4" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :search_score,"スコアレベル : " %></br>
+          <%= f.select :search_score, Event.search_scores_i18n.invert.map{|k, v| [k, v]}, { selected: params[:search_score], include_blank: "---" }, class: "form-control col-md-4" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :entry_limit, "参加状況 : " %></br>
+          <div class="form-inline">
+          <%= f.select :entry_limit, options_for_select((1..16).to_a, params[:entry_limit]) ,{ include_blank: "---" }, class: "form-control col-md-5" %>&ensp;人
+          </div>
+        </div>
+        <div class="form-group text-center">
+        <%= f.submit "検索する", class: "btn btn-primary" %>
+        </div>
+       <% end %>
+    </form>
     <div class="col-7">
       <h4><i class="fas fa-search"></i> 検索結果（全<%= @events.count %>件）</h4>
         <table class="table table-striped">
@@ -48,10 +45,10 @@
             <tbody>
               <% @events.each do |event| %>
               <tr>
-                <td><%= link_to event.event_date, event_path(event.id), class:"text-success" %></td>
+                <td><%= link_to event.event_date, event_path(event.id), class: "text-success" %></td>
                 <td><%= event.event_title %></td>
                 <td><%= event.event_area %></td>
-                <td><%= event.entry_limit %>人</td>
+                <td><%= event.applies.where(apply_status: :approved).count %> / <%= event.entry_limit %>人</td>
                 <td>あと<%= event.date %>日</td>
               </tr>
               <% end %>

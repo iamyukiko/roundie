@@ -1,23 +1,27 @@
-<div>
-  <div>
+<div  style="background-color:#f5f5f5;">
+  <h3 class="p-2"><%= link_to rooms_path, class: "text-dark" do %><i class="fas fa-arrow-left"></i><% end %></h3>
+</div>
+<div class="container mt-4">
+  <div class="mx-auto" style="width: 500px;">
+    <div class="chat text-right">
     <% if @messages.present? %>
       <% @messages.each do |message| %>
-        <div>
-          <div class>
-            <strong><%= message.user.nickname %></strong>
-          </div>
-          <div><%= message.body %>
-            (<%= message.created_at.strftime("%Y-%m-%d %H:%M")%>)
-          </div>
-        </div>
+        <p><%= message.body %>&emsp;
+          (<span><font size="1"><i class="fas fa-user"></i><strong><%= message.user.nickname %></strong>&emsp;<%= message.created_at.strftime("%Y-%m-%d %H:%M")%></font></span>)
+        </p>
       <% end %>
     <% end %>
-  </div>
-  <div>
-    <%= form_for @message do |f| %>
-      <%= f.text_field :body, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
-        <%= f.hidden_field :room_id, value: @room.id %>
-          <%= f.submit "投稿",class: 'form-submit'%>
-    <% end %>
+    </div>
+      <%= form_with model: @message do |f| %>
+        <form class="row">
+          <div class="col-auto">
+            <%= f.text_area :body, placeholder: "メッセージを入力して下さい", class: "form-control" %>
+            <%= f.hidden_field :room_id, value: @room.id %>
+          </div>
+          <div class="col-auto">
+            <%= f.submit "投稿", class: "btn btn-primary" %>
+          </div>
+       </form>
+      <% end %>
   </div>
 </div>

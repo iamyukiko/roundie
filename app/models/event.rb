@@ -12,7 +12,6 @@ class Event < ApplicationRecord
   validate :users_must_complete_info
   validate :event_date_start
   validate :deadline_date_finish
-  # validate :users_count_can_not_over_entry_limit
 
   scope :event_title_like, -> (event_title) { where('event_title LIKE ?', "%#{event_title}%") if event_title.present? }
   scope :gender_is, -> (gender) { where(gender: gender) if gender.present? }
@@ -66,8 +65,6 @@ class Event < ApplicationRecord
     every_one: 4
   }, _prefix: true
 
-#
-
   private
 
   #イベント作成時にはプロフィール詳細設定が必要というバリデーション
@@ -86,14 +83,9 @@ class Event < ApplicationRecord
   #募集締め切り日は開催日より8日前以上で設定というバリデーション
   def deadline_date_finish
     return if deadline_date.blank? || event_date.blank?
-    errors.add(:deadline_date, "は開催日より8日以上前を選択してください")unless
-    self.deadline_date+8.days < self.event_date
+    unless self.deadline_date + 8.days < self.event_date && deadline_date > Date.today
+      errors.add(:deadline_date, "は開催日より8日以上前を選択してください")
+    end
   end
-
-  # def users_count_can_not_over_entry_limit
-  #   if entry_limit < applies.where(apply_status: :approved).count
-  #     errors.add(:base, "規定人数に達しているため参加できません")
-  #   end
-  # end
 
 end

@@ -7,6 +7,7 @@ class Admin::EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @owner = User.find(@event.owner_id)
+    @event_users = @event.users
   end
 
   def edit

@@ -1,56 +1,79 @@
-<div class="container">
-  <h3>プロフィール編集</h3>
-  <%= render 'public/shared/error_messages', resource: @user %>
-
-  <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
-  <table class="table">
-    <tr>
-      <td><%= f.label :user_name, "氏名（スペースなし）" %></td>
-      <td><%= f.text_field :user_name %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :nickname %></td>
-      <td><%= f.text_field :nickname %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :birthdate %></td>
-      <td><%= f.date_select :birthdate, start_year: 1990, end_year:Time.now.year-10, date_separator:' / ' %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :user_area %></td>
-      <td><%= f.select :user_area, User.user_areas.keys, {} %></td>
-    <tr>
-      <td><%= f.label :gender %></td>
-      <td><%= f.collection_radio_buttons :gender, User.genders_i18n, :first, :last %></td>
-    </tr>
-     <tr>
-      <td><%= f.label :email %></td>
-      <td><%= f.text_field :email %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :user_score %></td>
-      <td><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :image, "プロフィール画像" %></td>
-      <td><%= f.file_field :image, accept: "image/*" %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :self_introduction %></td>
-      <td><%= f.text_area :self_introduction %></td>
-    </tr>
-   <tr>
-    <th><%= f.label :is_valid %></th>
-    <td><%= f.radio_button :is_valid, :true %>
-        <%= f.label :is_valid, "有効", {value: :true} %>
-        <%= f.radio_button :is_valid, :false %>
-        <%= f.label :is_valid, "退会", {value: :false} %>
-    </td>
-  </tr>
-  <tr>
-    <th></th>
-    <td><%= f.submit '変更を保存', class:"btn btn-success" %></td>
-  </tr>
-</table>
-  <% end %>
+<div  style="background-color:#f5f5f5;">
+  <h3 class="p-2"><%= link_to admin_user_path(@user.id), class: "text-dark" do %><i class="fas fa-arrow-left"></i><% end %></h3>
+</div>
+<div class="container mt-4">
+  <div class="mx-auto" style="width: 500px;">
+    <h4 class="mt-2 mb-4 p-2 text-center">プロフィール編集</h4>
+      <%= render 'public/shared/error_messages', resource: @user %>
+      <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
+        <table class="table table-borderless table-sm">
+          <tbody>
+            <tr>
+              <td><%= f.label :user_name, "氏名" %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+                  <font size ="1">※スペースなし</font>
+              </td>
+              <td class="form-group"><%= f.text_field :user_name, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :nickname %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.text_field :nickname, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :birthdate %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.date_select :birthdate, start_year: 1990, end_year:Time.now.year-10, date_separator:' / ' %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :user_area, "エリア" %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.select :user_area, User.user_areas.keys, {} %></td>
+            </tr>
+              <td><%= f.label :gender %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.collection_radio_buttons :gender, User.genders_i18n, :first, :last %></td>
+            </tr>
+             <tr>
+              <td><%= f.label :email %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.text_field :email, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :user_score, "スコアレベル" %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :image, "プロフィール画像" %></td>
+              <td><%= f.file_field :image, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :self_introduction %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+                  <font size ="1">※50文字以内</font>
+              </td>
+              <td class="form-group"><%= f.text_area :self_introduction, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :is_valid, "ステータス" %></td>
+              <td><%= f.radio_button :is_valid, :true %>
+                  <%= f.label :is_valid, "有効", {value: :true} %>
+                  <%= f.radio_button :is_valid, :false %>
+                  <%= f.label :is_valid, "退会", {value: :false} %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center"><%= f.submit '変更を保存', class: "btn btn-success" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+  </div>
 </div>

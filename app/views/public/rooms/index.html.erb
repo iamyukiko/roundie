@@ -1,15 +1,26 @@
-<div class="container">
-<% if @another_entries.present? %>
-<% @another_entries.each do |entry| %>
-<table class="container">
-<tr>
-  <td><%= link_to room_path(entry.room.id) do %><%= entry.user.user_name %>とのDM<% end %>
-  <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
-  </td>
-</tr>
+<div class="container mt-4 col-5">
+  <h4>チャット</h4>
+    <% if @another_entries.present? %>
+      <% @another_entries.each do |entry| %>
+        <table class="table">
+          <tbody>
+            <tr style="line-height:2;">
+              <td><%= link_to room_path(entry.room.id) do %>
+                  <%= image_tag entry.user.get_image, class: "rounded-circle", size:'100x100' %>
+                  <strong><font color=black><%= entry.user.nickname %></font></strong>
+                  <% end %>
+              </td>
+              <td><font color=#c0c0c0><%= Message.find_by(id: entry.room.message_ids.last)&.body %></font>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% else %>
+      <div class="text-center">
+        <p>メッセージのやり取りはありません</p>
+        <h1><i class="fas fa-envelope"></i></h1>
+      </div>
+    <% end %>
 </div>
-<% end %>
-<% else %>
-<p>メッセージのやり取りはありません</p>
-<% end %>
 

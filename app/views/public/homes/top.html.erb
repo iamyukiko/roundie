@@ -13,14 +13,14 @@
 </div>
 <div class="container">
   <h5><i class="far fa-flag"></i> 新着イベント</h5>
-    <table class="table table-hover" bgcolor="#f5f5f5">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>開催日</th>
           <th>イベントタイトル</th>
           <th>開催エリア</th>
           <th>参加状況</th>
-          <th>締め切り</th>
+          <th>募集締切日</th>
         </tr>
       </thead>
       <% @events.first(5).each do |event| %>
@@ -29,8 +29,8 @@
           <td><%= event.event_date %></td>
           <td><%= link_to event_path(event), class:"text-success" do %><%= event.event_title %><% end %></td>
           <td><%= event.event_area %></td>
-          <td><%= event.users.count %> / <%= event.entry_limit %>人</td>
-          <td><font color=red>あと<%= event.date %>日</font></td>
+          <td><%= event.applies.where(apply_status: :approved).count %> / <%= event.entry_limit %>人</td>
+          <td>あと<%= event.date %>日</td>
         </tr>
       </tbody>
       <% end %>

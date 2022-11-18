@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-4">
   <div class="mx-auto" style="width: 500px;">
     <h4 class="mt-2 mb-4 p-2 text-center">プロフィール編集</h4>
       <%= render 'public/shared/error_messages', resource: @user %>
@@ -6,30 +6,30 @@
           <table class="table table-borderless table-sm">
             <tr>
               <td><%= f.label :user_name, "氏名（スペースなし）" %></td>
-              <td class="form-group"><%= f.text_field :user_name, class:"form-control" %></td>
+              <td class="form-group"><%= f.text_field :user_name, class: "form-control" %></td>
             </tr>
             <tr>
               <td><%= f.label :nickname %></td>
-              <td class="form-group"><%= f.text_field :nickname, class:"form-control" %></td>
+              <td class="form-group"><%= f.text_field :nickname, class: "form-control" %></td>
             </tr>
             <tr>
               <td><%= f.label :birthdate %></td>
-              <td class="form-group"><%= f.date_select :birthdate, start_year: 1990, end_year:Time.now.year-10, date_separator:' / ' %></td>
+              <td class="form-group"><%= f.date_select :birthdate, start_year: 1990, end_year:Time.now.year - 10, date_separator: ' / ' %></td>
             </tr>
             <tr>
               <td><%= f.label :user_area %></td>
-              <td class="form-group"><%= f.select :user_area, User.user_areas.keys, {} %></td>
-            <tr>
+              <td class="form-group"><%= f.select :user_area, User.user_areas.keys, { include_blank: "---" }, class: "form-control" %></td>
+            </tr>
               <td><%= f.label :gender %></td>
               <td class="form-group"><%= f.collection_radio_buttons :gender, User.genders_i18n, :first, :last %></td>
             </tr>
              <tr>
               <td><%= f.label :email %></td>
-              <td class="form-group"><%= f.text_field :email, class:"form-control" %></td>
+              <td class="form-group"><%= f.text_field :email, class: "form-control" %></td>
             </tr>
             <tr>
-              <td><%= f.label :user_score %></td>
-              <td class="form-group"><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last %></td>
+              <td><%= f.label :user_score, "スコアレベル" %></td>
+              <td class="form-group"><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last, { include_blank: "---" }, class: "form-control" %></td>
             </tr>
             <tr>
               <td><%= f.label :image, "プロフィール画像" %></td>
@@ -37,11 +37,11 @@
             </tr>
             <tr>
               <td><%= f.label :self_introduction %></td>
-              <td class="form-group"><%= f.text_area :self_introduction, class:"form-control" %></td>
+              <td class="form-group"><%= f.text_area :self_introduction, class: "form-control" %></td>
             </tr>
             <tr>
-              <td colspan="2" align="center"><%= f.submit "更新する", class:"btn btn-success" %>&emsp;&emsp;&emsp;
-                <%= link_to "退会する", unsubscribe_path(@user.id), class:"btn btn-danger" %>
+              <td colspan="2" align="center"><%= f.submit "更新する", class: "btn btn-success" %>&emsp;&emsp;&emsp;
+                <%= link_to "退会する", unsubscribe_path(@user.id), class: "btn btn-danger" %>
               </td>
             </tr>
           </table>

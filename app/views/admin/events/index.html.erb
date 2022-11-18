@@ -1,29 +1,31 @@
-<div class="container">
-  <h4 class="mt-2 p-2 text-center bg-secondary text-white col-md-3">イベント一覧</h4>
+<div  style="background-color:#f5f5f5;">
+  <h3 class="p-2"><%= link_to admin_path, class: "text-dark" do %><i class="fas fa-arrow-left"></i><% end %></h3>
+</div>
+<div class="container mt-4">
+  <h4 class="text-center mb-4">イベント一覧</h4>
   <table class="table table-bordered">
     <thead class="thead-light">
       <tr>
         <th>イベントID</th>
         <th>イベント名</th>
         <th>開催日</th>
-        <th>募集締め切り日</th>
+        <th>募集締切日</th>
         <th>主催者</th>
         <th>開催エリア</th>
         <th>ステータス</th>
       </tr>
     </thead>
     <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.id %></td>
-        <td><%= link_to event.event_title, admin_event_path(event.id) %></td>
-        <td><%= event.event_date %></td>
-        <td><%= event.deadline_date %></td>
-
-        <td><% owner = User.find(event.owner_id) %><%= owner.user_name %></td>
-        <td><%= event.event_area %></td>
-        <td><%= event.event_status ? '募集中' : '募集終了' %></td>
-    <% end %>
+      <% @events.each do |event| %>
+        <tr>
+          <td><%= event.id %></td>
+          <td><%= link_to event.event_title, admin_event_path(event.id) %></td>
+          <td><%= event.event_date %></td>
+          <td><%= event.deadline_date %></td>
+          <td><% owner = User.find(event.owner_id) %><%= owner.user_name %></td>
+          <td><%= event.event_area %></td>
+          <td><%= event.event_status ? '募集中' : '募集終了' %></td>
+      <% end %>
     </tbody>
   </table>
   <!--<= paginate @customers %>-->

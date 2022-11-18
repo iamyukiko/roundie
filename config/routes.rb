@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   	get 'followers' => 'relationships#followers', as: 'followers'
   end
   get '/users/:user_id/events/applies' => "applies#index", as: 'index_apply'
-  # post '/users/:user_id/events/:id/applies' => "applies#create", as: 'create_apply'
   patch '/users/:user_id/events/:event_id/applies/:id' => "applies#update", as: 'update_apply'
   get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
   patch '/users/:id/withdraw' => 'users#withdraw', as: 'withdraw'

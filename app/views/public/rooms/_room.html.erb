@@ -1,6 +1,6 @@
 <% if current_user != user %>
   <% if isRoom == true %>
-    <%= link_to room_path(roomId), class:"text-dark" do %><i class="far fa-paper-plane"></i>
+    <%= link_to room_path(roomId), class: "text-dark" do %><i class="far fa-paper-plane"></i>
     <% end %>
   <% else %>
     <%= form_with model: room do |f| %>

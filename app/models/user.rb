@@ -2,7 +2,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_one_attached :image
   has_many :applies
   has_many :events, through: :applies
@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :rooms, dependent: :destroy
-  
+
   #フォローされる設定
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
@@ -30,6 +30,7 @@ class User < ApplicationRecord
     user.password = SecureRandom.urlsafe_base64
     user.user_name = "ゲスト"
     user.birthdate = '19990101'
+    user.gender = '2'
     end
   end
 

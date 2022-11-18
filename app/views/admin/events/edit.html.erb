@@ -1,44 +1,69 @@
-<%= render 'public/shared/error_messages', resource: @event %>
-<%= form_with model: @event, url: admin_event_path(@event.id), method: :patch do |f| %>
-<table class="table">
-  <tr>
-    <td><%= f.label :event_date %></td>
-    <td><%= f.date_select :event_date, start_year:Time.now.year, end_year:Time.now.year+1, date_separator:' / ' %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :event_title %></td>
-    <td><%= f.text_field :event_title %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :event_introduction %></td>
-    <td><%= f.text_area :event_introduction %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :event_area %></td>
-    <td><%= f.select :event_area, Event.event_areas.keys, {} %></td>
-  <tr>
-    <td><%= f.label :entry_limit %></td>
-    <td><%=f.select :entry_limit, options_for_select((1..16).to_a) %> 人</td>
-  </tr>
-  <tr>
-    <td><%= f.label :deadline_date %></td>
-    <td><%= f.date_select :deadline_date, start_year:Time.now.year, end_year:Time.now.year, date_separator:' / ' %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :search_score %></td>
-    <td><%= f.collection_select :search_score, Event.search_scores_i18n, :first, :last %></td>
-  </tr>
-   <tr>
-    <th><%= f.label :event_status %></th>
-    <td><%= f.radio_button :event_status, :true %>
-        <%= f.label :event_status, "募集中", {value: :true} %>
-        <%= f.radio_button :event_status, :false %>
-        <%= f.label :event_status, "募集終了", {value: :false} %>
-    </td>
-  </tr>
-  <tr>
-    <td class="colspan-2"><%= f.submit %></td>
-    <td></td>
-  </tr>
-</table>
-<% end %>
+<div  style="background-color:#f5f5f5;">
+  <h3 class="p-2"><%= link_to admin_event_path(@event.id), class: "text-dark" do %><i class="fas fa-arrow-left"></i><% end %></h3>
+</div>
+<div class="container">
+  <div class="mx-auto" style="width: 500px;">
+    <h4 class="mt-2 mb-4 p-2 text-center">イベント編集画面</h4>
+      <%= render 'public/shared/error_messages', resource: @event %>
+        <%= form_with model: @event, url: admin_event_path(@event.id), method: :patch do |f| %>
+          <table class="table table-borderless table-sm">
+            <tr>
+              <td><%= f.label :event_title %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.text_field :event_title, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :event_introduction %><span class="text-danger">
+                  <font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.text_area :event_introduction, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :event_area %>
+              <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.select :event_area, Event.event_areas.keys, { include_blank: "---" }, class: "form-control" %></td>
+            </tr>
+              <td><%= f.label :entry_limit %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-inline"><%=f.select :entry_limit, options_for_select((1..16).to_a), { include_blank: "---" }, class: "form-control" %> 人</td>
+            </tr>
+            <tr>
+              <td><%= f.label :event_date %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.date_select :event_date, start_year:Time.now.year, end_year:Time.now.year + 1, date_separator: ' / ' %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :deadline_date %>
+                  <span class="text-dark"><font size ="1">（必須）</font></span></br>
+                  <font size ="1">※開催日より8日以上前の日付を選択してください</font>
+              </td>
+              <td class="form-group"><%= f.date_select :deadline_date, start_year:Time.now.year, end_year:Time.now.year, date_separator: ' / ' %>
+            </tr>
+            <tr>
+              <td><%= f.label :search_score %>
+                  <span class="text-danger"><font size ="1">（任意）</font></span>
+              </td>
+              <td class="form-group"><%= f.collection_select :search_score, Event.search_scores_i18n, :first, :last, { include_blank: "---" }, class: "form-control" %></td>
+            </tr>
+             <tr>
+              <td><%= f.label :event_status %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group">
+                  <%= f.radio_button :event_status, :true %>
+                  <%= f.label :event_status, "募集中", {value: :true} %>
+                  <%= f.radio_button :event_status, :false %>
+                  <%= f.label :event_status, "募集終了", {value: :false} %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center"><%= f.submit class: "btn btn-success btn-block col-3" %></td>
+            </tr>
+          </table>
+        <% end %>
+  </div>
+</div>

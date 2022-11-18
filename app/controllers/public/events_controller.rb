@@ -1,5 +1,6 @@
 class Public::EventsController < ApplicationController
   include ApplicationHelper
+  before_action :authenticate_user!, except: [:index]
 
   def join
     @event = Event.find(params[:event_id])
@@ -14,14 +15,12 @@ class Public::EventsController < ApplicationController
       end
     elsif apply.applying? #申請中になっていいた場合
       redirect_to event_path(@event.id), notice: "申請中です"
-    elsif apply.approved?　#承認されている場合は、参加済み＆参加する
+    elsif apply.approved?
+      @apply_create = @event.applies.new(user_id: current_user.id, apply_status: :approved).save#承認されている場合は、参加済み＆参加する
       user_ids = @event.user_ids
   　　user_ids.push(current_user.id)
-  　　@apply_create = @event.applies.new(user_id: current_user.id, apply_status: :approved).save
-       redirect_to event_path(@event.id), notice: "承認されています"
-    elsif apply.rejected?　#却下された場合は、nillに戻す
-    　@event.apply.users.delete(current_user.id)
-      @apply_create = @event.applies.new(user_id: current_user.id, apply_status: :nil).save
+      redirect_to event_path(@event.id), notice: "承認されています"
+    elsif apply.rejected? #却下された場合は、念のため
       redirect_to event_path(@event.id), notice: "却下されています"
     else
       redirect_to event_path(@event.id), alert: "失敗"
@@ -62,7 +61,6 @@ class Public::EventsController < ApplicationController
   end
 
   def show
-    @room = Room.create
     @event = Event.find(params[:id])
     @owner = User.find(@event.owner_id)
     @event_users = @event.users
