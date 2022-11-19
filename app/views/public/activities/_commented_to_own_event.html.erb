@@ -1,0 +1,6 @@
+<%= link_to transition_path(activity) do %>
+  <%= link_to activity.subject.user.user_name, user_path(activity.subject.user) %>
+    があなたの
+  <%=link_to 'イベント', event_path(activity.subject.event) %>
+    にコメントしました
+<% end %>

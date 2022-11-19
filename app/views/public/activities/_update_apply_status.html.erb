@@ -1,0 +1,7 @@
+<%= link_to transition_path(activity) do %>
+  object
+   <%= link_to activity.subject.user.username, user_path(activity.subject.user) %>
+   が
+  <%=link_to '申請中のイベント', event_path(activity.subject.patch) %>
+  を<%= event.event_status %>しました
+  <% end %>
