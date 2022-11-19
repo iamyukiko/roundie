@@ -10,5 +10,5 @@ class Activity < ApplicationRecord
     followed_me: 2,
     updated_apply_status: 3,
   }
-  
+
 end

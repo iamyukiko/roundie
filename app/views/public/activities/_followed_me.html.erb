@@ -1,7 +1,6 @@
 <%= link_to transition_path(activity) do %>
-  object
-   <%= link_to activity.subject.user.username, user_path(activity.subject.user) %>
-   に
-  <%=link_to 'フォロー', user_path(activity.subject.post) %>
-  されました
-  <% end %>
+  <%= link_to activity.subject.follower.user_name, user_path(activity.subject.follower) %>
+     に
+  <%=link_to 'フォロー', user_followers_path(activity.subject.follower) %>
+    されました
+<% end %>

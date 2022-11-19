@@ -9,8 +9,8 @@ class Relationship < ApplicationRecord
 
   private
 
-  def create_activities　#記事通りで不明
-    Activity.create!(subject: self, user: follower, action_type: :followed_me)
+  def create_activities #記事通りで不明
+    Activity.create!(subject: self, user_id: followed.id, action_type: :followed_me)
   end
 
 end

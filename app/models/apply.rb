@@ -6,7 +6,7 @@ class Apply < ApplicationRecord
   has_one :activity, as: :subject, dependent: :destroy
 
 
-  after_create_commit :create_activities
+  after_update_commit :create_activities
 
   enum apply_status: {
     applying: 1, #申請中
@@ -16,8 +16,8 @@ class Apply < ApplicationRecord
 
   private
 
-  def create_activities　#applyステータスはアップデート。
-    Activity.create!(subject: self, user: event.apply, action_type: :updated_apply_status)
+  def create_activities #applyステータスはアップデート。
+    Activity.create!(subject: self, user_id: user.id, action_type: :updated_apply_status)
   end
 
 

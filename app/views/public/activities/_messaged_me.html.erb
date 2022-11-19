@@ -1,0 +1,6 @@
+<%= link_to transition_path(activity) do %>
+  <%= link_to activity.subject.user.user_name, user_path(activity.subject.user) %>
+     から
+  <%=link_to 'メッセージ', room_path(activity.subject.room) %>
+  が届きました
+  <% end %>

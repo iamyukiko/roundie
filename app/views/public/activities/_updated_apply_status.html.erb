@@ -1,0 +1,10 @@
+<%= link_to transition_path(activity) do %>
+  <%= link_to activity.subject.user.user_name, user_path(activity.subject.event) %>
+    が
+  <%=link_to '申請中のイベント', event_path(activity.subject.event) %>
+    <% if activity.subject.apply_status == "approved" %>
+        
+        <% else %>
+        却下しました
+      <% end %>
+<% end %>

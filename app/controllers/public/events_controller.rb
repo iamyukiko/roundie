@@ -45,7 +45,7 @@ class Public::EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
-    @event.users.delete(current_user)
+    @event.applies.where(user_id: current_user.id).destroy_all
     redirect_to event_path(@event.id)
   end
 

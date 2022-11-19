@@ -9,7 +9,7 @@ module Public::ActivitiesHelper
     when :followed_me
       user_path(activity.subject.follower)
     when :updated_apply_status
-      event_path(activity.subject.event.apply)
+      event_path(activity.subject.event)
     end
   end
 
