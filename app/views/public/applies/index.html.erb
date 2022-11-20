@@ -18,7 +18,7 @@
               <td><%= link_to event_path(apply.event_id), class:"text-success" do %><%= apply.event.event_title %><% end %></td>
               <td><%= link_to user_path(apply.user_id), class:"text-success" do %><%= apply.user.user_name %><% end %></td>
               <td class="form-inline"><%= form_with model: apply, url: update_apply_path(current_user.id, apply.event_id, apply.id), method: :patch, local: true do |f| %>
-                  <%=f.select :apply_status, options_for_select(Apply.apply_statuses_i18n.invert), {}, class:"form-control" %>
+                  <%=f.select :apply_status, options_for_select(Apply.apply_statuses_i18n.invert, selected: apply.apply_status), {}, class:"form-control" %>
                   <%= f.submit "登録", class:"btn btn-primary" %>
                   <% end %>
               </td>

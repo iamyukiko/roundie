@@ -23,7 +23,9 @@ class Public::UsersController < ApplicationController
     if params[:type] == 'owner' #ユーザーマイページで主催イベントを表示
       @events = Event.where(owner_id: @user.id).page(params[:page])
     else
-     @events = @user.events.page(params[:page]) #違う場合は参加イベントを表示
+      #elsif
+      #@events = @user.events.find_by(apply_status: :approved)
+     @events = @user.approved_events.page(params[:page]) #違う場合は参加イベントを表示
     end
   end
 

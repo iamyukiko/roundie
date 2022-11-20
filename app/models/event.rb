@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   belongs_to :owner, class_name: 'User'
   has_many :applies
   has_many :users, through: :applies
+  has_many :approved_users, -> {where(applies: {apply_status: :approved})}, through: :applies, source: :user
   has_many :event_comments, dependent: :destroy
 
   validates :event_date, presence: true
@@ -9,7 +10,7 @@ class Event < ApplicationRecord
   validates :entry_limit, presence: true
   validates :event_title, presence: true
   validates :event_introduction, presence: true
-  validate :users_must_complete_info
+  validate :users_must_complete_info, unless: -> { validation_context == :admin } #updateではなくsave時に発火
   validate :event_date_start
   validate :deadline_date_finish
 
@@ -34,8 +35,7 @@ class Event < ApplicationRecord
 
 #イベントの残日数表示
   def date
-    date_format = "%Y%m%d"
-    (Date.today.strftime(date_format).to_i - deadline_date.strftime(date_format).to_i)
+    (deadline_date - Date.today).to_i
   end
 
   def is_owned_by?(user)

@@ -63,9 +63,9 @@ class Public::EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @owner = User.find(@event.owner_id)
-    @event_users = @event.users
+    @event_users = @event.approved_users
     @event_comment = EventComment.new
-    @event_comments = @event.event_comments.page(params[:page])
+    @event_comments = @event.event_comments.order(created_at: :desc).page(params[:page])
   end
 
   def edit

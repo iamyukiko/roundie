@@ -2,7 +2,7 @@ class Public::AppliesController < ApplicationController
 
   def index
     # @owned_events = Event.find(owner_id: current_user.id)
-    @applies = Apply.joins(:event).where(event:{ owner_id: current_user.id}, apply_status: :applying).page(params[:page]) #ログインしている人にする
+    @applies = Apply.joins(:event).where(event:{ owner_id: current_user.id}, apply_status:[:applying, :rejected]).order(updated_at: :desc).page(params[:page]) #ログインしている人にする
   end
 
   def update
@@ -19,6 +19,7 @@ class Public::AppliesController < ApplicationController
          redirect_to index_apply_path(current_user.id), alert: "申請を却下しました"
     elsif params[:apply][:apply_status] == 'applying'
         @apply.update(apply_status: :applying)
+        redirect_to index_apply_path(current_user.id), alert: "申請中に変更しました"
     end
   end
 

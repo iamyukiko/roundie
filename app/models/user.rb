@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_one_attached :image
   has_many :applies
   has_many :events, through: :applies
+  has_many :approved_events, -> {where(applies: {apply_status: :approved})}, through: :applies, source: :event #
   has_many :event_comments, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
@@ -31,7 +32,11 @@ class User < ApplicationRecord
     user.password = SecureRandom.urlsafe_base64
     user.user_name = "ゲスト"
     user.birthdate = '19990101'
-    user.gender = '2'
+    user.nickname = 'ゲスト'
+    user.user_area = 1
+    user.gender = 2
+    user.user_score = 1
+    user.self_introduction = 'ゲストログインです'
     end
   end
 

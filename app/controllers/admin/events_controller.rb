@@ -7,7 +7,7 @@ class Admin::EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @owner = User.find(@event.owner_id)
-    @event_users = @event.users
+    @event_users = @event.approved_users
   end
 
   def edit
@@ -16,7 +16,8 @@ class Admin::EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update(event_params)
+    @event.attributes = event_params #attribute = 各カラムにコピー
+    if @event.save(context: :admin) #
       redirect_to admin_event_path(@event.id)
     else
       render "edit"

@@ -2,10 +2,8 @@
   <div class"row">
     <div class="col">
       <h4>チャット</h4>
+      <%= paginate @another_entries %>
     </div>
-      <div class="col">
-        <%= paginate @another_entries %>
-      </div>
   </div>
     <% if @another_entries.present? %>
       <% @another_entries.each do |entry| %>

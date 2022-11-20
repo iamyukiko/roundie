@@ -12,6 +12,7 @@
       <% end %>
     <% end %>
     </div>
+    <%= paginate @messages %>
       <%= form_with model: @message do |f| %>
         <form class="row">
           <div class="col-auto">

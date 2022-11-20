@@ -21,7 +21,7 @@
       <td><%= f.label :entry_limit %>
         <span class="text-danger"><font size ="1">（必須）</font></span>
       </td>
-      <td class="form-inline"><%=f.select :entry_limit, options_for_select((1..16).to_a), { include_blank: "---" }, class: "form-control" %> 人</td>
+      <td class="form-inline"><%=f.select :entry_limit, options_for_select((1..16).to_a,:selected=> event.entry_limit), class: "form-control" %> 人</td>
     </tr>
     <tr>
       <td><%= f.label :event_date %>
