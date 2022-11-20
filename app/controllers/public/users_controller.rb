@@ -21,23 +21,23 @@ class Public::UsersController < ApplicationController
       end
 
     if params[:type] == 'owner' #ユーザーマイページで主催イベントを表示
-      @events = Event.where(owner_id: @user.id)
+      @events = Event.where(owner_id: @user.id).page(params[:page])
     else
-     @events = @user.events #違う場合は参加イベントを表示
+     @events = @user.events.page(params[:page]) #違う場合は参加イベントを表示
     end
   end
 
-  def join_events
-    @user = User.find(params[:id])
-    @events = @user.events
-    render :show
-  end
+  # def join_events
+  #   @user = User.find(params[:id])
+  #   @events = @user.events
+  #   render :show
+  # end
 
-  def owner_events
-    @user = User.find(params[:id])
-    @events = Event.where(owner_id: @user.id)
-    render :show
-  end
+  # def owner_events
+  #   @user = User.find(params[:id])
+  #   @events = Event.where(owner_id: @user.id)
+  #   render :show
+  # end
 
 
   def edit

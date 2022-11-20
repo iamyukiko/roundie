@@ -1,5 +1,6 @@
 <div class="container mt-4">
-  <h3 class="mt-2 mb-4 p-2 text-center">申請依頼</h3>
+  <h3 class="mt-2 mb-2 p-2 text-center">申請依頼</h3>
+    <%= paginate @applies %>
     <div class="text-align: center">
       <table class="table">
         <thead>
@@ -14,8 +15,8 @@
              <% @applies.each do |apply| %>
             <tr>
               <td><%= apply.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-              <td><%= link_to event_path(apply.event_id) do %><%= apply.event.event_title %><% end %></td>
-              <td><%= link_to user_path(apply.user_id) do %><%= apply.user.user_name %><% end %></td>
+              <td><%= link_to event_path(apply.event_id), class:"text-success" do %><%= apply.event.event_title %><% end %></td>
+              <td><%= link_to user_path(apply.user_id), class:"text-success" do %><%= apply.user.user_name %><% end %></td>
               <td class="form-inline"><%= form_with model: apply, url: update_apply_path(current_user.id, apply.event_id, apply.id), method: :patch, local: true do |f| %>
                   <%=f.select :apply_status, options_for_select(Apply.apply_statuses_i18n.invert), {}, class:"form-control" %>
                   <%= f.submit "登録", class:"btn btn-primary" %>
@@ -25,5 +26,6 @@
             <% end %>
           </tbody>
       </table>
+      <div>
     </div>
 </div>

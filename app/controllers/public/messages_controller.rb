@@ -1,12 +1,22 @@
 class Public::MessagesController < ApplicationController
 
   def create
-    if Entry.where(user_id: current_user.id, room_id: params[:message][:room_id]).present?
-      @message = Message.create(params.require(:message).permit(:user_id, :body, :room_id).merge(user_id: current_user.id))
+    @message = current_user.messages.build(message_params)
+    @room = @message.room
+    if @message.save
+      flash[:notice] = "投稿しました"
+      redirect_to room_path(@room)
     else
-      flash[:alert] = "メッセージ送信に失敗しました。"
+      @messages = @room.messages
+      @user = @room.entry_users.where.not(id: current_user.id).first
+      flash.now[:alert] = "メッセージ送信に失敗しました。"
+      render 'public/rooms/show'
     end
-      redirect_to "/rooms/#{@message.room_id}"
   end
-
+  
+  private
+  
+  def message_params
+    params.require(:message).permit(:body, :room_id)
+  end
 end

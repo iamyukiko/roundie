@@ -1,8 +1,15 @@
 <div class="container mt-4 col-5">
-  <h4>チャット</h4>
+  <div class"row">
+    <div class="col">
+      <h4>チャット</h4>
+    </div>
+      <div class="col">
+        <%= paginate @another_entries %>
+      </div>
+  </div>
     <% if @another_entries.present? %>
       <% @another_entries.each do |entry| %>
-        <table class="table">
+        <table class="table table-sm">
           <tbody>
             <tr style="line-height:2;">
               <td><%= link_to room_path(entry.room.id) do %>

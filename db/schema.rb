@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2022_11_19_001101) do
     t.integer "event_area", null: false
     t.date "event_date", null: false
     t.date "deadline_date", null: false
-    t.string "entry_limit", null: false
+    t.integer "entry_limit", null: false
     t.string "event_title", null: false
     t.text "event_introduction", null: false
     t.boolean "event_status", default: true, null: false
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2022_11_19_001101) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "user_name", null: false
-    t.string "nickname"
+    t.string "nickname", null: false
     t.date "birthdate", null: false
     t.integer "user_area"
     t.integer "gender", default: 2, null: false

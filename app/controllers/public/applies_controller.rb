@@ -2,7 +2,7 @@ class Public::AppliesController < ApplicationController
 
   def index
     # @owned_events = Event.find(owner_id: current_user.id)
-    @applies = Apply.joins(:event).where(event:{ owner_id: current_user.id}, apply_status: :applying) #ログインしている人にする
+    @applies = Apply.joins(:event).where(event:{ owner_id: current_user.id}, apply_status: :applying).page(params[:page]) #ログインしている人にする
   end
 
   def update

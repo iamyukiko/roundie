@@ -65,6 +65,7 @@ class Public::EventsController < ApplicationController
     @owner = User.find(@event.owner_id)
     @event_users = @event.users
     @event_comment = EventComment.new
+    @event_comments = @event.event_comments.page(params[:page])
   end
 
   def edit

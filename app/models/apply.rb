@@ -17,7 +17,8 @@ class Apply < ApplicationRecord
   private
 
   def create_activities #applyステータスはアップデート。
-    Activity.create!(subject: self, user_id: user.id, action_type: :updated_apply_status)
+    # byebug
+    Activity.create!(subject: self, user_id: user_id, action_type: :updated_apply_status)
   end
 
 

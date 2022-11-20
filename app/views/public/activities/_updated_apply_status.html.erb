@@ -1,10 +1,15 @@
-<%= link_to transition_path(activity) do %>
-  <%= link_to activity.subject.user.user_name, user_path(activity.subject.event) %>
-    が
-  <%=link_to '申請中のイベント', event_path(activity.subject.event) %>
+<%= link_to read_activities_path(current_user, activity), class: "#{'read' if activity.read?}", method: :patch do %>
+  <p><font size ="3">
+    <%= link_to user_path(activity.subject.event) do %>
+      <%= image_tag activity.subject.event.owner.get_image, class: "rounded-circle", size:'100x100' %>
+      <%= activity.subject.event.owner.nickname %>
+    <% end %> が
+    <%=link_to '申請中のイベント', event_path(activity.subject.event) %> を
     <% if activity.subject.apply_status == "approved" %>
-        
-        <% else %>
-        却下しました
-      <% end %>
+      承認しました
+    <% else %>
+      却下しました
+    <% end %>
+    </font>
+  </p>
 <% end %>

@@ -24,7 +24,7 @@ class User < ApplicationRecord
     validates :user_name, presence: true, length: { minimum: 1, maximum: 10 }
     validates :birthdate, presence: true
     validates :gender, presence: true
-    validates :nickname, length: { minimum: 1, maximum: 10 },uniqueness: true, allow_blank: true
+    validates :nickname, length: { minimum: 1, maximum: 10 },uniqueness: true
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|

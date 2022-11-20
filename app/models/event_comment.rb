@@ -2,7 +2,7 @@ class EventComment < ApplicationRecord
   belongs_to :user
   belongs_to :event
 
-  #通知用
+#通知用
   has_one :activity, as: :subject, dependent: :destroy
 
   after_create_commit :create_activities

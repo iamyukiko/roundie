@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-
+  belongs_to :owner, class_name: 'User'
   has_many :applies
   has_many :users, through: :applies
   has_many :event_comments, dependent: :destroy
@@ -21,6 +21,7 @@ class Event < ApplicationRecord
   scope :search_score_is, -> (search_score) { where(search_score: search_score) if search_score.present? }
   scope :entry_limit_is, -> (entry_limit) { where(entry_limit: entry_limit) if entry_limit.present? }
 
+#検索用
   def self.search(event_title: nil, gender: nil, date_from: nil, date_to: nil, area: nil, search_score: nil, entry_limit: nil)
     event_title_like(event_title)
       .gender_is(gender)
@@ -30,7 +31,6 @@ class Event < ApplicationRecord
       .search_score_is(search_score)
       .entry_limit_is(entry_limit)
   end
-
 
 #イベントの残日数表示
   def date
@@ -70,7 +70,7 @@ class Event < ApplicationRecord
   #イベント作成時にはプロフィール詳細設定が必要というバリデーション
   def users_must_complete_info
     errors.add(:base, "プロフィールの詳細設定が必要です。マイページのプロフィール編集から設定してください。") if users.any? do |user|
-      user.nickname.blank? || user.user_area.blank? || user.user_score.blank? || user.self_introduction.blank?
+      user.user_area.blank? || user.user_score.blank? || user.self_introduction.blank?
     end
   end
 

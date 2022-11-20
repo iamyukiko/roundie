@@ -12,6 +12,12 @@
               <td class="form-group"><%= f.text_field :user_name, class: "form-control" %></td>
             </tr>
             <tr>
+              <td><%= f.label :nickname %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
+              <td class="form-group"><%= f.text_field :nickname, class: "form-control" %></td>
+            </tr>
+            <tr>
               <td><%= f.label :birthdate %>
                 <span class="text-danger"><font size ="1">（必須）</font></span>
               </td>

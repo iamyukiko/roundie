@@ -8,4 +8,12 @@
  Admin.create!(
      email: 'admin@admin',
      password: 'admin1',
+     user_name: 'admin',
+     nickname: 'admin11',
+     birthdate: '20000101',
+     user_area: '1',
+     gender: '2',
+     self_introduction: 'admin',
+     user_score: '0',
+
  )

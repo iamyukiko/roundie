@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  #会員用Devise
+#会員用Devise
   devise_for :users, controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions',
@@ -11,12 +11,12 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 
-  #管理者用Devise
+#管理者用Devise
   devise_for :admin, skip: [:registrations,:passwords] ,controllers: {
     sessions: "admin/sessions"
   }
 
-  #会員用ルーティング
+#会員用ルーティング
   scope module: :public do
   root to: 'homes#top'
   get '/about' => "homes#about", as: "about"
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
   patch '/users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
   get 'users/:id/activities' => 'activities#index', as: 'index_activities'
+  patch 'users/:id/activities/:id/read' => 'activities#read', as: 'read_activities'
   resources :messages, only:[:create,]
   resources :rooms, only:[:create, :show, :index]
   resources :events do
@@ -43,7 +44,7 @@ Rails.application.routes.draw do
 
   end
 
-  #管理者用ルーティング
+#管理者用ルーティング
   scope module: :admin do
   get '/admin' => "homes#top"
   end
