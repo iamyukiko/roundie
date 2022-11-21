@@ -3,6 +3,7 @@
 </div>
 <div class="container mt-4">
   <h4 class="text-center mb-4">会員一覧</h4>
+    <%= paginate @users %>
     <table class="table table-bordered table-sm">
       <thead class="thead-light">
         <tr>
@@ -28,5 +29,4 @@
         <% end %>
       </tbody>
     </table>
-  <!--<= paginate @customers %>-->
 </div>

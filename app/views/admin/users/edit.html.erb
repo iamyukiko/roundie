@@ -11,13 +11,13 @@
             <tr>
               <td><%= f.label :user_name, "氏名" %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
-                  <font size ="1">※スペースなし</font>
               </td>
               <td class="form-group"><%= f.text_field :user_name, class: "form-control" %></td>
             </tr>
             <tr>
               <td><%= f.label :nickname %>
-                  <span class="text-danger"><font size ="1">（必須）</font></span>
+                  <span class="text-danger"><font size ="1">（必須）</font></span></br>
+                  <font size ="1">※10文字以内</font>
               </td>
               <td class="form-group"><%= f.text_field :nickname, class: "form-control" %></td>
             </tr>
@@ -28,10 +28,10 @@
               <td class="form-group"><%= f.date_select :birthdate, start_year: 1990, end_year:Time.now.year-10, date_separator:' / ' %></td>
             </tr>
             <tr>
-              <td><%= f.label :user_area, "エリア" %>
-                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              <td><%= f.label :user_area %>
+                  <font size ="1">（任意）</font>
               </td>
-              <td class="form-group"><%= f.select :user_area, User.user_areas.keys, {} %></td>
+              <td class="form-group"><%= f.select :user_area, User.user_areas.keys, { include_blank: "---" }, class: "form-control" %></td>
             </tr>
               <td><%= f.label :gender %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
@@ -46,18 +46,19 @@
             </tr>
             <tr>
               <td><%= f.label :user_score, "スコアレベル" %>
-                  <span class="text-danger"><font size ="1">（必須）</font></span>
+                  <font size ="1">（任意）</font>
               </td>
-              <td class="form-group"><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last %></td>
+              <td class="form-group"><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last, { include_blank: "---" }, class: "form-control" %></td>
             </tr>
             <tr>
-              <td><%= f.label :image, "プロフィール画像" %></td>
+              <td><%= f.label :image, "プロフィール画像" %>
+                  <font size ="1">（任意）</font>
+              </td>
               <td><%= f.file_field :image, accept: "image/*" %></td>
             </tr>
             <tr>
               <td><%= f.label :self_introduction %>
-                  <span class="text-danger"><font size ="1">（必須）</font></span>
-                  <font size ="1">※50文字以内</font>
+                  <font size ="1">（任意）※50文字以内</font>
               </td>
               <td class="form-group"><%= f.text_area :self_introduction, class: "form-control" %></td>
             </tr>

@@ -1,7 +1,7 @@
 class Admin::EventsController < ApplicationController
 
   def index
-    @events = Event.all
+    @events = Event.page(params[:page])
   end
 
   def show
@@ -18,7 +18,7 @@ class Admin::EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.attributes = event_params #attribute = 各カラムにコピー
     if @event.save(context: :admin) #
-      redirect_to admin_event_path(@event.id)
+      redirect_to admin_event_path(@event.id), notice: '更新されました'
     else
       render "edit"
     end

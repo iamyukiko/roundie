@@ -2,6 +2,8 @@ class EventComment < ApplicationRecord
   belongs_to :user
   belongs_to :event
 
+  validates :comment, presence: true
+
 #通知用
   has_one :activity, as: :subject, dependent: :destroy
 

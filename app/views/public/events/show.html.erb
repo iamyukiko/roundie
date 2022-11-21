@@ -49,7 +49,7 @@
                   <%= link_to '編集', edit_event_path(@event), class: "btn btn-sm btn-success" %>
                 <!--< elsif @event.users.include?(current_user) %>-->
                 <% else %>
-                  <% if @event.deadline_date == Date.today || @event.event_status == false %>
+                  <% if @event.deadline_date < Date.today || @event.event_status == false %>
                     <!--イベント中にあるdeadline_dateが今日だったら-->
                     <!--もしくはイベントの中にあるイベントステータスがfalseだったら--->
                     <p>募集終了</p>
@@ -81,7 +81,7 @@
           <div class="comment">
             <p class="text-right"><font size="4"><%= event_comment.comment %>&emsp;</font>
               <span><font size="1">(<i class="fas fa-user"></i>
-                <%= event_comment.user.nickname %> <%= event_comment.created_at.strftime('%Y/%m/%d') %>)</font></span>
+                <%= event_comment.user.nickname %> <%= event_comment.created_at.strftime('%Y/%m/%d %H:%M') %>)</font></span>
             </p>
           </div>
         <% end %>

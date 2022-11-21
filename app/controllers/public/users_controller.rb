@@ -21,11 +21,11 @@ class Public::UsersController < ApplicationController
       end
 
     if params[:type] == 'owner' #ユーザーマイページで主催イベントを表示
-      @events = Event.where(owner_id: @user.id).page(params[:page])
+      @events = Event.where(owner_id: @user.id).order(event_date: "ASC").page(params[:page])
     else
       #elsif
       #@events = @user.events.find_by(apply_status: :approved)
-     @events = @user.approved_events.page(params[:page]) #違う場合は参加イベントを表示
+     @events = @user.approved_events.order(event_date: "ASC").page(params[:page]) #違う場合は参加イベントを表示
     end
   end
 
@@ -54,7 +54,7 @@ class Public::UsersController < ApplicationController
     end
 
     if @user.update(user_params)
-      redirect_to user_path(@user.id)
+      redirect_to user_path(@user.id), notice: '更新されました'
     else
       render :edit
     end

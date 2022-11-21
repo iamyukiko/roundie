@@ -10,9 +10,9 @@
           (<span><font size="1"><i class="fas fa-user"></i><strong><%= message.user.nickname %></strong>&emsp;<%= message.created_at.strftime("%Y-%m-%d %H:%M")%></font></span>)
         </p>
       <% end %>
+      <%= paginate @messages %>
     <% end %>
     </div>
-    <%= paginate @messages %>
       <%= form_with model: @message do |f| %>
         <form class="row">
           <div class="col-auto">

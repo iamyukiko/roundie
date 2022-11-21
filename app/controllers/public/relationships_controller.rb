@@ -19,6 +19,6 @@ class Public::RelationshipsController < ApplicationController
 #フォローされている人の一覧を取得する際に使用
   def followers
      user = User.find(params[:user_id])
-     @users = user.followers..order(updated_at: :desc).page(params[:page])
+     @users = user.followers.order(updated_at: :desc).page(params[:page])
   end
 end

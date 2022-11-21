@@ -1,7 +1,7 @@
 <%= link_to read_activities_path(current_user, activity), class: "#{'read' if activity.read?}", method: :patch do %>
   <p>
     <font size ="3">
-    <%= link_to user_path(activity.subject.follower) do %>
+    <%= link_to user_path(activity.subject.follower), class:"text-success" do %>
       <%= image_tag activity.subject.follower.get_image, class: "rounded-circle", size:'100x100' %>
     <%= activity.subject.follower.nickname %>
     <% end %> にフォローされました

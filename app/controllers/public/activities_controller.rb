@@ -1,7 +1,7 @@
 class Public::ActivitiesController < ApplicationController
 
   def index
-    @activities = current_user.activities.order(updated_at: :desc).page(params[:page])
+    @activities = current_user.activities.order(created_at: :desc).page(params[:page])
   end
 
   def read

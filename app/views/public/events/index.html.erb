@@ -6,10 +6,10 @@
           <%= f.label :event_title, "イベント名 : " %></br>
           <%= f.text_field :event_title, value: params[:event_title], class: "form-control" %>
           </div>
-        <div class="form-group">date_select_params_to_date
+        <div class="form-group">
           <%= f.label :date, "開催日 : " %></br>
           <%= f.date_select :date_from, { default: date_select_params_to_date(:date_from) } %> ~
-          <%= f.date_select :date_to, { default: date_select_params_to_date(:date_to)}%>
+          <%= f.date_select :date_to, { default: date_select_params_to_date(:date_to) }%>
         </div>
         <div class="form-group">
           <%= f.label :area, "開催エリア : " %></br>
@@ -20,9 +20,9 @@
           <%= f.select :search_score, Event.search_scores_i18n.invert.map{|k, v| [k, v]}, { selected: params[:search_score], include_blank: "---" }, class: "form-control col-md-4" %>
         </div>
         <div class="form-group">
-          <%= f.label :entry_limit, "参加状況 : " %></br>
+          <%= f.label :entry_limit, "募集人数 : " %></br>
           <div class="form-inline">
-          <%= f.select :entry_limit, options_for_select((1..16).to_a, params[:entry_limit]) ,{ include_blank: "---" }, class: "form-control col-md-5" %>&ensp;人
+          <%= f.select :entry_limit, options_for_select((2..16).to_a, params[:entry_limit]) ,{ include_blank: "---" }, class: "form-control col-md-5" %>&ensp;人
           </div>
         </div>
         <div class="form-group text-center">
@@ -45,8 +45,8 @@
             <tbody>
               <% @events.each do |event| %>
               <tr>
-                <td><%= link_to event.event_date, event_path(event.id), class: "text-success" %></td>
-                <td><%= event.event_title %></td>
+                <td><%= event.event_date %></td>
+                <td><%= link_to event.event_title, event_path(event.id), class: "text-success" %></td>
                 <td><%= event.event_area %></td>
                 <td><%= event.applies.where(apply_status: :approved).count %> / <%= event.entry_limit %>人</td>
                 <td>あと<%= event.date %>日</td>

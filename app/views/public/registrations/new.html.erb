@@ -7,13 +7,13 @@
             <tr>
               <td><%= f.label :user_name %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
-                  <font size ="1">※スペースなし</font>
               </td>
               <td class="form-group"><%= f.text_field :user_name, class: "form-control" %></td>
             </tr>
             <tr>
               <td><%= f.label :nickname %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
+                  <font size ="1">※10文字以内</font>
               </td>
               <td class="form-group"><%= f.text_field :nickname, class: "form-control" %></td>
             </tr>

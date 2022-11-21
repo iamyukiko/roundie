@@ -1,7 +1,8 @@
 class Message < ApplicationRecord
-  validates :body, presence: true
   belongs_to :user
   belongs_to :room
+
+  validates :body, presence: true
 
 #通知用
   has_one :activity, as: :subject, dependent: :destroy

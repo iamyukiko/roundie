@@ -23,12 +23,12 @@
               <td><%= f.label :event_area %>
               <span class="text-danger"><font size ="1">（必須）</font></span>
               </td>
-              <td class="form-group"><%= f.select :event_area, Event.event_areas.keys, { include_blank: "---" }, class: "form-control" %></td>
+              <td class="form-group"><%= f.select :event_area, Event.event_areas.keys, class: "form-control" %></td>
             </tr>
               <td><%= f.label :entry_limit %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
               </td>
-              <td class="form-inline"><%=f.select :entry_limit, options_for_select((1..16).to_a), class: "form-control" %> 人</td>
+              <td class="form-inline"><%=f.select :entry_limit, options_for_select((2..16).to_a, :selected=> @event.entry_limit,), class: "form-control" %> 人</td>
             </tr>
             <tr>
               <td><%= f.label :event_date %>
@@ -38,20 +38,19 @@
             </tr>
             <tr>
               <td><%= f.label :deadline_date %>
-                  <span class="text-dark"><font size ="1">（必須）</font></span></br>
+                  <span class="text-danger"><font size ="1">（必須）</font></span></br>
                   <font size ="1">※開催日より8日以上前の日付を選択してください</font>
               </td>
               <td class="form-group"><%= f.date_select :deadline_date, start_year:Time.now.year, end_year:Time.now.year, date_separator: ' / ' %>
             </tr>
             <tr>
               <td><%= f.label :search_score %>
-                  <span class="text-danger"><font size ="1">（任意）</font></span>
+                  <font size ="1">（任意）</font>
               </td>
               <td class="form-group"><%= f.collection_select :search_score, Event.search_scores_i18n, :first, :last, { include_blank: "---" }, class: "form-control" %></td>
             </tr>
              <tr>
               <td><%= f.label :event_status %>
-                  <span class="text-danger"><font size ="1">（必須）</font></span>
               </td>
               <td class="form-group">
                   <%= f.radio_button :event_status, :true %>

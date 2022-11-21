@@ -3,10 +3,11 @@
 </div>
 <div class="container mt-4">
   <h4 class="text-center mb-4">イベント一覧</h4>
+  <%= paginate @events %>
   <table class="table table-bordered">
     <thead class="thead-light">
       <tr>
-        <th>イベントID</th>
+        <th>ID</th>
         <th>イベント名</th>
         <th>開催日</th>
         <th>募集締切日</th>
@@ -24,9 +25,14 @@
           <td><%= event.deadline_date %></td>
           <td><% owner = User.find(event.owner_id) %><%= owner.user_name %></td>
           <td><%= event.event_area %></td>
-          <td><%= event.event_status ? '募集中' : '募集終了' %></td>
+          <td><% if event.event_status == true %>
+                <p class="text-success font-weight-bold">募集中</p>
+              <% else %>
+                <p class="text-success font-weight-bold">募集終了</p>
+              <% end %>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>
-  <!--<= paginate @customers %>-->
 </div>

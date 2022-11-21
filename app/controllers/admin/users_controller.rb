@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
 
   def index
-    @users = User.all
+    @users = User.page(params[:page])
   end
 
   def show
@@ -20,7 +20,7 @@ class Admin::UsersController < ApplicationController
     end
 
     if @user.update(user_params)
-      redirect_to admin_user_path(@user.id)
+      redirect_to admin_user_path(@user.id), notice: '更新されました'
     else
       render :edit
     end

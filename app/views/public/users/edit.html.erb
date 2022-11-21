@@ -1,42 +1,67 @@
+<div  style="background-color:#f5f5f5;">
+  <h3 class="p-2"><%= link_to user_path(@user.id), class: "text-dark" do %><i class="fas fa-arrow-left"></i><% end %></h3>
+</div>
 <div class="container mt-4">
   <div class="mx-auto" style="width: 500px;">
     <h4 class="mt-2 mb-4 p-2 text-center">プロフィール編集</h4>
+      <p class="p-2 text-center"><font size ="2">
+        ※イベント新規作成するには下記の項目を</br>
+        すべて入力する必要があります。（画像を除く）</font></p>
       <%= render 'public/shared/error_messages', resource: @user %>
         <%= form_with model: @user do |f| %>
           <table class="table table-borderless table-sm">
             <tr>
-              <td><%= f.label :user_name, "氏名（スペースなし）" %></td>
+              <td><%= f.label :user_name, "氏名" %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
               <td class="form-group"><%= f.text_field :user_name, class: "form-control" %></td>
             </tr>
             <tr>
-              <td><%= f.label :nickname %></td>
+              <td><%= f.label :nickname %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span></br>
+                  <font size ="1">※10文字以内</font>
+              </td>
               <td class="form-group"><%= f.text_field :nickname, class: "form-control" %></td>
             </tr>
             <tr>
-              <td><%= f.label :birthdate %></td>
+              <td><%= f.label :birthdate %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
               <td class="form-group"><%= f.date_select :birthdate, start_year: 1990, end_year:Time.now.year - 10, date_separator: ' / ' %></td>
             </tr>
             <tr>
-              <td><%= f.label :user_area %></td>
+              <td><%= f.label :user_area %>
+                  <font size ="1">（任意）</font>
+              </td>
               <td class="form-group"><%= f.select :user_area, User.user_areas.keys, { include_blank: "---" }, class: "form-control" %></td>
             </tr>
-              <td><%= f.label :gender %></td>
+              <td><%= f.label :gender %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
               <td class="form-group"><%= f.collection_radio_buttons :gender, User.genders_i18n, :first, :last %></td>
             </tr>
              <tr>
-              <td><%= f.label :email %></td>
+              <td><%= f.label :email %>
+                  <span class="text-danger"><font size ="1">（必須）</font></span>
+              </td>
               <td class="form-group"><%= f.text_field :email, class: "form-control" %></td>
             </tr>
             <tr>
-              <td><%= f.label :user_score, "スコアレベル" %></td>
+              <td><%= f.label :user_score, "スコアレベル" %>
+                  <font size ="1">（任意）</font>
+              </td>
               <td class="form-group"><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last, { include_blank: "---" }, class: "form-control" %></td>
             </tr>
             <tr>
-              <td><%= f.label :image, "プロフィール画像" %></td>
+              <td><%= f.label :image, "プロフィール画像" %>
+                  <font size ="1">（任意）</font>
+              </td>
               <td><%= f.file_field :image, accept: "image/*" %></td>
             </tr>
             <tr>
-              <td><%= f.label :self_introduction %></td>
+              <td><%= f.label :self_introduction %>
+                  <font size ="1">（任意）※50文字以内</font>
+              </td>
               <td class="form-group"><%= f.text_area :self_introduction, class: "form-control" %></td>
             </tr>
             <tr>
