@@ -2,7 +2,12 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-
+    if params[:type] == 'owner' #ユーザーマイページで主催イベントを表示
+      @events = Event.where(owner_id: @user.id).order(event_date: "ASC").page(params[:page])
+    else
+     @events = @user.approved_events.order(event_date: "ASC").page(params[:page]) #違う場合は参加イベントを表示
+    end
+    
     @currentUserEntry=Entry.where(user_id: current_user.id) #ログインユーザーをEntryに記録するために探す
     @userEntry=Entry.where(user_id: @user.id) #チャットボタンをクリックされたユーザーをEntryに記録するために探す
       unless @user.id == current_user.id
@@ -20,26 +25,7 @@ class Public::UsersController < ApplicationController
         end
       end
 
-    if params[:type] == 'owner' #ユーザーマイページで主催イベントを表示
-      @events = Event.where(owner_id: @user.id).order(event_date: "ASC").page(params[:page])
-    else
-      #elsif
-      #@events = @user.events.find_by(apply_status: :approved)
-     @events = @user.approved_events.order(event_date: "ASC").page(params[:page]) #違う場合は参加イベントを表示
-    end
   end
-
-  # def join_events
-  #   @user = User.find(params[:id])
-  #   @events = @user.events
-  #   render :show
-  # end
-
-  # def owner_events
-  #   @user = User.find(params[:id])
-  #   @events = Event.where(owner_id: @user.id)
-  #   render :show
-  # end
 
 
   def edit
