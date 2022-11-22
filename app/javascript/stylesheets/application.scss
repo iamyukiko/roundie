@@ -25,7 +25,9 @@
 .pagination>li>a:hover {
 }
 
-.jumbotron {
-  background-image:url("../images/top.png");
-  center no-repeat; background-size: cover;
+.jumbotron { 
+  background-image: image-url("../images/top_image.png");
+  center no-repeat;
+  background-size: cover;
+  
 }
