@@ -1,13 +1,5 @@
-  <p>
-    <font size ="3">
-      <% user =  User.find_by(id: activity.subject.room.entries.pluck(:user_id).select{|o| o != current_user.id }) %>
-      <%= link_to read_activities_path(current_user, activity), class: "#{'read' if activity.read?}", method: :patch do %>
-       <%= image_tag activity.subject.user.get_image, class: "rounded-circle", size:'100x100' %>
-        <%= link_to user_path(user), class:"text-success" do %><%= user.nickname %><% end %>
-          から
-         <%=link_to room_path(activity.subject.room) ,class:"text-success" do  %>メッセージ<% end %>
-          が届きました
-    </font>
-  </p>
+<% user =  User.find_by(id: activity.subject.room.entries.pluck(:user_id).select{|o| o != current_user.id }) %>
+<%= link_to read_activities_path(current_user, activity), class: "#{'read' if activity.read?}", method: :patch do %>
+  <%= image_tag activity.subject.user.get_image, class: "rounded-circle", size:'100x100' %>
+  <%= user.nickname %> からメッセージが届きました
 <% end %>
-

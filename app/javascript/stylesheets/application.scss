@@ -13,6 +13,10 @@
   text-align: center;
 }
 
+.read {
+  background: #f1f1f1;
+}
+
 .pagination>li>a {
   color: #696969;
 
@@ -23,4 +27,10 @@
 }
 
 .pagination>li>a:hover {
+}
+
+
+.top-bg {
+  background-image: url("../images/top_image.png");
+  background-size:cover;
 }

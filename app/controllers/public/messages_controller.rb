@@ -3,14 +3,15 @@ class Public::MessagesController < ApplicationController
   def create
     @message = current_user.messages.build(message_params)
     @room = @message.room
+  
     if @message.save
       flash[:notice] = "投稿しました"
       redirect_to room_path(@room)
     else
       @messages = @room.messages
       @user = @room.entry_users.where.not(id: current_user.id).first
-      flash.now[:alert] = "メッセージ送信に失敗しました。"
-      render 'public/rooms/show'
+      flash[:alert] = "メッセージ送信に失敗しました。"
+       redirect_to room_path(@room)
     end
   end
   

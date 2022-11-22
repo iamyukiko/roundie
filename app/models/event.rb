@@ -69,8 +69,8 @@ class Event < ApplicationRecord
 
   #イベント作成時にはプロフィール詳細設定が必要というバリデーション
   def users_must_complete_info
-    errors.add(:base, "プロフィールの詳細設定が必要です。マイページのプロフィール編集から設定してください。") if users.any? do |user|
-      user.user_area.blank? || user.user_score.blank? || user.self_introduction.blank?
+    if owner.user_area.blank? || owner.user_score.blank? || owner.self_introduction.blank?
+      errors.add(:base, "プロフィールの詳細設定が必要です。マイページのプロフィール編集から設定してください。")
     end
   end
 

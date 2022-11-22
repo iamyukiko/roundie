@@ -33,9 +33,9 @@ class User < ApplicationRecord
     user.user_name = "ゲスト"
     user.birthdate = '19990101'
     user.nickname = 'ゲスト'
-    user.user_area = '1'
+    user.user_area = '2'
     user.gender = '2'
-    user.user_score = '1'
+    user.user_score = '2'
     user.self_introduction = 'ゲストログインです'
     end
   end

@@ -12,8 +12,10 @@ class EventComment < ApplicationRecord
   private
 
   def create_activities #コメントをした際通知
-    event.users.each do |user|
-      Activity.create!(subject: self, user_id: user.id, action_type: :commented_to_own_event)
+    event.approved_users.each do |to_user|
+     if to_user.id != user.id #送り先 != コメントした人
+      Activity.create!(subject: self, user_id: to_user.id, action_type: :commented_to_own_event)
+     end
     end
   end
 
