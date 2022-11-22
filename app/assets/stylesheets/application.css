@@ -1,5 +1,5 @@
 .jumbotron {
-  background-image: url("top_image.jpg");
+  background-image: image-url("top_image.jpg");
   background-size: cover;
   background-position: center 60%;
 }
