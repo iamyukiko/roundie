@@ -1,4 +1,4 @@
 .jumbotron {
-  background-image: image-url("top_image.png")center no-repeat;
+  background-image: image-url("top_image.png");
   background-size: cover;
 }
