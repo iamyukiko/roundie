@@ -7,7 +7,7 @@ class Public::UsersController < ApplicationController
     else
      @events = @user.approved_events.order(event_date: "ASC").page(params[:page]) #違う場合は参加イベントを表示
     end
-    
+
     @currentUserEntry=Entry.where(user_id: current_user.id) #ログインユーザーをEntryに記録するために探す
     @userEntry=Entry.where(user_id: @user.id) #チャットボタンをクリックされたユーザーをEntryに記録するために探す
       unless @user.id == current_user.id
@@ -58,7 +58,7 @@ class Public::UsersController < ApplicationController
     end
     @user.update(is_valid: false)
     reset_session
-    redirect_to root_path
+    redirect_to root_path, notice: '退会しました。ご利用ありがとうございました'
   end
 
   private

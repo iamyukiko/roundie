@@ -23,10 +23,14 @@ module Public::ActivitiesHelper
       when :updated_apply_status
         if 0 < self.methods.grep(/event_path/).count
             event_path(activity.subject.event)
-         else
+        else
           Rails.application.routes.url_helpers.event_path(activity.subject.event)
         end
       end
+  end
+
+  def unread_activities
+    @activities = current_user.activities.where(read: false)
   end
 
 end

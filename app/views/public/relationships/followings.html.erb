@@ -1,6 +1,6 @@
 <!--フォローしている人の一覧-->
 <div class="container mt-4 col-6">
-  <h4>フォロー<%= paginate @users %></h4>
+  <h4 class="title">フォロー<%= paginate @users %></h4>
     <% if @users.exists? %>
       <% @users.each do |user| %>
         <table class="table">

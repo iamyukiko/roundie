@@ -35,13 +35,6 @@ class AddDeviseToAdmins < ActiveRecord::Migration[6.1]
 
       # Uncomment below if timestamps were not included in your original model.
       # t.timestamps null: false
-      t.string :user_name, null: false
-      t.string :nickname, null: false
-      t.date :birthdate, null: false
-      t.integer :user_area, null: true
-      t.integer :gender, default: 2, null: false
-      t.integer :user_score, null: true
-      t.text :self_introduction, null: true
     end
 
     add_index :admins, :email,                unique: true

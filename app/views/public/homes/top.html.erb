@@ -12,7 +12,7 @@
   </div>
 </div>
 <div class="container">
-  <h5><i class="far fa-flag"></i> 新着イベント</h5>
+  <h5 class="new_event text-center col-2"><strong>新着イベント</strong></h5>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -30,7 +30,12 @@
           <td><%= link_to event_path(event), class:"text-success" do %><%= event.event_title %><% end %></td>
           <td><%= event.event_area %></td>
           <td><%= event.applies.where(apply_status: :approved).count %> / <%= event.entry_limit %>人</td>
-          <td>あと<%= event.date %>日</td>
+          <td><% if event.deadline_date < Date.today || event.event_status == false %>
+                <p class="text-danger font-weight-bold"> 募集終了 </p>
+              <% else %>
+                あと<%= event.date %>日
+              <% end %>
+          </td>
         </tr>
       </tbody>
       <% end %>

@@ -18,19 +18,102 @@
 }
 
 .pagination>li>a {
+  border: none;
   color: #696969;
-
 }
 
 .pagination>.active>a {
   background: #93c9ff;
+  border-radius: 15px;
 }
 
 .pagination>li>a:hover {
+  border-radius: 15px;
 }
 
 
 .top-bg {
   background-image: url("../images/top_image.png");
   background-size:cover;
+}
+
+.n-circle {
+  position: absolute;
+  padding-left: 1rem;
+  color: #efa04c;
+}
+
+.my_page {
+  position: relative;
+  padding: 0.6em;
+  background: #8fbc8f;
+}
+
+.my_page:after {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 30px;
+  border: 15px solid transparent;
+  border-top: 15px solid #2e8b57;
+  width: 0;
+  height: 0;
+}
+
+.title {
+  position: relative;
+  padding: 0.25em 1em;
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
+}
+.title:before, .title:after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  width: 2px;
+  height: -webkit-calc(100% + 14px);
+  height: calc(100% + 14px);
+  background-color: black;
+}
+
+.title:before {
+  left: 6px;
+}
+
+.title:after {
+  right: 6px;
+}
+
+.new_event {
+  position: relative;
+  color: black;
+  background: #fffacd;
+  line-height: 1.4;
+  padding: 0.25em 0.5em;
+  margin: 2em 0 0.5em;
+  border-radius: 0 5px 5px 5px;
+}
+
+.new_event:after {
+  position: absolute;
+  font-family: "Font Awesome 5 Free",'Quicksand','Avenir','Arial',sans-serif;
+  font-weight: 900;
+  content: '\✓ Check';
+  background: #ff6347;
+  color: #fff;
+  left: 0px;
+  bottom: 100%;
+  border-radius: 5px 5px 0 0;
+  padding: 3px 7px 1px;
+  font-size: 0.7em;
+  line-height: 1;
+  letter-spacing: 0.05em
+}
+
+body {
+  font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
 }

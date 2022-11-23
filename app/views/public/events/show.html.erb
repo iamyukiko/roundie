@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <div class="row mt-4">
     <div class="col-5">
-      <h4 class="mb-4 text-center">イベント詳細</h4>
+      <h4 class="title mb-4 text-center">イベント詳細</h4>
         <table class="table">
           <tbody>
             <tr>
@@ -50,9 +50,9 @@
                 <!--< elsif @event.users.include?(current_user) %>-->
                 <% else %>
                   <% if @event.deadline_date < Date.today || @event.event_status == false %>
-                    <!--イベント中にあるdeadline_dateが今日だったら-->
+                    <!--イベント中にあるdeadline_dateが今日以降だったら-->
                     <!--もしくはイベントの中にあるイベントステータスがfalseだったら--->
-                    <p>募集終了</p>
+                    <p class="text-danger font-weight-bold">募集終了</p>
                   <% elsif  @event.applies.find_by(user_id: current_user.id)&.applying? %>
                     <!--申請しようとしているユーザーがログインユーザーで、申請ステータスが申請中だったら--->
                     <%= link_to '申請中', event_join_path(@event), class: "btn btn-primary" %>

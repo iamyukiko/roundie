@@ -2,7 +2,7 @@
   <% if current_user != @user%>
     <p><p>
   <% else %>
-    <h3>My page</h3>
+    <h3 class="my_page col-3 text-center">My page</h3>
   <% end %>
     <div class="row mt-3">
       <div class="col-5 mx-auto" style="text-align: center">
@@ -11,9 +11,7 @@
       <div class="col-7">
         <p><font size="4"><%= link_to "参加イベント一覧", user_path(@user.id,{ type: 'join' }), class: "text-success" %></font> |
             <font size="4"><%= link_to "主催イベント一覧", user_path(@user.id,{ type: 'owner' }), class: "text-success" %></font>
-            <%= link_to new_event_path, class: "text-success" do %><i class="fas fa-plus-square"></i><% end %>
-            <span style="float: right"><%= link_to index_apply_path(@user.id), class:"text-success" do %><i class="fas fa-bell"></i>イベント申請一覧<% end %></span>
-        </p>
+            <%= link_to new_event_path, class: "text-success" do %><i class="fas fa-plus-square"></i><% end %></p>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -32,8 +30,8 @@
                       <td><%= link_to event.event_title, event_path(event.id), class: "text-success"  %></td>
                       <td><%= event.event_area %></td>
                       <td><%= event.applies.where(apply_status: :approved).count %>/<%= event.entry_limit %>人</td>
-                      <td><% if event.deadline_date == Date.today || event.event_status == false %>
-                          <p> 募集終了 </p>
+                      <td><% if event.deadline_date < Date.today || event.event_status == false %>
+                          <p class="text-danger font-weight-bold"> 募集終了 </p>
                           <% else %>
                           あと<%= event.date %>日
                           <% end %>
