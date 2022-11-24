@@ -1,6 +1,6 @@
 <div class="container mt-3">
   <div class="row mt-5">
-    <form class="form-horizontal col-md-4" style="background-color:#f0fff0" >
+    <form class="search_box form-horizontal col-md-4">
       <%= form_with url: events_path, method: :get, local: true do |f| %>
         <div class="form-group mt-4">
           <%= f.label :event_title, "イベント名 : " %></br>
@@ -26,11 +26,11 @@
           </div>
         </div>
         <div class="form-group text-center">
-        <%= f.submit "検索する", class: "btn btn-primary" %>
+        <%= f.submit "検索", class: "btn btn-success" %>
         </div>
        <% end %>
     </form>
-    <div class="col-7">
+    <div class="col-7 ml-3">
       <h4><i class="fas fa-search"></i> 検索結果（全<%= @events.count %>件）</h4>
         <table class="table table-striped">
           <thead>

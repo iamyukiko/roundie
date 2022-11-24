@@ -66,8 +66,6 @@ ActiveRecord::Schema.define(version: 2022_11_19_001101) do
     t.integer "user_id"
     t.integer "event_id"
     t.integer "apply_status", default: 1, null: false
-    t.date "approval_date"
-    t.date "rejection_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_applies_on_event_id"

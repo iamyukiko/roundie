@@ -1,7 +1,7 @@
 <div class="container mt-4">
-  <div class="mx-auto" style="width: 500px;">
-  <h3 class="title mt-2 text-center">お知らせ</h3>
-    <%= paginate @activities %>
+  <div class="mx-auto" style="width: 600px;">
+    <h3 class="title mt-2 mb-2 p-2 text-center">通知</h3>
+      <%= paginate @activities %>
       <% if @activities.present? %>
         <% @activities.each do |activity| %>
           <%= render "#{activity.action_type}", activity: activity %>
@@ -9,5 +9,5 @@
       <% else %>
         <p class="text-center">お知らせはありません</p>
       <% end %>
-    </div>
+  </div>
 </div>

@@ -160,7 +160,4 @@ ja:
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
-  attributes:
-    user:
-      user_name: 氏名
-      birthdate: 生年月日
+

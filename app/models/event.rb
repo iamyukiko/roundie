@@ -37,11 +37,10 @@ class Event < ApplicationRecord
   def date
     (deadline_date - Date.today).to_i
   end
-
+  
   def is_owned_by?(user)
     owner_id == user.id
   end
-
 
 #開催エリアの選択用
   enum event_area:{

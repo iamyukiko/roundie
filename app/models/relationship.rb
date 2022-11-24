@@ -9,7 +9,8 @@ class Relationship < ApplicationRecord
 
   private
 
-  def create_activities #記事通りで不明
+#フォローされた際の通知アクション
+  def create_activities
     Activity.create!(subject: self, user_id: followed.id, action_type: :followed_me)
   end
 

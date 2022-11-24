@@ -1,5 +1,6 @@
 module Public::ActivitiesHelper
 
+#通知アクション
   def transition_path(activity) #ビュー・コントローラーからの呼び出し両パターンを想定
     case activity.action_type.to_sym
       when :commented_to_own_event
@@ -29,6 +30,7 @@ module Public::ActivitiesHelper
       end
   end
 
+#既読
   def unread_activities
     @activities = current_user.activities.where(read: false)
   end

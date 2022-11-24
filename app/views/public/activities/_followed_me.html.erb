@@ -1,4 +1,4 @@
 <%= link_to read_activities_path(current_user, activity), class: "dropdown-item border-bottom #{'read' if activity.read?}", method: :patch do %>
-  <%= image_tag activity.subject.follower.get_image, class: "rounded-circle", size:'100x100' %>
+  <%= image_tag activity.subject.follower.get_image, class: "rounded-circle", size:'50x50' %>
   <%= activity.subject.follower.nickname %>にフォローされました
 <% end %>

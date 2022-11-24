@@ -75,7 +75,7 @@ class Public::EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
-      redirect_to event_path(@event.id), notice: '更新されました'
+      redirect_to event_path(@event.id), notice: '更新しました'
     else
       render "edit"
     end

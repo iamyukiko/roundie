@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <div class="mx-auto" style="width: 500px;">
     <h4 class="title mt-2 mb-2 p-2 text-center">ラウンドイベント新規作成</h4>
-      <p class="under p-2 text-center">イベント作成にはプロフィールの詳細設定が必要です。</p>
+      <p class="under p-2 text-center text-danger"><font size ="2"><strong>※イベント作成にはプロフィールの詳細設定が必要です。</strong></font></p>
       <%= render 'public/shared/error_messages', resource: @event %>
       <%= render 'public/events/form', event: @event %>
   </div>

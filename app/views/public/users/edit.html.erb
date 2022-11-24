@@ -1,12 +1,12 @@
 <div  style="background-color:#f5f5f5;">
   <h3 class="p-2"><%= link_to user_path(@user.id), class: "text-dark" do %><i class="fas fa-arrow-left"></i><% end %></h3>
 </div>
-<div class="container mt-4">
+<div class="container">
   <div class="mx-auto" style="width: 500px;">
-    <h4 class="title mt-2 mb-4 p-2 text-center">プロフィール編集</h4>
-      <p class="p-2 text-center"><font size ="2">
+    <h4 class="title mt-2 mb-2 p-2 text-center">プロフィール編集</h4>
+      <p class="p-2 text-center text-danger"><font size ="2"><strong>
         ※イベント新規作成するには下記の項目を</br>
-        すべて入力する必要があります。（画像を除く）</font></p>
+        すべて入力する必要があります。（画像を除く）</strong></font></p>
       <%= render 'public/shared/error_messages', resource: @user %>
         <%= form_with model: @user do |f| %>
           <table class="table-borderless table-sm">
@@ -65,8 +65,8 @@
               <td class="form-group"><%= f.text_area :self_introduction, class: "form-control" %></td>
             </tr>
             <tr>
-              <td colspan="2" align="center"><%= f.submit "更新する", class: "btn btn-success" %>&emsp;&emsp;&emsp;
-                <%= link_to "退会する", unsubscribe_path(@user.id), class: "btn btn-danger" %>
+              <td colspan="2" align="center"><%= f.submit "更新", class: "btn btn-primary" %>&emsp;&emsp;&emsp;
+                <%= link_to "退会", unsubscribe_path(@user.id), class: "btn btn-danger" %>
               </td>
             </tr>
           </table>

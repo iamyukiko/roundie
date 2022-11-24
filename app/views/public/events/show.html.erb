@@ -47,7 +47,6 @@
               <td colspan="2" align="center">
                 <% if @event.owner_id == current_user.id %>
                   <%= link_to '編集', edit_event_path(@event), class: "btn btn-sm btn-success" %>
-                <!--< elsif @event.users.include?(current_user) %>-->
                 <% else %>
                   <% if @event.deadline_date < Date.today || @event.event_status == false %>
                     <!--イベント中にあるdeadline_dateが今日以降だったら-->
@@ -58,10 +57,11 @@
                     <%= link_to '申請中', event_join_path(@event), class: "btn btn-primary" %>
                   <% elsif  @event.applies.find_by(user_id: current_user.id)&.rejected? %>
                     <!--申請しようとしているユーザーがログインユーザーで、申請ステータスが却下されたら--->
-                    <p class="p-2" style="background-color:#ffff00">
+                    <p class="p-2"><strong>
                       <font color="red"><i class="fas fa-exclamation-circle"></i>
                       このイベントは却下されたため、申請できません
-                      </font>
+                      </font></strong>
+                    </p>
                   <% elsif  @event.applies.find_by(user_id: current_user.id)&.approved? %>
                     <!--申請しようとしているユーザーがログインユーザーで、申請ステータスが承認されたら--->
                   <%= link_to 'イベントを辞退', event_path(@event), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "イベント主催者には報告積みですか？"}%>
@@ -71,7 +71,7 @@
                 <% end %>
               </td>
             </tr>
-          <tbody>
+          </tbody>
         </table>
     </div>
     <div class="col ml-4">
@@ -93,8 +93,11 @@
         </div>
       <% else %>
         <div class="text-center mt-5">
-          <h5 class="text-dark" ><i class="fas fa-comment-dots"></i>
-          <%= link_to "イベント主催者に質問する", rooms_path(owner_id: @owner.id), method: :post, class: "text-dark" %>
+          <h5 class="text-dark" >
+          <%= link_to rooms_path(owner_id: @owner.id), method: :post, class: "text-dark" do %>
+          <p>イベント主催者に問い合わせる</p>
+          <i class="fas fa-user-alt"></i><i class="fas fa-comment-dots"></i>
+          <% end %>
           </h5>
         </div>
       <% end %>

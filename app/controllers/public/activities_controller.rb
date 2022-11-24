@@ -4,6 +4,7 @@ class Public::ActivitiesController < ApplicationController
     @activities = current_user.activities.order(created_at: :desc).page(params[:page])
   end
 
+#既読
   def read
     activity = current_user.activities.find(params[:id])
     activity.read! if activity.unread?

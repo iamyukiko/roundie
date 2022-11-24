@@ -40,7 +40,7 @@ class Public::UsersController < ApplicationController
     end
 
     if @user.update(user_params)
-      redirect_to user_path(@user.id), notice: '更新されました'
+      redirect_to user_path(@user.id), notice: '更新しました'
     else
       render :edit
     end

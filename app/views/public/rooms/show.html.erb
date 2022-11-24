@@ -22,7 +22,7 @@
             <%= f.text_area :body, placeholder: "メッセージを入力して下さい", class: "form-control" %>
             <%= f.hidden_field :room_id, value: @room.id %>
           </div>
-          <div class="col-auto">
+          <div class="col-auto text-center mt-2">
             <%= f.submit "投稿", class: "btn btn-primary" %>
           </div>
        </form>

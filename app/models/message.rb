@@ -11,8 +11,8 @@ class Message < ApplicationRecord
 
   private
 
+#メッセージを送った際の通知アクション
   def create_activities
-    #byebug
     Activity.create!(subject: self, user_id: self.room.entries.pluck(:user_id).select{|user_id| user_id != self.user_id }.first, action_type: :messaged_me)
   end
 
