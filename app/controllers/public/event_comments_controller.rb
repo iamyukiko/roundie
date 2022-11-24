@@ -5,7 +5,6 @@ class Public::EventCommentsController < ApplicationController
     comment = current_user.event_comments.new(event_comment_params)
     comment.event_id = event.id
     comment.save
-    redirect_to event_path(event.id)
   end
 
   private

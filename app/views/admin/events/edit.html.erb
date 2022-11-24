@@ -6,7 +6,7 @@
     <h4 class="mt-2 mb-4 p-2 text-center">イベント編集画面</h4>
       <%= render 'public/shared/error_messages', resource: @event %>
         <%= form_with model: @event, url: admin_event_path(@event.id), method: :patch do |f| %>
-          <table class="table table-borderless table-sm">
+          <table class="table-borderless table-sm">
             <tr>
               <td><%= f.label :event_title %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>

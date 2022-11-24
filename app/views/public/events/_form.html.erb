@@ -1,5 +1,5 @@
 <%= form_with model: event do |f| %>
-  <table class="table table-borderless table-sm">
+  <table class="table-borderless table-sm">
     <tr>
       <td><%= f.label :event_title %>
         <span class="text-danger"><font size ="1">（必須）</font></span>
@@ -16,7 +16,7 @@
       <td><%= f.label :event_area %>
         <span class="text-danger"><font size ="1">（必須）</font></span>
       </td>
-      <td class="form-group"><%= f.select :event_area, Event.event_areas.keys, { include_blank: "---" }, class: "form-control" %></td>
+      <td class="form-group"><%= f.select :event_area, Event.event_areas.keys, class: "form-control" %></td>
     <tr>
       <td><%= f.label :entry_limit %>
         <span class="text-danger"><font size ="1">（必須）</font></span>

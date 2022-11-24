@@ -1,8 +1,8 @@
 <div class="container mt-3">
+  <h4 class="title mb-4 text-center">イベント詳細</h4>
   <div class="row mt-4">
-    <div class="col-5">
-      <h4 class="title mb-4 text-center">イベント詳細</h4>
-        <table class="table">
+    <div class="col">
+        <table class="table col">
           <tbody>
             <tr>
               <td>開催日</td>
@@ -74,12 +74,11 @@
           <tbody>
         </table>
     </div>
-    <div class="col-5 ml-4">
+    <div class="col ml-4">
       <% if @event.applies.find_by(user_id: current_user.id)&.approved? %>
-        <h4 class="mb-4 text-center">~ コメント ~</h4>
         <% @event_comments.each do |event_comment| %>
           <div class="comment">
-            <p class="text-right"><font size="4"><%= event_comment.comment %>&emsp;</font>
+            <p class="text-right"><font size="2"><%= event_comment.comment %>&emsp;</font>
               <span><font size="1">(<i class="fas fa-user"></i>
                 <%= event_comment.user.nickname %> <%= event_comment.created_at.strftime('%Y/%m/%d %H:%M') %>)</font></span>
             </p>

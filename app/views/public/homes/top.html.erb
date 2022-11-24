@@ -12,8 +12,10 @@
   </div>
 </div>
 <div class="container">
-  <h5 class="new_event text-center col-2"><strong>新着イベント</strong></h5>
-    <table class="table table-striped">
+  <h5 class="event_top text-center col">
+    <strong>新着イベント</strong>
+  </h5>
+    <table class="table mt-3">
       <thead>
         <tr>
           <th>開催日</th>
@@ -40,7 +42,9 @@
       </tbody>
       <% end %>
     </table>
-    <%= link_to "＞＞もっと見る", events_path, class:"text-success" %>
+    <div class="text-center mt-3">
+    <%= link_to "もっと見る", events_path, class:"text-success" %>
+    </div>
 </div>
 
 

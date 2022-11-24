@@ -9,7 +9,7 @@
         すべて入力する必要があります。（画像を除く）</font></p>
       <%= render 'public/shared/error_messages', resource: @user %>
         <%= form_with model: @user do |f| %>
-          <table class="table table-borderless table-sm">
+          <table class="table-borderless table-sm">
             <tr>
               <td><%= f.label :user_name, "氏名" %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>

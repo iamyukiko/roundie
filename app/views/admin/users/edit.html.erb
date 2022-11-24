@@ -6,7 +6,7 @@
     <h4 class="mt-2 mb-4 p-2 text-center">プロフィール編集</h4>
       <%= render 'public/shared/error_messages', resource: @user %>
       <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
-        <table class="table table-borderless table-sm">
+        <table class="table-borderless table-sm">
           <tbody>
             <tr>
               <td><%= f.label :user_name, "氏名" %>
@@ -31,7 +31,7 @@
               <td><%= f.label :user_area %>
                   <font size ="1">（任意）</font>
               </td>
-              <td class="form-group"><%= f.select :user_area, User.user_areas.keys, { include_blank: "---" }, class: "form-control" %></td>
+              <td class="form-group"><%= f.select :user_area, User.user_areas.keys, class: "form-control" %></td>
             </tr>
               <td><%= f.label :gender %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
@@ -48,7 +48,7 @@
               <td><%= f.label :user_score, "スコアレベル" %>
                   <font size ="1">（任意）</font>
               </td>
-              <td class="form-group"><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last, { include_blank: "---" }, class: "form-control" %></td>
+              <td class="form-group"><%= f.collection_select :user_score, User.user_scores_i18n, :first, :last, class: "form-control" %></td>
             </tr>
             <tr>
               <td><%= f.label :image, "プロフィール画像" %>
