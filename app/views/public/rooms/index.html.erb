@@ -7,7 +7,7 @@
   </div>
     <% if @another_entries.present? %>
       <% @another_entries.each do |entry| %>
-        <table class="table table-sm">
+        <table class="table-sm">
           <tbody>
             <tr style="line-height:2;">
               <td><%= link_to room_path(entry.room.id) do %>
