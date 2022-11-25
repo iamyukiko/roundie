@@ -9,7 +9,7 @@
         <p><%= message.body %>&emsp;
           (<span><font size="1"><i class="fas fa-user"></i>
             <strong><%= message.user.nickname %></strong>
-              &emsp;<%= message.created_at.strftime("%Y-%m-%d %H:%M")%></font>
+              &emsp;<%= message.created_at.to_s(:datetime_jp)%></font>
            </span>)
         </p>
       <% end %>
