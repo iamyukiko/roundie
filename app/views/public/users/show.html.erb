@@ -5,10 +5,10 @@
     <h5 class="my_page text-center"><strong>My page</strong></h5>
   <% end %>
     <div class="row mt-4">
-      <div class="col-5 mx-auto" style="text-align: center">
+      <div class="col-4">
         <%= render 'public/users/show', user: @user, isRoom: @isRoom, roomId: @roomId, room: @room, entry: @entry, user: @user%>
       </div>
-      <div class="col-7">
+      <div class="col-8">
         <p><font size="4"><%= link_to "参加イベント一覧", user_path(@user.id,{ type: 'join' }), class: "text-success" %></font> |
             <font size="4"><%= link_to "主催イベント一覧", user_path(@user.id,{ type: 'owner' }), class: "text-success" %></font>
             <%= link_to new_event_path, class: "text-success" do %><i class="fas fa-plus-square"></i><% end %></p>

@@ -29,7 +29,7 @@
       <tbody>
         <tr>
           <td><%= event.event_date %></td>
-          <td><%= link_to event_path(event), class:"text-success" do %><%= event.event_title %><% end %></td>
+          <td width="500"><%= link_to event_path(event), class:"text-success" do %><%= event.event_title %><% end %></td>
           <td><%= event.event_area %></td>
           <td><%= event.applies.where(apply_status: :approved).count %> / <%= event.entry_limit %>人</td>
           <td><% if event.deadline_date < Date.today || event.event_status == false %>

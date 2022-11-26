@@ -8,7 +8,10 @@
     </p>
     <p><%= user.user_area %> / <%= user.age%>歳 / 性別：<%= user.gender_i18n %></p>
     <p>スコアレベル : <%= user.user_score_i18n %></p>
-    <p>~ 自己紹介 ~</br><span style="border-bottom: solid 1px #d3d3d3;"><%= user.self_introduction %></span></p>
+    <div class="introduction col-md-8">
+    <span class="introduction-title">自己紹介</span>
+    <p><%= user.self_introduction %></p>
+    </div>
   <% if current_user != user%>
     <p></p>
   <% else %>
