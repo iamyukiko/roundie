@@ -7,15 +7,14 @@
 			<p class="mb-4 text-center"><font size="5">会員詳細</font></p>
 			<p class="mt-3 text-center">
 				<%= image_tag @user.get_image, class: "rounded-circle mb-3", size:'200x200' %></br>
-				ID : <%= @user.id %>&emsp;<strong><%= @user.user_name %></strong></br></br>
-				~ 自己紹介 ~ </br>
-				<%= safe_join(@user.self_introduction.split("\n"),tag(:br)) %></p>
+				ID : <%= @user.id %>&emsp;<strong><%= @user.user_name %></strong></p>
 		</div>
-		<div class="col mt-5">
-			<table class="table table-bordered col-8">
+		</div>
+		<div class="col">
+			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<th>ニックネーム : </th>
+						<th width="200">ニックネーム : </th>
 						<td><%= @user.nickname %></td>
 					</tr>
 					<tr>
@@ -35,7 +34,11 @@
 						<td><%= @user.user_score_i18n %></td>
 					</tr>
 					<tr>
-						<th>ステータス</th>
+						<th>自己紹介 : </th>
+						<td><%= @user.self_introduction %></td>
+					</tr>
+					<tr>
+						<th>ステータス : </th>
 						<td>
 			      	<% if @user.is_valid == true %>
 								<span class="text-success font-weight-bold">有効</span>
@@ -49,6 +52,5 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
 	</div>
 </div>

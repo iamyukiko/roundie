@@ -4,53 +4,53 @@
 <div class="container mt-4">
 	<div class="mx-auto" style="width: 500px;">
 		<h4 class="text-center mb-4">イベント詳細</h4>
-			<table class="table table-sm text-center col">
+			<table class="table table-sm col">
 				<tbody>
 					<tr>
 						<th>ID : </th>
 						<td><%= @event.id %></td>
 					</tr>
 					<tr>
-						<th>イベント名</th>
+						<th>イベント名 : </th>
 						<td><%= @event.event_title %></td>
 					</tr>
 					<tr>
-						<th>開催日</th>
+						<th>開催日 : </th>
 						<td><%= @event.event_date %></td>
 					</tr>
 					<tr>
-						<th>募集締切日</th>
+						<th>募集締切日 : </th>
 						<td><%= @event.deadline_date %></td>
 					</tr>
 					<tr>
-						<th>開催エリア</th>
+						<th>開催エリア : </th>
 						<td><%= @event.event_area %></td>
 					</tr>
 					<tr>
-						<th>スコアレベル</th>
+						<th>スコアレベル : </th>
 						<td><%= @event.search_score_i18n %></td>
 					</tr>
 					<tr>
-						<th>参加状況</th>
+						<th>参加状況 : </th>
 						<td><%= @event.applies.where(apply_status: :approved).count %>/<%= @event.entry_limit %> 人</td>
 					</tr>
 					<tr>
-						<th>イベント参加者</th>
+						<th width="200">イベント参加者 : </th>
 						<td><% @event_users.each do |event_user| %>
                   <%= link_to admin_user_path(event_user.id) do %><%= event_user.user_name %><% end %>
                  <% end %>
             </td>
 					</tr>
 					<tr>
-						<th>イベント詳細</th>
-						<td><%= safe_join(@event.event_introduction.split("\n"),tag(:br)) %></td>
+						<th>イベント詳細 : </th>
+						<td width="400"><%= safe_join(@event.event_introduction.split("\n"),tag(:br)) %></td>
 					</tr>
 					<tr>
-						<th>主催者</th>
+						<th>主催者 : </th>
 						<td><% owner = User.find(@event.owner_id) %><%= owner.user_name %></td>
 					</tr>
 					<tr>
-						<th>開催状況</th>
+						<th>開催状況 : </th>
 						<td>
 							<% if @event.event_status == true %>
 								<p class="text-success font-weight-bold">募集中</p>
