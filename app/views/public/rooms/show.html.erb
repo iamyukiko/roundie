@@ -6,7 +6,7 @@
     <div class="chat text-right">
     <% if @messages.present? %>
       <% @messages.each do |message| %>
-        <p><%= message.body %></br>
+        <p><font size="2"><%= safe_join(message.body.split("\n"),tag(:br)) %></font></br>
           (<span><font size="1"><i class="fas fa-user"></i>
             <strong><%= message.user.nickname %></strong>
               &emsp;<%= message.created_at.to_s(:datetime_jp)%></font>
