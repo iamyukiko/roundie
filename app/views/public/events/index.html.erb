@@ -8,8 +8,8 @@
           </div>
         <div class="form-group">
           <%= f.label :date, "開催日 : " %></br>
-          <%= f.date_select :date_from, { default: date_select_params_to_date(:date_from), include_blank: "---"  } %> ~
-          <%= f.date_select :date_to, { default: date_select_params_to_date(:date_to), include_blank: "---"  }%>
+          <%= f.date_select :date_from, { selected: date_select_params_to_date(:date_from), include_blank: "---" } %> ~
+          <%= f.date_select :date_to, { selected: date_select_params_to_date(:date_to), include_blank: "---" }%>
         </div>
         <div class="form-group">
           <%= f.label :area, "開催エリア : " %></br>
