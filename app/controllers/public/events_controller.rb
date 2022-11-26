@@ -8,7 +8,7 @@ class Public::EventsController < ApplicationController
 
     if apply.nil? #nilだった場合、申請を作成
       if @event.entry_limit.to_i < Apply.where(event_id: params[:event_id], apply_status: :approved).count+1
-         redirect_to event_path(@event.id), notice: "規定人数を超えています"
+         redirect_to event_path(@event.id), alert: "規定人数を超えています"
       else
         @apply_create = @event.applies.new(user_id: current_user.id, apply_status: :applying).save
         redirect_to event_path(@event.id), notice: "申請しました"

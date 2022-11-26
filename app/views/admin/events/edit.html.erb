@@ -34,14 +34,14 @@
               <td><%= f.label :event_date %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
               </td>
-              <td class="form-group"><%= f.date_select :event_date, date_separator: ' / ' %></td>
+              <td class="form-group"><%= f.date_select :event_date, start_year: Time.now.year, end_year: Time.now.year + 2, date_separator:' / ' %></td>
             </tr>
             <tr>
               <td><%= f.label :deadline_date %>
                   <span class="text-danger"><font size ="1">（必須）</font></span></br>
                   <font size ="1">※開催日より8日以上前の日付を選択してください</font>
               </td>
-              <td class="form-group"><%= f.date_select :deadline_date, start_year:Time.now.year, end_year:Time.now.year, date_separator: ' / ' %>
+              <td class="form-group"><%= f.date_select :deadline_date, start_year:Time.now.year, end_year:Time.now.year + 2, date_separator: ' / '%></td>
             </tr>
             <tr>
               <td><%= f.label :search_score %>
