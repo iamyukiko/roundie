@@ -81,7 +81,7 @@
             <p class="text-right"><font size="2"><%= safe_join(event_comment.comment.split("\n"),tag(:br)) %></font></br>
               <span><font size="1">(<i class="fas fa-user"></i>
                 <%= link_to user_path(event_comment.user.id), class:"text-success" do %><%= event_comment.user.nickname %><% end %>
-                <%= event_comment.created_at.to_s(:datetime_jp) %>)</font></span>
+                <%= event_comment.created_at.strftime('%Y/%m/%d %H:%M') %>)</font></span>
             </p>
           </div>
         <% end %>
