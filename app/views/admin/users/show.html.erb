@@ -9,7 +9,7 @@
 				<%= image_tag @user.get_image, class: "rounded-circle mb-3", size:'200x200' %></br>
 				ID : <%= @user.id %>&emsp;<strong><%= @user.user_name %></strong></br></br>
 				~ 自己紹介 ~ </br>
-				<%= @user.self_introduction %></p>
+				<%= safe_join(@user.self_introduction.split("\n"),tag(:br)) %></p>
 		</div>
 		<div class="col mt-5">
 			<table class="table table-bordered col-8">

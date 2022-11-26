@@ -43,7 +43,7 @@
 					</tr>
 					<tr>
 						<th>イベント詳細</th>
-						<td><%= @event.event_introduction %></td>
+						<td><%= safe_join(@event.event_introduction.split("\n"),tag(:br)) %></td>
 					</tr>
 					<tr>
 						<th>主催者</th>
