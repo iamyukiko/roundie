@@ -1,12 +1,12 @@
 <%= link_to read_activities_path(current_user, activity), class: "dropdown-item border-bottom #{'read' if activity.read?}", method: :patch do %>
-<% if activity.subject.present? %>
-  <%= image_tag activity.subject.event.owner.get_image, class: "rounded-circle", size:'50x50' %>
-  <%= activity.subject.event.owner.nickname %> が申請中のイベントを
-    <% if activity.subject.apply_status == "approved" %>
-      承認しました
-    <% else %>
-      却下しました
-    <% end %>
-<% end %>
+  <% if activity.subject.present? %>
+    <%= image_tag activity.subject.event.owner.get_image, class: "rounded-circle", size:'50x50' %>
+    <%= activity.subject.event.owner.nickname %> が申請中のイベントを
+      <% if activity.subject.apply_status == "approved" %>
+        承認しました
+      <% else %>
+        却下しました
+      <% end %>
+  <% end %>
 <% end %>
 

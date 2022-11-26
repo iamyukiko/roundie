@@ -1,9 +1,9 @@
-  <%= image_tag user.get_image, class: "rounded-circle", size:'200x200' %></br>
+<%= image_tag user.get_image, class: "rounded-circle", size:'200x200' %></br>
   <h5 class="my_name mt-3 col-md-8"><strong><%= user.nickname %></strong></h5>
-  <div style="display: inline-block; _display: inline;"><%= render "public/relationships/relationship_btn", user: user %>
-  </div>&nbsp;
-  <div style="display: inline-block; _display: inline;"><%= render "public/rooms/room", isRoom: isRoom, roomId: roomId, room: room, entry: entry, user: user %>
-  </div>
+    <div style="display: inline-block; _display: inline;"><%= render "public/relationships/relationship_btn", user: user %>
+    </div>&nbsp;
+    <div style="display: inline-block; _display: inline;"><%= render "public/rooms/room", isRoom: isRoom, roomId: roomId, room: room, entry: entry, user: user %>
+    </div>
     <p><%= link_to user.followings.count, user_followings_path(user) %>フォロー | <%= link_to user.followers.count, user_followers_path(user) %>フォロワー
     </p>
     <p><%= user.user_area %> / <%= user.age%>歳 / 性別：<%= user.gender_i18n %></p>
@@ -12,9 +12,9 @@
     <span class="introduction-title">自己紹介</span>
       <p><%= user.self_introduction %></p>
     </div>
-  <% if current_user != user%>
-    <p></p>
-  <% else %>
-    <p><%= link_to rooms_path, class: "text-dark" do %><i class="fas fa-envelope"></i>&nbsp;チャット履歴<% end %></p>
-    <p><%= link_to edit_user_path(user.id), class: "text-dark" do %><i class="fas fa-cog"></i>&nbsp;プロフィール編集<% end %></p>
-  <% end %>
+<% if current_user != user%>
+  <p></p>
+<% else %>
+  <p><%= link_to rooms_path, class: "text-dark" do %><i class="fas fa-envelope"></i>&nbsp;チャット履歴<% end %></p>
+  <p><%= link_to edit_user_path(user.id), class: "text-dark" do %><i class="fas fa-cog"></i>&nbsp;プロフィール編集<% end %></p>
+<% end %>
