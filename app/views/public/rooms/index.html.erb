@@ -15,7 +15,7 @@
                   <strong><font color=black><%= entry.user.nickname %></font></strong>
                   <% end %>
               </td>
-              <td><font color=#c0c0c0><%= Message.find_by(id: entry.room.message_ids.last)&.body %></font>
+              <td width="400"><font color=#c0c0c0><%= Message.find_by(id: entry.room.message_ids.last)&.body %></font>
               </td>
             </tr>
           </tbody>
