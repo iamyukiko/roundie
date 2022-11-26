@@ -5,34 +5,34 @@
         <table class="table col">
           <tbody>
             <tr>
-              <td>開催日 : </td>
+              <th>開催日 : </th>
               <td><%= @event.event_date %></td>
             </tr>
             <tr>
-              <td>イベント名 : </td>
+              <th>イベント名 : </th>
               <td width="370"><%= @event.event_title %></td>
             </tr>
             <tr>
-              <td>イベント詳細 : </td>
+              <th>イベント詳細 : </th>
               <td><%= safe_join(@event.event_introduction.split("\n"),tag(:br)) %></td>
             </tr>
             <tr>
-              <td>開催エリア : </td>
+              <th>開催エリア : </th>
               <td><%= @event.event_area %></td>
             </tr>
             <tr>
-              <td>イベント参加者 : </td>
+              <th>イベント参加者 : </th>
               <td><% @event_users.each do |event_user| %>
                   <%= link_to user_path(event_user.id), class: "text-success" do %><%= event_user.nickname %><% end %>
                   <% end %>
               </td>
             </tr>
             <tr>
-              <td>参加状況 : </td>
+              <th>参加状況 : </th>
               <td><%= @event.applies.where(apply_status: :approved).count %> / <%= @event.entry_limit %>人</td>
             </tr>
             <tr>
-              <td>スコアレベル : </td>
+              <th>スコアレベル : </th>
               <td><%= @event.search_score_i18n %></td>
             </tr>
             <tr>
@@ -40,7 +40,7 @@
               <td>あと<%= @event.date %>日 (<%= @event.deadline_date %>)</td>
             </tr>
             <tr>
-              <td>主催者 : </td>
+              <th>主催者 : </th>
               <td><%= link_to @owner.nickname, user_path(@owner.id), class: "text-success" %></td>
             </tr>
             <tr>
