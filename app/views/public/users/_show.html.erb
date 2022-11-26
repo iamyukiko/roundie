@@ -1,5 +1,5 @@
   <%= image_tag user.get_image, class: "rounded-circle", size:'200x200' %></br>
-  <p class="mt-3"><strong><%= user.nickname %></strong><p>
+  <h5 class="my_name mt-3 col-md-8"><strong><%= user.nickname %></strong></h5>
   <div style="display: inline-block; _display: inline;"><%= render "public/relationships/relationship_btn", user: user %>
   </div>&nbsp;
   <div style="display: inline-block; _display: inline;"><%= render "public/rooms/room", isRoom: isRoom, roomId: roomId, room: room, entry: entry, user: user %>

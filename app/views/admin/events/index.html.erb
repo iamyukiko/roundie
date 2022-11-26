@@ -2,16 +2,16 @@
   <h3 class="p-2"><%= link_to admin_path, class: "text-dark" do %><i class="fas fa-arrow-left"></i><% end %></h3>
 </div>
 <div class="container mt-4">
-  <h4 class="text-center mb-4">イベント一覧</h4>
+  <h4 class=" title text-center mb-4">イベント一覧</h4>
   <%= paginate @events %>
   <table class="table table-bordered table-sm">
     <thead>
       <tr>
         <th>ID</th>
-        <th>イベント名</th>
+        <th width="400">イベント名</th>
         <th>開催日</th>
         <th>募集締切日</th>
-        <th>主催者</th>
+        <th width="130">主催者</th>
         <th>開催エリア</th>
         <th>ステータス</th>
       </tr>
@@ -20,7 +20,7 @@
       <% @events.each do |event| %>
         <tr>
           <td><%= event.id %></td>
-          <td><%= link_to event.event_title, admin_event_path(event.id) %></td>
+          <td><%= link_to event.event_title, admin_event_path(event.id), class:"text-success" %></td>
           <td><%= event.event_date %></td>
           <td><%= event.deadline_date %></td>
           <td><% owner = User.find(event.owner_id) %><%= owner.user_name %></td>

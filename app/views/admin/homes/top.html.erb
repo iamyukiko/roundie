@@ -1,16 +1,16 @@
 <div class="container mt-5">
     <div class="row ">
-      <div class="rounded-pill col mr-5 text-center" style="background-color:#f0fff0; padding:30px; border:1px solid #ccc">
-        <h2><i class="fas fa-users-cog"></i>&nbsp;
-            <%= link_to "会員管理", admin_users_path %>
+      <div class="admin_top1 mr-3 col text-center">
+        <h2 class="admin_top1-title"><i class="fas fa-users-cog"></i>&nbsp;
+            <%= link_to "会員管理", admin_users_path, class:"text-light" %>
         </h2>
         <p>会員の管理画面です。</br>
            会員の有効・退会の</br>
            ステータス変更はこちらから</p>
       </div>
-        <div class="rounded-pill col ml-5 text-center" style="background-color:#fff0f5; padding:30px; border:1px solid #ccc">
-        <h2><i class="far fa-calendar-alt"></i>&nbsp;
-            <%= link_to "イベント管理", admin_events_path %>
+        <div class="admin_top2 ml-2 col text-center">
+        <h2 class="admin_top2-title"><i class="far fa-calendar-alt"></i>&nbsp;
+            <%= link_to "イベント管理", admin_events_path, class:"text-light" %>
         </h2>
         <p>イベント管理画面です。</br>
            登録されているイベントの閲覧、</br>

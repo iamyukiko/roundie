@@ -7,7 +7,7 @@
 			<table class="table table-sm col">
 				<tbody>
 					<tr>
-						<th>ID : </th>
+						<th width="200">ID : </th>
 						<td><%= @event.id %></td>
 					</tr>
 					<tr>
@@ -35,9 +35,9 @@
 						<td><%= @event.applies.where(apply_status: :approved).count %>/<%= @event.entry_limit %> 人</td>
 					</tr>
 					<tr>
-						<th width="200">イベント参加者 : </th>
+						<th>イベント参加者 : </th>
 						<td><% @event_users.each do |event_user| %>
-                  <%= link_to admin_user_path(event_user.id) do %><%= event_user.user_name %><% end %>
+                  <%= link_to admin_user_path(event_user.id), class:"text-success" do %><%= event_user.user_name %><% end %>
                  <% end %>
             </td>
 					</tr>

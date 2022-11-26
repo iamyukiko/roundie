@@ -98,13 +98,6 @@ body {
     border: dashed 2px white;
 }
 
-.my_page {
-  padding: 0.5em;/*文字周りの余白*/
-  color: #010101;/*文字色*/
-  background: #dcd3b2;/*背景色*/
-  border-bottom: solid 3px #715c1f;/*下線*/
-}
-
 .introduction {
     position: relative;
     margin: 2em 0;
@@ -128,4 +121,42 @@ body {
 .introduction p {
     margin: 0;
     padding: 0;
+}
+
+.admin_top1 {
+    margin: 2em 0;
+    background: #ffe2c6;
+}
+.admin_top1 .admin_top1-title {
+    background: #ffc184;
+    padding: 4px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.admin_top1 p {
+    padding: 15px 20px;
+    margin: 0;
+}
+
+.admin_top2 {
+    margin: 2em 0;
+    background: #dcefff;
+}
+.admin_top2 .admin_top2-title {
+    background: #5fb3f5;
+    padding: 4px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.admin_top2 p {
+    padding: 15px 20px;
+    margin: 0;
+}
+
+.my_name {
+  background: linear-gradient(transparent 50%, #ffff00 50%);
 }
