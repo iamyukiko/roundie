@@ -30,15 +30,15 @@
         </div>
        <% end %>
     </form>
-    <div class="col-7 ml-3">
+    <div class="col ml-3">
       <h4><i class="fas fa-search"></i> 検索結果（全<%= @events.count %>件）</h4>
         <table class="table table-striped">
           <thead>
             <tr>
               <th>開催日</th>
-              <th>イベント名</th>
+              <th width="200">イベント名</th>
               <th>開催エリア</th>
-              <th>参加状況</th>
+              <th width="100">参加状況</th>
               <th>募集締切日</th>
             </tr>
           </thead>
@@ -46,7 +46,7 @@
               <% @events.each do |event| %>
               <tr>
                 <td><%= event.event_date %></td>
-                <td width="240"><%= link_to event.event_title, event_path(event.id), class: "text-success" %></td>
+                <td><%= link_to event.event_title, event_path(event.id), class: "text-success" %></td>
                 <td><%= event.event_area %></td>
                 <td><%= event.applies.where(apply_status: :approved).count %> / <%= event.entry_limit %>人</td>
                 <td><% if event.deadline_date < Date.today || event.event_status == false %>
