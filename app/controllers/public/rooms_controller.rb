@@ -20,7 +20,7 @@ class Public::RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @messages = @room.messages.order(created_at: :desc).page(params[:page])
+    @messages = @room.messages.order(created_at: :desc)
     @message = Message.new
     @user = @room.entry_users.where.not(id: current_user.id).first
   end
