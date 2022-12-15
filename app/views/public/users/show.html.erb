@@ -25,7 +25,7 @@
                       <td width="240"><%= link_to event.event_title, event_path(event.id), class: "text-success"  %></td>
                       <td><%= event.event_area %></td>
                       <td><%= event.applies.where(apply_status: :approved).count %>/<%= event.entry_limit %>人</td>
-                      <td><% if event.deadline_date < Date.today || event.event_status == false %>
+                      <td><% if event.deadline_date <= Date.today || event.event_status == false %>
                           <p class="text-danger font-weight-bold"> 募集終了 </p>
                           <% else %>
                           あと<%= event.date %>日

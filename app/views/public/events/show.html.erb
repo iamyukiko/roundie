@@ -37,7 +37,7 @@
             </tr>
             <tr>
               <th>募集締切日 : </th>
-              <% if @event.deadline_date < Date.today %>
+              <% if @event.deadline_date <= Date.today %>
                 <td><p class="text-danger font-weight-bold">このイベントは締切を過ぎています</p></td>
               <% else %>
                 <td>あと<%= @event.date %>日 (<%= @event.deadline_date %>)</td>
@@ -52,7 +52,7 @@
                 <% if @event.owner_id == current_user.id %>
                   <%= link_to '編集', edit_event_path(@event), class: "btn btn-sm btn-success" %>
                 <% else %>
-                  <% if @event.deadline_date < Date.today || @event.event_status == false %>
+                  <% if @event.deadline_date <= Date.today || @event.event_status == false %>
                     <!--イベント中にあるdeadline_dateが今日以降だったら-->
                     <!--もしくはイベントの中にあるイベントステータスがfalseだったら--->
                     <p class="text-danger font-weight-bold">募集終了</p>
@@ -79,33 +79,34 @@
         </table>
     </div>
     <div class="col ml-4">
+      <% if @event.applies.find_by(user_id: current_user.id)&.approved? %>
       <div class="overflow">
-        <% if @event.applies.find_by(user_id: current_user.id)&.approved? %>
-          <% @event_comments.each do |event_comment| %>
-            <div class="comment">
-              <p class="text-right"><font size="2"><%= safe_join(event_comment.comment.split("\n"),tag(:br)) %></font></br>
-                <span><font size="1">(<i class="fas fa-user"></i>
-                  <%= link_to user_path(event_comment.user.id), class:"text-success" do %><%= event_comment.user.nickname %><% end %>
-                  <%= event_comment.created_at.strftime('%Y/%m/%d %H:%M') %>)</font></span>
-              </p>
-            </div>
-          <% end %>
+        <% @event_comments.each do |event_comment| %>
+          <div class="comment-list">
+            <p class="text-right"><font size="2"><%= safe_join(event_comment.comment.split("\n"),tag(:br)) %></font></br>
+              <span><font size="1">(<i class="fas fa-user"></i>
+                <%= link_to user_path(event_comment.user.id), class:"text-success" do %><%= event_comment.user.nickname %><% end %>
+                <%= event_comment.created_at.strftime('%Y/%m/%d %H:%M') %>)</font></span>
+            </p>
+          </div>
+        </dsiv>
+        <% end %>
       </div>
-        <div>
-          <%= form_with model: [@event, @event_comment] do |f| %>
-            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに入力", class:"form-control" %></br>
-            <%= f.submit "送信", class: "btn btn-primary" %>
-          <% end %>
-        </div>
+      <div class="comment">
+        <%= form_with model: [@event, @event_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに入力", class:"form-control" %></br>
+          <%= f.submit "送信", class: "btn btn-primary" %>
+        <% end %>
+      </div>
       <% else %>
-        <div class="text-center mt-5">
-          <h5 class="text-dark" >
+      <div class="text-center mt-5">
+        <h5 class="text-dark">
           <%= link_to rooms_path(owner_id: @owner.id), method: :post, class: "text-dark" do %>
           <p>イベント主催者に問い合わせる</p>
           <i class="fas fa-user-alt"></i><i class="fas fa-comment-dots"></i>
           <% end %>
-          </h5>
-        </div>
+        </h5>
+      </div>
       <% end %>
     </div>
   </div>
