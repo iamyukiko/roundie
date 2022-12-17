@@ -26,28 +26,32 @@
               <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                  <li class="nav-item">
-                  <%= link_to index_apply_path(current_user.id), class:'nav-link text-light' do %>
                     <% if unchecked_applies.any? %>
-                      <span class="fa-stack fa-1x">
-                        <i class="fas fa-user-alt fa-stack-1x" style="font-size: 1.3em;"></i>
-                        <i class="fas fa-circle n-circle fa-stack-1x" style="font-size: 1.3em;"></i>
-                      </span>
+                      <%= link_to index_apply_path(current_user.id), class:'nav-link text-light' do %>
+                        <span class="fa-stack">
+                          <i class="fas fa-user-alt fa-stack-1x" style="font-size: 1.3em; margin: 0;"></i>
+                          <i class="fas fa-circle n-circle fa-stack-1x" style="font-size: 1.3em; margin: 0;"></i>
+                        </span>
+                      <% end %>
                     <% else %>
-                      <i class="fas fa-user-alt" style="font-size: 1.3em;"></i>
+                      <%= link_to index_apply_path(current_user.id), class:'nav-link text-light' do %>
+                        <i class="fas fa-user-alt" style="font-size: 1.3em;"></i>
+                      <% end %>
                     <% end %>
-                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to index_activities_path(current_user.id), class:'nav-link text-light' do %>
                     <% if unread_activities.any? %>
-                      <span class="fa-stack fa-1x">
-                        <i class="fas fa-bell fa-stack-1x" style="font-size: 1.3em;"></i>
-                        <i class="fas fa-circle n-circle fa-stack-1x" style="font-size: 1.3em;"></i>
-                      </span>
+                      <%= link_to index_activities_path(current_user.id), class:'nav-link text-light' do %>
+                        <span class="fa-stack">
+                          <i class="fas fa-bell fa-stack-1x" style="font-size: 1.3em; margin: 0;"></i>
+                          <i class="fas fa-circle n-circle fa-stack-1x" style="font-size: 1.3em; margin: 0;"></i>
+                        </span>
+                      <% end %>
                     <% else %>
-                      <i class="fas fa-bell" style="font-size: 1.3em;"></i>
+                      <%= link_to index_activities_path(current_user.id), class:'nav-link text-light' do %>
+                        <i class="fas fa-bell" style="font-size: 1.3em;"></i>
+                      <% end %>
                     <% end %>
-                  <% end %>
                 </li>
                 <li class="nav-item">
                   <%= link_to user_path(current_user.id), class:'nav-link text-light' do %>

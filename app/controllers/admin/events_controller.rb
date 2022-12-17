@@ -12,12 +12,13 @@ class Admin::EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+    @event.update_status
   end
 
   def update
     @event = Event.find(params[:id])
     @event.attributes = event_params #attribute = 各カラムにコピー
-    if @event.save(context: :admin) #
+    if @event.save(context: :admin)
       redirect_to admin_event_path(@event.id), notice: '更新されました'
     else
       render "edit"

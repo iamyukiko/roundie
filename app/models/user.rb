@@ -63,10 +63,24 @@ class User < ApplicationRecord
     end
       image
   end
+
 #年齢の算出
   def age
     date_format = "%Y%m%d"
     (Date.today.strftime(date_format).to_i - birthdate.strftime(date_format).to_i) / 10000
+  end
+
+#管理者検索用
+  def self.search_for(content, method)
+    if method == 'perfect'
+      User.where(user_name: content)
+    elsif method == 'forward'
+      User.where('user_name LIKE ?', content + '%')
+    elsif method == 'backward'
+      User.where('user_name LIKE ?', '%' + content)
+    else
+      User.where('user_name LIKE ?', '%' + content + '%')
+    end
   end
 
 #性別の選択用

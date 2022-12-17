@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 #管理者用ルーティング
   scope module: :admin do
   get '/admin' => "homes#top"
+  get "admin/search" => "searches#search"
   end
 
   namespace :admin do

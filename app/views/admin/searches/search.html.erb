@@ -1,0 +1,5 @@
+<% if @model == 'event' %>
+  <%= render 'admin/events/events_search', events: @records %>
+<% elsif @model == 'user' %>
+ <%= render 'admin/users/users_search', users: @records %>
+<% end %>

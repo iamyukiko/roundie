@@ -33,9 +33,28 @@ class Event < ApplicationRecord
       .entry_limit_is(entry_limit)
   end
 
+#管理者画面検索用
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Event.where(event_title: content)
+    elsif method == 'forward'
+      Event.where('event_title LIKE ?', content+'%')
+    elsif method == 'backward'
+      Event.where('event_title LIKE ?', '%'+content)
+    else
+      Event.where('event_title LIKE ?', '%'+content+'%')
+    end
+  end
+
 #イベントの残日数表示
   def date
     (deadline_date - Date.today).to_i
+  end
+
+  def update_status
+    if self.deadline_date <= Date.today
+      self.update_column(:event_status, false) #update_columnバリデーションを通さない
+    end
   end
 
 #開催エリアの選択用
