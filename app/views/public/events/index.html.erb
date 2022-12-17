@@ -32,33 +32,43 @@
     </form>
     <div class="col ml-3">
       <h4><i class="fas fa-search"></i> 検索結果（全<%= @events.count %>件）</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>開催日</th>
-              <th width="200">イベント名</th>
-              <th>開催エリア</th>
-              <th width="100">参加状況</th>
-              <th>募集締切日</th>
-            </tr>
-          </thead>
-            <tbody>
-              <% @events.each do |event| %>
+        <% if @events.count == 0 %>
+          <div class="text-center mt-5">
+            <h5 class="text-dark"><strong>イベントを検索してみよう！</strong></h5></br>
+              <p><span class="hint">~ 検索のヒント ~</span></p>
+              <span>・&ensp;開催日を長めに検索</span></br>
+              <span>・&ensp;スコアレベルを初期値で検索</span></br>
+              <span>・&ensp;募集人数を４の倍数で検索</span>
+          </div>
+        <% else %>
+          <table class="table table-striped">
+            <thead>
               <tr>
-                <td><%= event.event_date %></td>
-                <td><%= link_to event.event_title, event_path(event.id), class: "text-success" %></td>
-                <td><%= event.event_area %></td>
-                <td><%= event.applies.where(apply_status: :approved).count %> / <%= event.entry_limit %>人</td>
-                <td><% if event.deadline_date <= Date.today || event.event_status == false %>
-                    <p class="text-danger font-weight-bold"> 募集終了 </p>
-                  <% else %>
-                    あと<%= event.date %>日
-                  <% end %>
-                </td>
+                <th>開催日</th>
+                <th width="200">イベント名</th>
+                <th>開催エリア</th>
+                <th width="100">参加状況</th>
+                <th>募集締切日</th>
               </tr>
-              <% end %>
-           </tbody>
-        </table>
+            </thead>
+              <tbody>
+                <% @events.each do |event| %>
+                <tr>
+                  <td><%= event.event_date %></td>
+                  <td><%= link_to event.event_title, event_path(event.id), class: "text-success" %></td>
+                  <td><%= event.event_area %></td>
+                  <td><%= event.applies.where(apply_status: :approved).count %> / <%= event.entry_limit %>人</td>
+                  <td><% if event.deadline_date <= Date.today || event.event_status == false %>
+                      <p class="text-danger font-weight-bold"> 募集終了 </p>
+                    <% else %>
+                      あと<%= event.date %>日
+                    <% end %>
+                  </td>
+                </tr>
+                <% end %>
+             </tbody>
+          </table>
+        <% end %>
     </div>
   </div>
 </div>
