@@ -18,7 +18,6 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_user_path(@user.id), alert: 'ゲストユーザーの更新・削除はできません'
       return
     end
-
     if @user.update(user_params)
       redirect_to admin_user_path(@user.id), notice: '更新されました'
     else

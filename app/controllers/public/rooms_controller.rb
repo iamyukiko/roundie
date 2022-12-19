@@ -26,14 +26,12 @@ class Public::RoomsController < ApplicationController
   end
 
   def index
-   current_entries = current_user.entries
-   my_room_id = []
+    current_entries = current_user.entries
+    my_room_id = []
      current_entries.each do |entry|
        my_room_id << entry.room.id
      end
-   @another_entries = Entry.where(room_id: my_room_id).where.not(user_id: current_user.id).page(params[:page])
+    @another_entries = Entry.where(room_id: my_room_id).where.not(user_id: current_user.id).page(params[:page])
   end
 
 end
-
-

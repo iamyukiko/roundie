@@ -3,17 +3,17 @@
   <div class="mx-auto" style="width: 600px;">
   <h4 class="title mt-2 mb-2 text-center">フォロー<%= paginate @users %></h4>
     <% if @users.exists? %>
-        <table class="table table-sm mt-3">
-          <tbody>
-            <% @users.each do |user| %>
-            <tr style="vertical-align:middle;">
-              <td><%= image_tag user.get_image, class: "rounded-circle", size:'50x50' %></td>
-              <td><%= link_to user_path(user), class:"text-success" do %><%= user.nickname %><% end %></td>
-              <td><%= render 'public/relationships/relationship_btn', user: user %></td>
-            </tr>
-              <% end %>
-          </tbody>
-        </table>
+      <table class="table table-sm mt-3">
+        <tbody>
+        <% @users.each do |user| %>
+          <tr style="vertical-align:middle;">
+            <td><%= image_tag user.get_image, class: "rounded-circle", size:'50x50' %></td>
+            <td><%= link_to user_path(user), class:"text-success" do %><%= user.nickname %><% end %></td>
+            <td><%= render 'public/relationships/relationship_btn', user: user %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     <% else %>
       <div class="text-center">
         <p>ユーザーをフォローすると、ここに表示されます</p>

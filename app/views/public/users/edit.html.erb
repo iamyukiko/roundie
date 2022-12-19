@@ -35,12 +35,13 @@
               </td>
               <td class="form-group"><%= f.select :user_area, User.user_areas.keys, { include_blank: "---" }, class: "form-control" %></td>
             </tr>
+            <tr>
               <td><%= f.label :gender %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
               </td>
               <td class="form-group"><%= f.collection_radio_buttons :gender, User.genders_i18n, :first, :last %></td>
             </tr>
-             <tr>
+            <tr>
               <td><%= f.label :email %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
               </td>

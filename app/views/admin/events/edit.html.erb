@@ -25,6 +25,7 @@
               </td>
               <td class="form-group"><%= f.select :event_area, Event.event_areas.keys, class: "form-control" %></td>
             </tr>
+            <tr>
               <td><%= f.label :entry_limit %>
                   <span class="text-danger"><font size ="1">（必須）</font></span>
               </td>
@@ -49,7 +50,7 @@
               </td>
               <td class="form-group"><%= f.collection_select :search_score, Event.search_scores_i18n, :first, :last, { include_blank: "---" }, class: "form-control" %></td>
             </tr>
-             <tr>
+            <tr>
               <td><%= f.label :event_status %>
               </td>
               <td class="form-group">

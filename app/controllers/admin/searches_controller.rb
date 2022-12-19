@@ -10,5 +10,5 @@ class Admin::SearchesController < ApplicationController
 			@records = Event.search_for(@content, @method)
 		end
 	end
-	
+
 end

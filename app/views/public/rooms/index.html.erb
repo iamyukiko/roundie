@@ -6,21 +6,21 @@
     </div>
   </div>
     <% if @another_entries.present? %>
-        <table class="table table-sm">
-          <tbody>
-            <% @another_entries.each do |entry| %>
-            <tr style="line-height:2;">
-              <td><%= link_to room_path(entry.room.id) do %>
-                  <%= image_tag entry.user.get_image, class: "rounded-circle", size:'60x60' %>
-                  <strong><font color=black><%= entry.user.nickname %></font></strong>
-                  <% end %>
-              </td>
-              <td width="400"><font color=#c0c0c0><%= Message.find_by(id: entry.room.message_ids.last)&.body %></font>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <table class="table table-sm">
+        <tbody>
+          <% @another_entries.each do |entry| %>
+          <tr style="line-height:2;">
+            <td><%= link_to room_path(entry.room.id) do %>
+                <%= image_tag entry.user.get_image, class: "rounded-circle", size:'60x60' %>
+                <strong><font color=black><%= entry.user.nickname %></font></strong>
+                <% end %>
+            </td>
+            <td width="400"><font color=#c0c0c0><%= Message.find_by(id: entry.room.message_ids.last)&.body %></font>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% else %>
       <div class="text-center">
         <p>メッセージのやり取りはありません</p>
@@ -28,4 +28,3 @@
       </div>
     <% end %>
 </div>
-

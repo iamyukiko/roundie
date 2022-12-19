@@ -7,7 +7,6 @@ class Public::UsersController < ApplicationController
     else
      @events = @user.approved_events.order(event_date: "ASC").page(params[:page]) #違う場合は参加イベントを表示
     end
-
     @currentUserEntry=Entry.where(user_id: current_user.id) #ログインユーザーをEntryに記録するために探す
     @userEntry=Entry.where(user_id: @user.id) #チャットボタンをクリックされたユーザーをEntryに記録するために探す
       unless @user.id == current_user.id
@@ -24,7 +23,6 @@ class Public::UsersController < ApplicationController
           @entry = Entry.new
         end
       end
-
   end
 
 
@@ -38,7 +36,6 @@ class Public::UsersController < ApplicationController
       redirect_to user_path(@user.id), alert: 'ゲストユーザーの更新・削除はできません'
       return
     end
-
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: '更新しました'
     else

@@ -5,7 +5,7 @@ class Public::AppliesController < ApplicationController
   end
 
   def update
-    @apply = Apply.find(params[:id]) #フォームでもURLでも取れる
+    @apply = Apply.find(params[:id])
     if params[:apply][:apply_status] == 'approved'
       if @apply.event.entry_limit.to_i < Apply.where(event_id: params[:event_id], apply_status: :approved).count+1
         redirect_to index_apply_path(current_user.id), alert: "イベントの規定人数を超えています"

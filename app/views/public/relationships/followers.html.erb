@@ -2,18 +2,18 @@
 <div class="container mt-4 col-6">
   <div class="mx-auto" style="width: 600px;">
     <h4 class="title mt-2 mb-2 text-center">フォロワー <%= paginate @users %></h4>
-      <% if @users.exists? %>
-        <table class="table">
-          <tbody>
-            <% @users.each do |user| %>
-            <tr>
-              <td><%= image_tag user.get_image, class: "rounded-circle", size:'50x50' %></td>
-              <td><%= link_to user_path(user), class:"text-success" do %><%= user.nickname %><% end %></td>
-              <td><%= render 'public/relationships/relationship_btn', user: user %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+    <% if @users.exists? %>
+      <table class="table">
+        <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= image_tag user.get_image, class: "rounded-circle", size:'50x50' %></td>
+            <td><%= link_to user_path(user), class:"text-success" do %><%= user.nickname %><% end %></td>
+            <td><%= render 'public/relationships/relationship_btn', user: user %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     <% else %>
       <div class="text-center">
         <p>フォローされると、フォロワーがここに表示されます</p>

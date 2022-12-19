@@ -5,7 +5,7 @@
         <div class="form-group mt-4">
           <%= f.label :event_title, "イベント名 : " %></br>
           <%= f.text_field :event_title, value: params[:event_title], class: "form-control" %>
-          </div>
+        </div>
         <div class="form-group">
           <%= f.label :date, "開催日 : " %></br>
           <%= f.date_select :date_from, { default: date_select_params_to_date(:date_from) } %> ~
