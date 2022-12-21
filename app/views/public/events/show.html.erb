@@ -89,7 +89,6 @@
                   <%= event_comment.created_at.strftime('%Y/%m/%d %H:%M') %>)</font></span>
               </p>
             </div>
-          </div>
           <% end %>
         </div>
         <div class="comment">
@@ -98,6 +97,7 @@
             <%= f.submit "送信", class: "btn btn-primary" %>
           <% end %>
         </div>
+    </div>
       <% else %>
         <div class="text-center mt-5">
           <h5 class="text-dark">
