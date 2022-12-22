@@ -1,4 +1,5 @@
 class Public::AppliesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @applies = Apply.joins(:event).where(event:{ owner_id: current_user.id}, apply_status:[:applying, :rejected]).order(updated_at: :desc).page(params[:page])

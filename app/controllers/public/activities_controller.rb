@@ -1,4 +1,5 @@
 class Public::ActivitiesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @activities = current_user.activities.order(created_at: :desc).page(params[:page])
