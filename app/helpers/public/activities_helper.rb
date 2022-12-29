@@ -1,11 +1,12 @@
 module Public::ActivitiesHelper
 
-#通知アクション
-  def transition_path(activity) #ビュー・コントローラーからの呼び出し両パターンを想定
+  # 通知アクション
+  # ビュー・コントローラーからの呼び出し両パターンを想定
+  def transition_path(activity)
     case activity.action_type.to_sym
       when :commented_to_own_event
         if 0 < self.methods.grep(/event_path/).count
-          event_path(activity.subject.event) #ビューから呼ばれたときはこちらの処理
+          event_path(activity.subject.event) # ビューから呼ばれたときはこちらの処理
         else
           Rails.application.routes.url_helpers.event_path(activity.subject.event) #コントローラーからヘルパーメソッドを呼んだときは↑のパスが使用できないためこちら
         end
@@ -19,18 +20,18 @@ module Public::ActivitiesHelper
         if 0 < self.methods.grep(/user_path/).count
           user_path(activity.subject.follower)
         else
-         Rails.application.routes.url_helpers.user_path(activity.subject.follower)
+          Rails.application.routes.url_helpers.user_path(activity.subject.follower)
         end
       when :updated_apply_status
         if 0 < self.methods.grep(/event_path/).count
-            event_path(activity.subject.event)
+          event_path(activity.subject.event)
         else
           Rails.application.routes.url_helpers.event_path(activity.subject.event)
         end
       end
   end
 
-#既読
+  # 既読
   def unread_activities
     @activities = current_user.activities.where(read: false)
   end

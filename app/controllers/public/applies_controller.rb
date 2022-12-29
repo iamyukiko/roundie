@@ -2,24 +2,24 @@ class Public::AppliesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @applies = Apply.joins(:event).where(event:{ owner_id: current_user.id}, apply_status:[:applying, :rejected]).order(updated_at: :desc).page(params[:page])
+    @applies = Apply.joins(:event).where(event: { owner_id: current_user.id }, apply_status: [:applying, :rejected]).order(updated_at: :desc).page(params[:page])
   end
 
   def update
     @apply = Apply.find(params[:id])
     if params[:apply][:apply_status] == 'approved'
-      if @apply.event.entry_limit.to_i < Apply.where(event_id: params[:event_id], apply_status: :approved).count+1
-        redirect_to index_apply_path(current_user.id), alert: "イベントの規定人数を超えています"
+      if @apply.event.entry_limit.to_i < Apply.where(event_id: params[:event_id], apply_status: :approved).count + 1
+        redirect_to index_apply_path(current_user.id), alert: 'イベントの規定人数を超えています'
       else
         @apply.update(apply_status: :approved)
-        redirect_to index_apply_path(current_user.id), notice: "承認しました"
+        redirect_to index_apply_path(current_user.id), notice: '承認しました'
       end
     elsif params[:apply][:apply_status] == 'rejected'
-        @apply.update(apply_status: :rejected)
-         redirect_to index_apply_path(current_user.id), alert: "申請を却下しました"
+      @apply.update(apply_status: :rejected)
+      redirect_to index_apply_path(current_user.id), alert: '申請を却下しました'
     elsif params[:apply][:apply_status] == 'applying'
-        @apply.update(apply_status: :applying)
-        redirect_to index_apply_path(current_user.id), alert: "申請中に変更しました"
+      @apply.update(apply_status: :applying)
+      redirect_to index_apply_path(current_user.id), notice: '申請中に変更しました'
     end
   end
 

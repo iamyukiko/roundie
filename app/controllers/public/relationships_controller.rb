@@ -11,15 +11,15 @@ class Public::RelationshipsController < ApplicationController
     redirect_to request.referer
   end
 
-#フォローしている人の一覧を取得する際に使用
+  # フォローしている人の一覧を取得する際に使用
   def followings
     user = User.find(params[:user_id])
     @users = user.followings.order(updated_at: :desc).page(params[:page])
   end
 
-#フォローされている人の一覧を取得する際に使用
+  # フォローされている人の一覧を取得する際に使用
   def followers
-     user = User.find(params[:user_id])
-     @users = user.followers.order(updated_at: :desc).page(params[:page])
+    user = User.find(params[:user_id])
+    @users = user.followers.order(updated_at: :desc).page(params[:page])
   end
 end

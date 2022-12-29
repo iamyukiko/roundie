@@ -5,8 +5,8 @@ class Public::RoomsController < ApplicationController
     if params[:entry]
       params[:owner_id] = params[:entry][:user_id]
     end
-      rooms = Room.all.map{|o| {id: o.id, entries: o.entries.pluck(:user_id) }}
-      room = rooms.select{|o| o[:entries].sort == [current_user.id, params[:owner_id].to_i].sort }.first
+      rooms = Room.all.map{ |o| { id: o.id, entries: o.entries.pluck(:user_id) } }
+      room = rooms.select{ |o| o[:entries].sort == [current_user.id, params[:owner_id].to_i].sort }.first
     if room.present?
       @room = Room.find(room[:id])
     else

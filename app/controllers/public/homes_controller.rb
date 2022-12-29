@@ -4,7 +4,6 @@ class Public::HomesController < ApplicationController
     @events = Event.all.order(created_at: :desc)
   end
 
-  def about
-  end
+  def about; end
 
 end

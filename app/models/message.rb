@@ -4,16 +4,16 @@ class Message < ApplicationRecord
 
   validates :body, presence: true
 
-#通知用
+  # 通知用
   has_one :activity, as: :subject, dependent: :destroy
 
   after_create_commit :create_activities
 
   private
 
-#メッセージを送った際の通知アクション
+  # メッセージを送った際の通知アクション
   def create_activities
-    Activity.create!(subject: self, user_id: self.room.entries.pluck(:user_id).select{|user_id| user_id != self.user_id }.first, action_type: :messaged_me)
+    Activity.create!(subject: self, user_id: self.room.entries.pluck(:user_id).select{ |user_id| user_id != self.user_id }.first, action_type: :messaged_me)
   end
 
 end
