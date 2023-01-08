@@ -36,7 +36,7 @@ class Public::EventsController < ApplicationController
     @event.users << current_user
       @event.applies.update(apply_status: "approved")
       if @event.save
-        redirect_to event_path(@event.id)
+        redirect_to event_path(@event.id), notice: 'イベントの作成に成功しました'
       else
         render 'new'
       end
