@@ -34,5 +34,4 @@ class Public::RoomsController < ApplicationController
      end
     @another_entries = Entry.where(room_id: my_room_id).where.not(user_id: current_user.id).page(params[:page])
   end
-
 end

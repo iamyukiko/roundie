@@ -31,5 +31,4 @@ class Admin::EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:owner_id, :event_area, :event_date, :deadline_date, :entry_limit, :age, :event_title, :event_introduction, :event_status, :search_score)
   end
-
 end

@@ -11,5 +11,4 @@ class Public::ActivitiesController < ApplicationController
     activity.read! if activity.unread?
     redirect_to ApplicationController.helpers.transition_path(activity) # ヘルパーを呼び出し
   end
-
 end

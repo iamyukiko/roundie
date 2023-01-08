@@ -22,5 +22,4 @@ class Public::AppliesController < ApplicationController
       redirect_to index_apply_path(current_user.id), notice: '申請中に変更しました'
     end
   end
-
 end

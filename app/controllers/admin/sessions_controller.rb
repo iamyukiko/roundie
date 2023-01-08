@@ -1,5 +1,4 @@
 class Admin::SessionsController < Devise::SessionsController
-
   def guest_sign_in
     admin = Admin.guest
     sign_in admin
@@ -19,5 +18,4 @@ class Admin::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     new_admin_session_path
   end
-
 end
